@@ -70,7 +70,7 @@ func main() {
 	sumKey := ""
 	sumStart := false
 	sumTotal := 0
-
+	sumRange := []int{}
 	// 第一步：处理所有数据并转换
 	for _, key := range order {
 		item := params[key]
@@ -79,6 +79,7 @@ func main() {
 			sumKey = key
 			sumStart = true
 			sumTotal = 0
+			sumRange = append(sumRange, item.Range...)
 			processedData[key] = make([]byte, item.Size)
 			continue
 		}
@@ -116,7 +117,6 @@ func main() {
 		}
 	}
 
-	// 如果有 sum 字段，填充总和
 	if sumKey != "" && sumTotal > 0 {
 		item := params[sumKey]
 		processedData[sumKey] = byteToMuiByte(sumTotal, item.Size, "big")
