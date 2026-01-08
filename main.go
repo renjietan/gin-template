@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
 	"example.com/t/udp"
 	"example.com/t/ws"
 	"github.com/gin-gonic/gin"
@@ -14,7 +15,7 @@ import (
 // 心跳间隔
 const heartbeatInterval = 3 * time.Second
 
-const serverAddr = "127.0.0.1:9000"
+const serverAddr = "112.125.89.8:33700"
 
 var udpClient *udp.UDPClient
 var wsManager *ws.WebSocketManager
@@ -108,9 +109,7 @@ func main() {
 		}
 	}()
 
-	// 等待退出信号（Ctrl+C）
 	<-quit
 	fmt.Println("\n收到退出信号, 准备关闭...")
-	// 稍等一会儿保证 goroutine 退出（Close 中会关闭连接并通知协程）
 	fmt.Println("客户端已退出")
 }

@@ -21,9 +21,9 @@ type WebSocketManager struct {
 	// 用于广播消息的通道
 	broadcast chan []byte
 	// 用于注册新客户端
-	register chan *websocket.Conn
+	register_chan chan *websocket.Conn
 	// 用于注销客户端
-	unregister chan *websocket.Conn
+	unregister_chan chan *websocket.Conn
 	// 互斥锁保护 clients map
 	mu sync.RWMutex
 	// 升级器配置
@@ -34,10 +34,10 @@ type WebSocketManager struct {
 // NewWebSocketManager 创建并初始化 WebSocket 管理器
 func NewWebSocketManager() *WebSocketManager {
 	manager := &WebSocketManager{
-		clients:    make(map[*websocket.Conn]bool),
-		broadcast:  make(chan []byte, 256),
-		register:   make(chan *websocket.Conn),
-		unregister: make(chan *websocket.Conn),
+		clients:         make(map[*websocket.Conn]bool),
+		broadcast:       make(chan []byte, 256),
+		register_chan:   make(chan *websocket.Conn),
+		unregister_chan: make(chan *websocket.Conn),
 		upgrader: websocket.Upgrader{
 			ReadBufferSize:  1024,
 			WriteBufferSize: 1024,
@@ -63,7 +63,7 @@ func (m *WebSocketManager) HandleWebSocket(c *gin.Context) {
 	}
 
 	// 注册新客户端
-	m.register <- conn
+	m.register_chan <- conn
 
 	// 启动读取协程
 	go m.read(conn)
@@ -109,22 +109,22 @@ func (m *WebSocketManager) Close() {
 	}
 
 	close(m.broadcast)
-	close(m.register)
-	close(m.unregister)
+	close(m.register_chan)
+	close(m.unregister_chan)
 }
 
 // 主循环
 func (m *WebSocketManager) run() {
 	for {
 		select {
-		case conn := <-m.register:
+		case conn := <-m.register_chan:
 			// 注册新客户端
 			m.mu.Lock()
 			m.clients[conn] = true
 			m.mu.Unlock()
 			log.Printf("新客户端连接，当前连接数: %d", len(m.clients))
 
-		case conn := <-m.unregister:
+		case conn := <-m.unregister_chan:
 			// 注销客户端
 			m.mu.Lock()
 			if _, ok := m.clients[conn]; ok {
@@ -143,7 +143,7 @@ func (m *WebSocketManager) run() {
 					log.Printf("发送消息失败: %v", err)
 					// 如果发送失败，将连接加入注销队列
 					select {
-					case m.unregister <- conn:
+					case m.unregister_chan <- conn:
 					default:
 					}
 				}
@@ -156,7 +156,7 @@ func (m *WebSocketManager) run() {
 // 读取客户端消息的协程（没写完 - 数据处理）
 func (m *WebSocketManager) read(conn *websocket.Conn) {
 	defer func() {
-		m.unregister <- conn
+		m.unregister_chan <- conn
 		conn.Close()
 	}()
 

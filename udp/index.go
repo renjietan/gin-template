@@ -20,7 +20,7 @@ func NewUDPClient(serverAddr string, heartbeatInterval time.Duration) (*UDPClien
 	// 解析服务端 UDP 地址
 	udpAddr, err := net.ResolveUDPAddr("udp", serverAddr)
 	if err != nil {
-		return nil, fmt.Errorf("解析 UDP 地址失败: %w", err.Error())
+		return nil, fmt.Errorf("解析 UDP 地址失败: %v", err.Error())
 	}
 
 	// 创建 UDP 连接
@@ -34,8 +34,6 @@ func NewUDPClient(serverAddr string, heartbeatInterval time.Duration) (*UDPClien
 		done:              make(chan struct{}),
 		heartbeatInterval: heartbeatInterval,
 	}
-
-	fmt.Println("已连接到服务端:", serverAddr)
 
 	// 启动协程
 	go client.recvLoop()
@@ -68,7 +66,7 @@ func (c *UDPClient) LastMsg() string {
 	return c.lastMsg
 }
 
-// 持续接收服务端消息
+// 通过for循环持续接收服务端消息
 func (c *UDPClient) recvLoop() {
 	buf := make([]byte, 1024)
 
@@ -84,7 +82,7 @@ func (c *UDPClient) recvLoop() {
 
 		n, addr, err := c.conn.ReadFromUDP(buf)
 		if err != nil {
-			// 读超时等错误可以忽略，继续循环
+			// TODO：读取超时等错误是否需要处理，暂不清楚，此处不做处理，继续循环
 			netErr, ok := err.(net.Error)
 			if ok && netErr.Timeout() {
 				continue
