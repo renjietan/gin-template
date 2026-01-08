@@ -6,8 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-
-	"example.com/t/udp_client"
+	"example.com/t/udp"
 	"example.com/t/ws"
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +16,7 @@ const heartbeatInterval = 3 * time.Second
 
 const serverAddr = "127.0.0.1:9000"
 
-var udpClient *udp_client.UDPClient
+var udpClient *udp.UDPClient
 var wsManager *ws.WebSocketManager
 
 func main() {
@@ -91,7 +90,7 @@ func main() {
 
 	// ============ 4. 初始化 UDP 客户端 ============ //
 	var err error
-	udpClient, err = udp_client.NewUDPClient(serverAddr, heartbeatInterval)
+	udpClient, err = udp.NewUDPClient(serverAddr, heartbeatInterval)
 	if err != nil {
 		fmt.Println("UDP 客户端初始化失败:", err)
 		return

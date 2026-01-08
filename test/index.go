@@ -27,7 +27,7 @@ func main() {
 		},
 		"length": {
 			Data:  0x00,
-			Range: []int{3, 5},
+			Range: []int{3, 6},
 			Size:  2,
 		},
 		"data1": {
@@ -45,10 +45,15 @@ func main() {
 			Range: []int{},
 			Size:  0,
 		},
+		"data33": {
+			Data:  "hello-1",
+			Range: []int{},
+			Size:  0,
+		},
 		"length2": {
 			Data:  0x00,
-			Range: []int{},
-			Size:  2,
+			Range: []int{7, 8},
+			Size:  4,
 		},
 		"data4": {
 			Data:  "hello world1",
@@ -63,24 +68,27 @@ func main() {
 	}
 
 	// 定义处理顺序
-	order := []string{"ee", "ee2", "length", "data1", "data2", "data3", "length2", "data4", "data5"}
+	keys := []string{"ee", "ee2", "length", "data1", "data2", "data3", "data33", "length2", "data4", "data5"}
 
 	// 存储处理结果
 	processedData := make(map[string][]byte)
+	res := []byte{}
 	sumKey := ""
 	sumStart := false
 	sumTotal := 0
 	sumRange := []int{}
 	// 第一步：处理所有数据并转换
-	for _, key := range order {
+	for index, key := range keys {
 		item := params[key]
 
 		if len(item.Range) > 1 {
 			sumKey = key
 			sumStart = true
 			sumTotal = 0
+			sumRange = []int{}
 			sumRange = append(sumRange, item.Range...)
 			processedData[key] = make([]byte, item.Size)
+			// res = append(res, processedData[key]...)
 			continue
 		}
 
@@ -90,12 +98,10 @@ func main() {
 		case int:
 			dataBytes = byteToMuiByte(v, item.Size, "big")
 		case []byte:
-			// 根据 Size 调整字节切片长度
 			if item.Size > 0 {
 				if len(v) >= item.Size {
 					dataBytes = v[:item.Size]
 				} else {
-					// 不足部分用0填充
 					dataBytes = make([]byte, item.Size)
 					copy(dataBytes, v)
 				}
@@ -107,24 +113,21 @@ func main() {
 			dataBytes = []byte(v)
 			item.Size = len(dataBytes)
 		default:
-			// 其他类型暂时不处理
 			dataBytes = []byte{}
 		}
 		processedData[key] = dataBytes
-		// 如果 sum 已开始，累加长度
-		if sumStart && sumKey != "" {
+		// res = append(res, processedData[key]...)
+		if sumStart && sumKey != "" && index >= sumRange[0] && index <= sumRange[1] {
 			sumTotal += len(dataBytes)
+			if index == sumRange[1] {
+				item := params[sumKey]
+				processedData[sumKey] = byteToMuiByte(sumTotal, item.Size, "big")
+			}
 		}
 	}
-
-	if sumKey != "" && sumTotal > 0 {
-		item := params[sumKey]
-		processedData[sumKey] = byteToMuiByte(sumTotal, item.Size, "big")
-	}
-
-	fmt.Println("Processed Data:")
-	for _, key := range order {
-		fmt.Printf("%s: %v (length: %d)\n", key, processedData[key], len(processedData[key]))
+	for _, key := range keys {
+		res = append(res, processedData[key]...)
+		fmt.Printf("%s: %v %#v(length: %d)\n", key, processedData[key], processedData[key], len(processedData[key]))
 	}
 }
 
