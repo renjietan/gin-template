@@ -5,6 +5,8 @@ import (
 	"net"
 	"sync"
 	"time"
+
+	udp_utils_gen "example.com/t/udp/utils/gen"
 )
 
 type UDPClient struct {
@@ -34,10 +36,15 @@ func NewUDPClient(serverAddr string, heartbeatInterval time.Duration) (*UDPClien
 		done:              make(chan struct{}),
 		heartbeatInterval: heartbeatInterval,
 	}
+	login_buf := udp_utils_gen.Login()
+	fmt.Println("login_buf:", login_buf)
+
+	res, ok := conn.Write(login_buf)
+	fmt.Println("res:", res, " ok:", ok)
 
 	// 启动协程
 	go client.recvLoop()
-	go client.heartbeatLoop()
+	// go client.heartbeatLoop()
 
 	return client, nil
 }
@@ -69,7 +76,6 @@ func (c *UDPClient) LastMsg() string {
 // 通过for循环持续接收服务端消息
 func (c *UDPClient) recvLoop() {
 	buf := make([]byte, 1024)
-
 	for {
 		select {
 		case <-c.done:
@@ -91,34 +97,34 @@ func (c *UDPClient) recvLoop() {
 			continue
 		}
 
-		msg := string(buf[:n])
+		msg := buf[:n]
 
 		c.mu.Lock()
-		c.lastMsg = msg
+		c.lastMsg = string(msg)
 		c.mu.Unlock()
 
-		fmt.Printf("收到来自 %s 的消息: %s\n", addr.String(), msg)
+		fmt.Printf("收到来自 %s 的消息: %+v\n", addr.String(), msg)
 	}
 }
 
-// 发送心跳
-func (c *UDPClient) heartbeatLoop() {
-	ticker := time.NewTicker(c.heartbeatInterval)
-	defer ticker.Stop()
+// // 发送心跳
+// func (c *UDPClient) heartbeatLoop() {
+// 	ticker := time.NewTicker(c.heartbeatInterval)
+// 	defer ticker.Stop()
 
-	for {
-		select {
-		case <-c.done:
-			fmt.Println("心跳协程退出")
-			return
-		case <-ticker.C:
-			heartbeatMsg := []byte("heartbeat")
-			_, err := c.conn.Write(heartbeatMsg)
-			if err != nil {
-				fmt.Println("发送心跳失败:", err)
-				continue
-			}
-			fmt.Println("已发送心跳包")
-		}
-	}
-}
+// 	for {
+// 		select {
+// 		case <-c.done:
+// 			fmt.Println("心跳协程退出")
+// 			return
+// 		case <-ticker.C:
+// 			heartbeatMsg := []byte("heartbeat")
+// 			_, err := c.conn.Write(heartbeatMsg)
+// 			if err != nil {
+// 				fmt.Println("发送心跳失败:", err)
+// 				continue
+// 			}
+// 			fmt.Println("已发送心跳包")
+// 		}
+// 	}
+// }

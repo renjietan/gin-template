@@ -3,68 +3,61 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
+
+	"example.com/t/utility"
 )
 
-var sw sync.Mutex
 var wg sync.WaitGroup
-var a int
-var b int
-var aa = make(chan int)
-var bb = make(chan int)
 
-func setA() {
-	defer wg.Done()
-	sw.Lock()
-	a = 1
-	aa <- a
-	sw.Unlock()
-}
-func setA2() {
-	defer wg.Done()
-	sw.Lock()
-	a = 2
-	aa <- a
-	sw.Unlock()
-}
-
-func setB() {
-	defer wg.Done()
-	sw.Lock()
-	b = 1
-	bb <- b
-	sw.Unlock()
-}
-func setB2() {
-	defer wg.Done()
-	sw.Lock()
-	b = 2
-	bb <- b
-	sw.Unlock()
-}
 func main() {
+	t := utility.NewTimeoutManager()
+	res := t.StopByName("name")
+	fmt.Println(res)
+	// wg.Add(9)
+	// // 这样快速多次调用不会有阻塞问题
+	t.Set("1s", 1*time.Second, func() {
+		fmt.Println("1秒后执行")
+		// wg.Done()
+	})
+	// t.StopByName("1s")
+	t.Set("1s", 1*time.Second, func() {
+		fmt.Println("1-2秒后执行")
+		// wg.Done()
+	})
+	// t.StopByName("1s")
+	t.Set("1s", 1*time.Second, func() {
+		fmt.Println("1-3秒后执行")
+		// wg.Done()
+	})
+	// t.StopByName("1s")
+	t.Set("1s", 1*time.Second, func() {
+		fmt.Println("1-4秒后执行")
+		// wg.Done()
+	})
+	// t.StopByName("1s")
+	t.Set("1s", 1*time.Second, func() {
+		fmt.Println("1-5秒后执行")
+		// wg.Done()
+	})
+	t.Set("500ms", 500*time.Millisecond, func() {
+		fmt.Println("500毫秒后执行")
+		// wg.Done()
+	})
+	t.Set("100ms", 100*time.Millisecond, func() {
+		fmt.Println("100毫秒后执行")
+		// wg.Done()
+	})
 
-	wg.Add(1)
-	go setA()
-	wg.Add(1)
-	go setA2()
-	wg.Add(1)
-	go setB()
-	wg.Add(1)
-	go setB2()
-	wg.Add(1)
-	go func() {
-		for {
-			select {
-			case v := <-aa:
-				fmt.Println("从【cn1】读取的值:", v)
-			case v := <-bb:
-				fmt.Println("从【cn1】读取的值:", v)
-			default:
-				wg.Done()
-				return
-			}
-		}
-	}()
-	wg.Wait()
-	fmt.Println(a, b)
+	// 或者在 goroutine 中并发调用也没问题
+	go t.Set("1s", 1*time.Second, func() {
+		fmt.Println("goroutine: 1秒后执行")
+		// wg.Done()
+	})
+	go t.Set("2s", 2*time.Second, func() {
+		fmt.Println("goroutine: 2秒后执行")
+		// wg.Done()
+	})
+	// wg.Wait()
+	time.Sleep(1000 * time.Second)
 }
