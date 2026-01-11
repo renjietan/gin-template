@@ -17,32 +17,26 @@ func NewTimeoutManager() *TimeoutManager {
 	}
 }
 
-func (t *TimeoutManager) Set(name string, duration time.Duration, fn func()) {
-	fmt.Printf("name-----------%s, duration=%v, fn=%+v\n", name, duration, fn)
+func (t *TimeoutManager) Set(name string, duration time.Duration, log_str string, fn func()) {
 	t.mu.Lock()
 	if t.timers == nil {
 		t.timers = make(map[string]*time.Timer)
 	}
-	// t.mu.Unlock()
-	// t.mu.Lock()
-	// if t_timer, exists := t.timers[name]; exists {
-	// 	// 已存在同名定时器，停止它
-	// 	res := t_timer.Stop()
-	// 	fmt.Println("res===============", res)
-	// 	delete(t.timers, name)
-	// }
-	t.StopByName(name)
 	t.mu.Unlock()
+	if _, exists := t.timers[name]; exists {
+		t.StopByName(name)
+	}
 	var timer *time.Timer
 	timer = time.AfterFunc(duration, func() {
 		defer func() {
 			t.mu.Lock()
-			fmt.Println("==============name", name)
+			fmt.Println("log_str", log_str)
 			delete(t.timers, name)
 			t.mu.Unlock()
 		}()
 		fn()
 	})
+	fmt.Printf("name1-----------%s, duration=%v, log=%v timer=%p timers=%v\n", name, duration, log_str, timer, t.timers)
 	t.mu.Lock()
 	t.timers[name] = timer
 	t.mu.Unlock()
