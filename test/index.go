@@ -16,6 +16,7 @@ func main() {
 	for {
 		select {
 		case v := <-cn:
+			time.Sleep(1* time.Second)
 			fmt.Println("v:", v)
 		default:
 			fmt.Println("faild")
