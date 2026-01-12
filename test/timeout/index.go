@@ -1,15 +1,17 @@
-package utility
+package timeout
 
 import (
 	"fmt"
 	"sync"
 	"testing"
 	"time"
+
+	timeout "example.com/t/utility/timeout"
 )
 
 func TestTimeoutManager(t *testing.T) {
 	// 1. 创建管理器
-	tm := NewTimeoutManager()
+	tm := timeout.NewTimeoutManager()
 	defer tm.Close()
 
 	// 2. 并发设置多个定时器
@@ -22,11 +24,9 @@ func TestTimeoutManager(t *testing.T) {
 			name := fmt.Sprintf("timer-%d", id)
 			err := tm.SetSync(name,
 				time.Second*time.Duration(id+1),
-				fmt.Sprintf("定时器 %d", id),
 				func() {
 					t.Logf("函数回调 %d 在 %v 触发", id, time.Now())
 				})
-
 			if err != nil {
 				t.Errorf("设置定时器 %d 失败: %v", id, err)
 			}
@@ -64,15 +64,14 @@ func TestTimeoutManager(t *testing.T) {
 		active, created, expired, stopped, reset)
 
 	// 8. 重置定时器
-	err = tm.ResetTimer("timer-2", 2*time.Second, "重置后的定时器", nil)
+	err = tm.ResetTimer("timer-2", 2*time.Second, nil)
 	if err != nil {
 		t.Errorf("重置定时器失败: %v", err)
 	}
 
 	// 9. 使用扩展版本重置
 	err = tm.ResetTimerExt("timer-3",
-		WithDuration(3*time.Second),
-		WithLogStr("扩展重置"),
+		timeout.WithDuration(3*time.Second),
 	)
 	if err != nil {
 		t.Errorf("使用扩展方式重置定时器失败: %v", err)
@@ -103,7 +102,7 @@ func TestTimeoutManager(t *testing.T) {
 }
 
 func TestConcurrentAccess(t *testing.T) {
-	tm := NewTimeoutManager()
+	tm := timeout.NewTimeoutManager()
 	defer tm.Close()
 
 	// 并发读写测试
@@ -116,7 +115,7 @@ func TestConcurrentAccess(t *testing.T) {
 		go func(id int) {
 			defer wg.Done()
 			name := fmt.Sprintf("concurrent-timer-%d", id)
-			tm.Set(name, time.Second, "并发测试", func() {
+			tm.Set(name, time.Second, func() {
 				// 空回调
 			})
 		}(i)
@@ -140,18 +139,18 @@ func TestConcurrentAccess(t *testing.T) {
 }
 
 func TestManagerClose(t *testing.T) {
-	tm := NewTimeoutManager()
+	tm := timeout.NewTimeoutManager()
 
 	// 设置一些定时器
 	for i := 0; i < 3; i++ {
-		tm.Set(fmt.Sprintf("timer-%d", i), 10*time.Second, "test", func() {})
+		tm.Set(fmt.Sprintf("timer-%d", i), 10*time.Second, func() {})
 	}
 
 	// 关闭管理器
 	tm.Close()
 
 	// 验证关闭后操作返回错误
-	err := tm.SetSync("new-timer", time.Second, "should fail", func() {})
+	err := tm.SetSync("new-timer", time.Second, func() {})
 	if err == nil {
 		t.Error("关闭后 SetSync 应该失败")
 	}

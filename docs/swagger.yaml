@@ -1,24 +1,132 @@
-basePath: /api/v1
+basePath: /
+definitions:
+  controller.BroadcastRequest:
+    properties:
+      msg:
+        example: hello
+        type: string
+    type: object
+  controller.ErrorResponse:
+    properties:
+      detail:
+        example: 'dial udp: ...'
+        type: string
+      error:
+        example: 需要字段 msg
+        type: string
+    type: object
+  controller.StatusResponse:
+    properties:
+      status:
+        example: ok
+        type: string
+    type: object
+  controller.WsClientCountResponse:
+    properties:
+      client_count:
+        example: 3
+        type: integer
+    type: object
+  main.SendUDPRequest:
+    properties:
+      msg:
+        example: hello udp
+        type: string
+    type: object
+  main.UDPMessageResponse:
+    properties:
+      last_msg:
+        example: '{...}'
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact:
     name: API Support
-  description: 这是一个用户管理的API文档
+  description: Key Fob WebSocket + UDP 接口文档
   title: Key Fob API
   version: "1.0"
 paths:
-  /example/helloworld:
+  /udp/last:
     get:
-      consumes:
-      - application/json
-      description: do ping
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: string
+            $ref: '#/definitions/main.UDPMessageResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      summary: 获取最后一条 UDP 消息
       tags:
-      - example
+      - udp
+  /udp/send:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 消息体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.SendUDPRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.StatusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      summary: 发送 UDP 消息
+      tags:
+      - udp
+  /ws/broadcast:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 消息体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/controller.BroadcastRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.StatusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      summary: 广播 WebSocket 消息
+      tags:
+      - websocket
+  /ws/count:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.WsClientCountResponse'
+      summary: 获取当前 WebSocket 连接数
+      tags:
+      - websocket
 swagger: "2.0"

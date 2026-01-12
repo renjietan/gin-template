@@ -1,9 +1,9 @@
 // @title Key Fob API
 // @version 1.0
-// @description 这是一个API文档
+// @description Key Fob WebSocket + UDP 接口文档
 // @contact.name API Support
 // @host localhost:8080
-// @BasePath /api/v1
+// @BasePath /
 package main
 
 import (
@@ -13,13 +13,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-
 	"example.com/t/controller"
+	docs "example.com/t/docs"
 	"example.com/t/udp"
 	"example.com/t/ws"
+	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // 心跳间隔
@@ -30,7 +30,20 @@ const serverAddr = "8.135.10.183:53753"
 var udpClient *udp.UDPClient
 var wsManager *ws.WebSocketManager
 
+// UDPMessageResponse 用于 swagger 展示最后一条 UDP 消息.
+type UDPMessageResponse struct {
+	LastMsg string `json:"last_msg" example:"{...}"`
+}
+
+// SendUDPRequest 用于 swagger 展示发送消息体.
+type SendUDPRequest struct {
+	Msg string `json:"msg" example:"hello udp"`
+}
+
 func main() {
+	// Swagger 基本信息设置
+	docs.SwaggerInfo.BasePath = "/"
+
 	// ============ 1. 初始化 Gin ============ //
 	r := gin.Default()
 	// ============ 2. 初始化 WebSocket ============ //
@@ -43,7 +56,7 @@ func main() {
 	defer wsManager.Close()
 
 	// WebSocket 路由
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.GET("/ws", wsManager.HandleWebSocket)
 
 	// 获取 WebSocket 连接数
@@ -53,40 +66,9 @@ func main() {
 	r.POST("/ws/broadcast", controller.BroadcastWsMessage)
 
 	// ============ 3. UDP 相关路由 ============ //
-	r.GET("/udp/last", func(c *gin.Context) {
-		if udpClient == nil {
-			c.JSON(500, gin.H{"error": "UDP 客户端尚未初始化"})
-			return
-		}
+	r.GET("/udp/last", getLastUDP)
 
-		msg := udpClient.LastMsg()
-
-		c.JSON(200, gin.H{
-			"last_msg": msg,
-		})
-	})
-
-	r.POST("/udp/send", func(c *gin.Context) {
-		var req struct {
-			Msg string `json:"msg"`
-		}
-		if err := c.ShouldBindJSON(&req); err != nil || req.Msg == "" {
-			c.JSON(400, gin.H{"error": "需要字段 msg"})
-			return
-		}
-
-		if udpClient == nil {
-			c.JSON(500, gin.H{"error": "UDP 客户端尚未初始化"})
-			return
-		}
-
-		if err := udpClient.Send(req.Msg); err != nil {
-			c.JSON(500, gin.H{"error": "发送失败", "detail": err.Error()})
-			return
-		}
-
-		c.JSON(200, gin.H{"status": "ok"})
-	})
+	r.POST("/udp/send", sendUDP)
 
 	// ============ 4. 初始化 UDP 客户端 ============ //
 	var err error
@@ -104,10 +86,11 @@ func main() {
 	// ============ 5. 启动 Gin HTTP 服务 ============ //
 	go func() {
 		if gin.Mode() != gin.ReleaseMode {
-			r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-			ginSwagger.WrapHandler(swaggerFiles.Handler,
-				ginSwagger.URL("http://localhost:8080/swagger/doc.json"),
-				ginSwagger.DefaultModelsExpandDepth(-1))
+			// 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler),
+			// 	ginSwagger.URL("http://localhost:8080/swagger/doc.json"),
+			// 	ginSwagger.DefaultModelsExpandDepth(-1),
+			// )
+			// ginSwagger.WrapHandler(swaggerFiles.Handler)
 			if err := r.Run(":8080"); err != nil {
 				fmt.Println("Gin 启动失败:", err)
 			}
@@ -117,4 +100,54 @@ func main() {
 	<-quit
 	fmt.Println("\n收到退出信号, 准备关闭...")
 	fmt.Println("客户端已退出")
+}
+
+// getLastUDP godoc
+// @Summary 获取最后一条 UDP 消息
+// @Tags udp
+// @Produce json
+// @Success 200 {object} UDPMessageResponse
+// @Failure 500 {object} controller.ErrorResponse
+// @Router /udp/last [get]
+func getLastUDP(c *gin.Context) {
+	if udpClient == nil {
+		c.JSON(500, gin.H{"error": "UDP 客户端尚未初始化"})
+		return
+	}
+
+	msg := udpClient.LastMsg()
+
+	c.JSON(200, gin.H{
+		"last_msg": msg,
+	})
+}
+
+// sendUDP godoc
+// @Summary 发送 UDP 消息
+// @Tags udp
+// @Accept json
+// @Produce json
+// @Param data body SendUDPRequest true "消息体"
+// @Success 200 {object} controller.StatusResponse
+// @Failure 400 {object} controller.ErrorResponse
+// @Failure 500 {object} controller.ErrorResponse
+// @Router /udp/send [post]
+func sendUDP(c *gin.Context) {
+	var req SendUDPRequest
+	if err := c.ShouldBindJSON(&req); err != nil || req.Msg == "" {
+		c.JSON(400, gin.H{"error": "需要字段 msg"})
+		return
+	}
+
+	if udpClient == nil {
+		c.JSON(500, gin.H{"error": "UDP 客户端尚未初始化"})
+		return
+	}
+
+	if err := udpClient.Send(req.Msg); err != nil {
+		c.JSON(500, gin.H{"error": "发送失败", "detail": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"status": "ok"})
 }

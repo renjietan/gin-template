@@ -15,7 +15,6 @@ type timerInfo struct {
 	endTime   time.Time
 	timer     *time.Timer
 	fn        func()
-	logStr    string
 }
 
 // timerCommand 定义管理器支持的命令类型
@@ -23,7 +22,6 @@ type timerCommand struct {
 	cmdType  string        // 命令类型
 	name     string        // 定时器名称
 	duration time.Duration // 定时器时长
-	logStr   string        // 日志信息
 	fn       func()        // 回调函数
 	done     chan struct{} // 操作完成通知通道
 	result   chan any      // 结果返回通道
@@ -34,7 +32,6 @@ type ResetOption func(*resetOptions)
 
 type resetOptions struct {
 	duration time.Duration
-	logStr   string
 	fn       func()
 }
 
@@ -90,7 +87,6 @@ func (tm *TimeoutManager) managerLoop() {
 				startTime: time.Now(),
 				endTime:   time.Now().Add(cmd.duration),
 				fn:        cmd.fn,
-				logStr:    cmd.logStr,
 			}
 
 			// 创建定时器
@@ -134,14 +130,10 @@ func (tm *TimeoutManager) managerLoop() {
 
 				// 使用新函数或原函数
 				newFn := cmd.fn
-				newLogStr := cmd.logStr
 				newDuration := cmd.duration
 
 				if newFn == nil {
 					newFn = oldInfo.fn // 使用原函数
-				}
-				if newLogStr == "" {
-					newLogStr = oldInfo.logStr // 使用原日志
 				}
 				if newDuration == 0 {
 					newDuration = oldInfo.duration // 使用原时长
@@ -154,7 +146,6 @@ func (tm *TimeoutManager) managerLoop() {
 					startTime: time.Now(),
 					endTime:   time.Now().Add(newDuration),
 					fn:        newFn,
-					logStr:    newLogStr,
 				}
 
 				// 创建新定时器
@@ -256,7 +247,6 @@ func (tm *TimeoutManager) managerLoop() {
 					StartTime time.Time
 					EndTime   time.Time
 					Remaining time.Duration
-					LogStr    string
 					IsActive  bool
 				}{
 					Name:      info.name,
@@ -264,7 +254,6 @@ func (tm *TimeoutManager) managerLoop() {
 					StartTime: info.startTime,
 					EndTime:   info.endTime,
 					Remaining: time.Until(info.endTime),
-					LogStr:    info.logStr,
 					IsActive:  true,
 				}
 			} else {
@@ -302,7 +291,6 @@ func (tm *TimeoutManager) managerLoop() {
 				StartTime time.Time
 				EndTime   time.Time
 				Remaining time.Duration
-				LogStr    string
 			}, 0, len(timers))
 
 			for _, info := range timers {
@@ -312,14 +300,12 @@ func (tm *TimeoutManager) managerLoop() {
 					StartTime time.Time
 					EndTime   time.Time
 					Remaining time.Duration
-					LogStr    string
 				}{
 					Name:      info.name,
 					Duration:  info.duration,
 					StartTime: info.startTime,
 					EndTime:   info.endTime,
 					Remaining: time.Until(info.endTime),
-					LogStr:    info.logStr,
 				})
 			}
 
@@ -372,7 +358,7 @@ func (tm *TimeoutManager) managerLoop() {
 // ==================== 公共接口：基础操作 ====================
 
 // Set 异步设置定时器（不等待确认）
-func (tm *TimeoutManager) Set(name string, duration time.Duration, logStr string, fn func()) {
+func (tm *TimeoutManager) Set(name string, duration time.Duration, fn func()) {
 	if tm.stopped.Load() {
 		return
 	}
@@ -382,7 +368,6 @@ func (tm *TimeoutManager) Set(name string, duration time.Duration, logStr string
 		cmdType:  "set",
 		name:     name,
 		duration: duration,
-		logStr:   logStr,
 		fn:       fn,
 	}:
 		// 成功发送
@@ -392,7 +377,7 @@ func (tm *TimeoutManager) Set(name string, duration time.Duration, logStr string
 }
 
 // SetSync 同步设置定时器（等待操作完成）
-func (tm *TimeoutManager) SetSync(name string, duration time.Duration, logStr string, fn func()) error {
+func (tm *TimeoutManager) SetSync(name string, duration time.Duration, fn func()) error {
 	if tm.stopped.Load() {
 		return fmt.Errorf("超时管理器已停止")
 	}
@@ -403,7 +388,6 @@ func (tm *TimeoutManager) SetSync(name string, duration time.Duration, logStr st
 		cmdType:  "set",
 		name:     name,
 		duration: duration,
-		logStr:   logStr,
 		fn:       fn,
 		done:     done,
 	}:
@@ -522,7 +506,6 @@ func (tm *TimeoutManager) GetTimerInfo(name string) (map[string]any, error) {
 					StartTime time.Time
 					EndTime   time.Time
 					Remaining time.Duration
-					LogStr    string
 					IsActive  bool
 				}); ok {
 					return map[string]any{
@@ -531,7 +514,6 @@ func (tm *TimeoutManager) GetTimerInfo(name string) (map[string]any, error) {
 						"start_time": info.StartTime,
 						"end_time":   info.EndTime,
 						"remaining":  info.Remaining,
-						"log_str":    info.LogStr,
 						"is_active":  info.IsActive,
 					}, nil
 				}
@@ -600,7 +582,6 @@ func (tm *TimeoutManager) ListAllTimersInfo() []map[string]any {
 					StartTime time.Time
 					EndTime   time.Time
 					Remaining time.Duration
-					LogStr    string
 				}); ok {
 					resultList := make([]map[string]any, len(infos))
 					for i, info := range infos {
@@ -610,7 +591,6 @@ func (tm *TimeoutManager) ListAllTimersInfo() []map[string]any {
 							"start_time": info.StartTime,
 							"end_time":   info.EndTime,
 							"remaining":  info.Remaining,
-							"log_str":    info.LogStr,
 						}
 					}
 					return resultList
@@ -679,7 +659,7 @@ func (tm *TimeoutManager) GetStats() (active int, created, expired, stopped, res
 // ==================== 公共接口：重置操作 ====================
 
 // ResetTimer 重置指定定时器（可选择性更新参数）
-func (tm *TimeoutManager) ResetTimer(name string, newDuration time.Duration, newLogStr string, newFn func()) error {
+func (tm *TimeoutManager) ResetTimer(name string, newDuration time.Duration, newFn func()) error {
 	if tm.stopped.Load() {
 		return fmt.Errorf("超时管理器已停止")
 	}
@@ -692,7 +672,6 @@ func (tm *TimeoutManager) ResetTimer(name string, newDuration time.Duration, new
 		cmdType:  "reset",
 		name:     name,
 		duration: newDuration,
-		logStr:   newLogStr,
 		fn:       newFn,
 		result:   resultChan,
 		done:     done,
@@ -727,20 +706,13 @@ func (tm *TimeoutManager) ResetTimerExt(name string, options ...ResetOption) err
 		opt(opts)
 	}
 
-	return tm.ResetTimer(name, opts.duration, opts.logStr, opts.fn)
+	return tm.ResetTimer(name, opts.duration, opts.fn)
 }
 
 // WithDuration 设置新的持续时间
 func WithDuration(d time.Duration) ResetOption {
 	return func(o *resetOptions) {
 		o.duration = d
-	}
-}
-
-// WithLogStr 设置新的日志字符串
-func WithLogStr(logStr string) ResetOption {
-	return func(o *resetOptions) {
-		o.logStr = logStr
 	}
 }
 

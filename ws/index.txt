@@ -14,16 +14,10 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type ClientInfo struct {
-	name   string
-	client *websocket.Conn
-	info   string
-}
-
 // WebSocketManager WebSocket 管理器
 type WebSocketManager struct {
 	// 所有连接的客户端
-	clients map[*websocket.Conn]ClientInfo
+	clients map[*websocket.Conn]bool
 	// 用于广播消息的通道
 	broadcast chan []byte
 	// 用于注册新客户端
@@ -40,7 +34,7 @@ type WebSocketManager struct {
 // NewWebSocketManager 创建并初始化 WebSocket 管理器
 func NewWebSocketManager() *WebSocketManager {
 	manager := &WebSocketManager{
-		clients:         make(map[string]ClientInfo),
+		clients:         make(map[*websocket.Conn]bool),
 		broadcast:       make(chan []byte, 256),
 		register_chan:   make(chan *websocket.Conn),
 		unregister_chan: make(chan *websocket.Conn),
@@ -167,7 +161,7 @@ func (m *WebSocketManager) read(conn *websocket.Conn) {
 	}()
 
 	// 设置读取超时和 pong 处理
-	conn.SetReadDeadline(time.Now().Add(5 * time.Second))
+	conn.SetReadDeadline(time.Now().Add(60 * time.Second))
 	for {
 		// 读取消息
 		messageType, message, err := conn.ReadMessage()
@@ -180,7 +174,7 @@ func (m *WebSocketManager) read(conn *websocket.Conn) {
 			break
 		}
 		// 任意消息都刷新读取超时，避免仅依赖控制帧 pong
-		conn.SetReadDeadline(time.Now().Add(5 * time.Second))
+		conn.SetReadDeadline(time.Now().Add(60 * time.Second))
 
 		// 下面 可以开始写我的逻辑了
 		log.Printf("收到客户端消息: %s, \n", string(message))

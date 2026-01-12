@@ -17,9 +17,33 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/example/helloworld": {
+        "/udp/last": {
             "get": {
-                "description": "do ping",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "udp"
+                ],
+                "summary": "获取最后一条 UDP 消息",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.UDPMessageResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/controller.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/udp/send": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],
@@ -27,15 +51,157 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "udp"
+                ],
+                "summary": "发送 UDP 消息",
+                "parameters": [
+                    {
+                        "description": "消息体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.SendUDPRequest"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/controller.StatusResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controller.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/controller.ErrorResponse"
                         }
                     }
+                }
+            }
+        },
+        "/ws/broadcast": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "websocket"
+                ],
+                "summary": "广播 WebSocket 消息",
+                "parameters": [
+                    {
+                        "description": "消息体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.BroadcastRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.StatusResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controller.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/ws/count": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "websocket"
+                ],
+                "summary": "获取当前 WebSocket 连接数",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.WsClientCountResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controller.BroadcastRequest": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "type": "string",
+                    "example": "hello"
+                }
+            }
+        },
+        "controller.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "type": "string",
+                    "example": "dial udp: ..."
+                },
+                "error": {
+                    "type": "string",
+                    "example": "需要字段 msg"
+                }
+            }
+        },
+        "controller.StatusResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "ok"
+                }
+            }
+        },
+        "controller.WsClientCountResponse": {
+            "type": "object",
+            "properties": {
+                "client_count": {
+                    "type": "integer",
+                    "example": 3
+                }
+            }
+        },
+        "main.SendUDPRequest": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "type": "string",
+                    "example": "hello udp"
+                }
+            }
+        },
+        "main.UDPMessageResponse": {
+            "type": "object",
+            "properties": {
+                "last_msg": {
+                    "type": "string",
+                    "example": "{...}"
                 }
             }
         }
@@ -46,10 +212,10 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8080",
-	BasePath:         "/api/v1",
+	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Key Fob API",
-	Description:      "这是一个用户管理的API文档",
+	Description:      "Key Fob WebSocket + UDP 接口文档",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
