@@ -40,7 +40,7 @@ type WebSocketManager struct {
 // NewWebSocketManager 创建并初始化 WebSocket 管理器
 func NewWebSocketManager() *WebSocketManager {
 	manager := &WebSocketManager{
-		clients:         make(map[string]ClientInfo),
+		clients:         make(map[*websocket.Conn]ClientInfo),
 		broadcast:       make(chan []byte, 256),
 		register_chan:   make(chan *websocket.Conn),
 		unregister_chan: make(chan *websocket.Conn),
@@ -126,7 +126,11 @@ func (m *WebSocketManager) run() {
 		case conn := <-m.register_chan:
 			// 注册新客户端
 			m.mu.Lock()
-			m.clients[conn] = true
+			m.clients[conn] = ClientInfo{
+				name:   conn.RemoteAddr().String(),
+				client: conn,
+				info:   "test",
+			}
 			m.mu.Unlock()
 			log.Printf("新客户端连接，当前连接数: %d", len(m.clients))
 
