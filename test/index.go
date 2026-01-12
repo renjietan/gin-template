@@ -2,22 +2,24 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
 	"sync"
 	"sync/atomic"
+	"syscall"
+	"time"
 )
 
 type Message struct {
 	ID      int
 	Content string
+	done    atomic.Bool
 }
 
-type go_done struct {
-	ID   int
-	done atomic.Bool
-}
+var data = make(chan *Message, 100)
 
 func main() {
-	data := []Message{}
+	// data := []Message{}
 	// cn := make(chan Message, 100)
 	// for i := 0; i < 10; i++ {
 	// 	cn <- Message{
@@ -42,17 +44,34 @@ func main() {
 	// 		close(cn)
 	// 	}
 	// }
+	var quit_chan = make(chan os.Signal, 1)
+	signal.Notify(quit_chan, os.Interrupt, syscall.SIGTERM)
 	var wg sync.WaitGroup
 	for v := range 10 {
 		wg.Add(1)
 		go func(index int) {
 			defer wg.Done()
-			data = append(data, Message{
+			msg := &Message{
 				ID:      index,
 				Content: fmt.Sprintf("%d", index),
-			})
-
+			}
+			msg.done.Store(true)
+			data <- msg
 		}(v)
 	}
 	wg.Wait()
+	for {
+		select {
+		case x := <-data:
+			fmt.Printf("v:%#v\n", x)
+		case <-quit_chan:
+			fmt.Println("quit")
+			return
+		default:
+			fmt.Println("faild")
+			close(data)
+		}
+		time.Sleep(1 * time.Second)
+	}
+
 }
