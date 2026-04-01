@@ -1,4 +1,4 @@
-basePath: /
+basePath: /api
 definitions:
   controller.BroadcastRequest:
     properties:
@@ -43,8 +43,13 @@ host: localhost:8080
 info:
   contact:
     name: API Support
-  description: Key Fob WebSocket + UDP 接口文档
-  title: Key Fob API
+    url: http://www.swagger.io/support
+  description: xxx统 API 服务
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: xxx API
   version: "1.0"
 paths:
   /udp/last:
@@ -129,4 +134,9 @@ paths:
       summary: 获取当前 WebSocket 连接数
       tags:
       - websocket
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

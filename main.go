@@ -1,9 +1,21 @@
-// @title Key Fob API
-// @version 1.0
-// @description Key Fob WebSocket + UDP 接口文档
-// @contact.name API Support
-// @host localhost:8080
-// @BasePath /
+// @title           xxx API
+// @version         1.0
+// @description     xxx统 API 服务
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+//// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
+// @BasePath  /api
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 package main
 
 import (
@@ -14,11 +26,10 @@ import (
 	"time"
 
 	"example.com/t/controller"
-	docs "example.com/t/docs"
 	"example.com/t/udp"
 	"example.com/t/ws"
-	"github.com/gin-gonic/gin"
-	swaggerfiles "github.com/swaggo/files"
+	"github.com/gin-gonic/gin" // 新版需要导入 renderer 包
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
@@ -41,9 +52,8 @@ type SendUDPRequest struct {
 }
 
 func main() {
-	// Swagger 基本信息设置
-	docs.SwaggerInfo.BasePath = "/"
-
+	// Swagger 基础路径
+	// docs.SwaggerInfo.BasePath = "/"
 	// ============ 1. 初始化 Gin ============ //
 	r := gin.Default()
 	// ============ 2. 初始化 WebSocket ============ //
@@ -56,7 +66,10 @@ func main() {
 	defer wsManager.Close()
 
 	// WebSocket 路由
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	if gin.Mode() != gin.ReleaseMode {
+		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
+	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.GET("/ws", wsManager.HandleWebSocket)
 
 	// 获取 WebSocket 连接数
