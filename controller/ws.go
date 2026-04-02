@@ -28,11 +28,12 @@ type ErrorResponse struct {
 }
 
 // GetWsClientCount godoc
-// @Summary 获取当前 WebSocket 连接数
-// @Tags websocket
-// @Produce json
-// @Success 200 {object} WsClientCountResponse
-// @Router /ws/count [get]
+//
+//	@Summary	获取当前 WebSocket 连接数
+//	@Tags		websocket
+//	@Produce	json
+//	@Success	200	{object}	WsClientCountResponse
+//	@Router		/ws/count [get]
 func GetWsClientCount(c *gin.Context) {
 	ws := c.MustGet("ws").(*ws.WebSocketManager)
 	count := ws.GetClientCount()
@@ -42,14 +43,15 @@ func GetWsClientCount(c *gin.Context) {
 }
 
 // BroadcastWsMessage godoc
-// @Summary 广播 WebSocket 消息
-// @Tags websocket
-// @Accept json
-// @Produce json
-// @Param data body BroadcastRequest true "消息体"
-// @Success 200 {object} StatusResponse
-// @Failure 400 {object} ErrorResponse
-// @Router /ws/broadcast [post]
+//
+//	@Summary	广播 WebSocket 消息
+//	@Tags		websocket
+//	@Accept		json
+//	@Produce	json
+//	@Param		data	body		BroadcastRequest	true	"消息体"
+//	@Success	200		{object}	StatusResponse
+//	@Failure	400		{object}	ErrorResponse
+//	@Router		/ws/broadcast [post]
 func BroadcastWsMessage(c *gin.Context) {
 	ws := c.MustGet("ws").(*ws.WebSocketManager)
 	var req BroadcastRequest
