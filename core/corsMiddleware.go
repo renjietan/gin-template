@@ -3,7 +3,6 @@ package core
 import (
 	"net/http"
 
-	"github.com/bytedance/gopkg/util/logger"
 	"github.com/gin-gonic/gin"
 )
 

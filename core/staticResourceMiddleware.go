@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"example.com/t/utility"
-	"github.com/bytedance/gopkg/util/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/nfnt/resize"
 	"golang.org/x/image/webp"
