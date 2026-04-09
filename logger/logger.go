@@ -59,12 +59,12 @@ func getEncoder() zapcore.Encoder {
 
 func getLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
-		Filename:   "logs/app.log", // 日志文件路径
-		MaxSize:    10,             // 单个文件最大 100 MB
-		MaxBackups: 30,             // 最多保留 5 个旧文件
-		MaxAge:     30,             // 最多保留 30 天
-		Compress:   true,           // 压缩旧文件
-		LocalTime:  true,           // 使用本地时间命名备份
+		Filename:   "static/logs/app.log", // 日志文件路径
+		MaxSize:    100,                   // 单个文件最大 100 MB
+		MaxBackups: 30,                    // 最多保留 30 个旧文件
+		MaxAge:     30,                    // 最多保留 30 天
+		Compress:   true,                  // 压缩旧文件
+		LocalTime:  true,                  // 使用本地时间命名备份
 	}
 	return zapcore.AddSync(lumberJackLogger)
 }

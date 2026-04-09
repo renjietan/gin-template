@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	udp_utils_gen "example.com/t/udp/utils/gen"
+	"example.com/t/api/udp/utils/gen"
 )
 
 type UDPClient struct {

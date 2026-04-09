@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"os"
 
+	logger2 "example.com/t/logger"
 	"example.com/t/types"
-	logger2 "example.com/t/utility/logger"
 	"github.com/BurntSushi/toml"
 )
 
@@ -14,24 +14,9 @@ var logger = logger2.GetLogger()
 func NewDefaultConfig() *types.AppConfig {
 	return &types.AppConfig{
 		StaticDir: "./static",
-		//Listen:    "0.0.0.0:5678",
-		//ProxyURL:  "",
-		//StaticDir: "./static",
-		StaticUrl: "http://localhost/5678/static",
-		//Redis:     types.RedisConfig{Host: "localhost", Port: 6379, Password: ""},
-		//Session: types.Session{
-		//	SecretKey: utils.RandString(64),
-		//	MaxAge:    86400,
-		//},
-		//ApiConfig: types.ApiConfig{},
-		//OSS: types.OSSConfig{
-		//	Active: "local",
-		//	Local: types.LocalStorageConfig{
-		//		BaseURL:  "http://localhost/5678/static/upload",
-		//		BasePath: "./static/upload",
-		//	},
-		//},
-		//AlipayConfig: types.AlipayConfig{Enabled: false, SandBox: false},
+		StaticUrl: "http://localhost:8080/static",
+		Listen:    "0.0.0.0:3344",
+		LogDir:    "./staic/logs",
 	}
 }
 

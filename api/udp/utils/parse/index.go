@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"slices"
 
+	"example.com/t/api/udp/utils/stuct"
 	"github.com/elliotchance/orderedmap/v3"
 
-	udp_utils_struct "example.com/t/udp/utils/stuct"
 	"example.com/t/utility"
 )
 

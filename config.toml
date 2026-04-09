@@ -1,2 +1,4 @@
 StaticDir = "./static"
-StaticUrl = "http://localhost/5678/static"
+StaticUrl = "http://localhost:8080/static"
+Listen = "0.0.0.0:3344"
+LogDir = "./staic/logs"

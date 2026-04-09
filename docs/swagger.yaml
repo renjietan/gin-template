@@ -1,4 +1,3 @@
-basePath: /api
 definitions:
   controller.BroadcastRequest:
     properties:
@@ -27,76 +26,21 @@ definitions:
         example: 3
         type: integer
     type: object
-  main.SendUDPRequest:
-    properties:
-      msg:
-        example: hello udp
-        type: string
-    type: object
-  main.UDPMessageResponse:
-    properties:
-      last_msg:
-        example: '{...}'
-        type: string
-    type: object
-host: localhost:8080
 info:
-  contact:
-    name: API Support
-    url: http://www.swagger.io/support
-  description: xxx统 API 服务
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
-  title: xxx API
-  version: "1.0"
+  contact: {}
 paths:
-  /udp/last:
-    get:
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/main.UDPMessageResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/controller.ErrorResponse'
-      summary: 获取最后一条 UDP 消息
-      tags:
-      - udp
-  /udp/send:
+  /case/1:
     post:
-      consumes:
-      - application/json
-      parameters:
-      - description: 消息体
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/main.SendUDPRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/controller.StatusResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/controller.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/controller.ErrorResponse'
-      summary: 发送 UDP 消息
+            $ref: '#/definitions/controller.WsClientCountResponse'
+      summary: 测试接口1
       tags:
-      - udp
+      - case
   /ws/broadcast:
     post:
       consumes:
@@ -134,9 +78,4 @@ paths:
       summary: 获取当前 WebSocket 连接数
       tags:
       - websocket
-securityDefinitions:
-  ApiKeyAuth:
-    in: header
-    name: Authorization
-    type: apiKey
 swagger: "2.0"

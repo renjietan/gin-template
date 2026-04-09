@@ -9,85 +9,26 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
-        "contact": {
-            "name": "API Support",
-            "url": "http://www.swagger.io/support"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        },
+        "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/udp/last": {
-            "get": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "udp"
-                ],
-                "summary": "获取最后一条 UDP 消息",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/main.UDPMessageResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/udp/send": {
+        "/case/1": {
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "udp"
+                    "case"
                 ],
-                "summary": "发送 UDP 消息",
-                "parameters": [
-                    {
-                        "description": "消息体",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/main.SendUDPRequest"
-                        }
-                    }
-                ],
+                "summary": "测试接口1",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.StatusResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/controller.WsClientCountResponse"
                         }
                     }
                 }
@@ -192,43 +133,18 @@ const docTemplate = `{
                     "example": 3
                 }
             }
-        },
-        "main.SendUDPRequest": {
-            "type": "object",
-            "properties": {
-                "msg": {
-                    "type": "string",
-                    "example": "hello udp"
-                }
-            }
-        },
-        "main.UDPMessageResponse": {
-            "type": "object",
-            "properties": {
-                "last_msg": {
-                    "type": "string",
-                    "example": "{...}"
-                }
-            }
-        }
-    },
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
         }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "1.0",
-	Host:             "localhost:8080",
-	BasePath:         "/api",
+	Version:          "",
+	Host:             "",
+	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "xxx API",
-	Description:      "xxx统 API 服务",
+	Title:            "",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

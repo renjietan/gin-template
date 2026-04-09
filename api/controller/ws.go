@@ -1,9 +1,8 @@
 package controller
 
 import (
+	"example.com/t/api/ws"
 	"github.com/gin-gonic/gin"
-
-	"example.com/t/ws"
 )
 
 // WsClientCountResponse 用于 swagger 展示当前连接数响应体.

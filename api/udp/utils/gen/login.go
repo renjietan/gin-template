@@ -1,10 +1,9 @@
 package udp_utils_gen
 
 import (
+	"example.com/t/api/udp/utils/parse"
+	"example.com/t/api/udp/utils/stuct"
 	"github.com/elliotchance/orderedmap/v3"
-
-	udp_utils_parse "example.com/t/udp/utils/parse"
-	udp_utils_struct "example.com/t/udp/utils/stuct"
 )
 
 func Login() (res []byte) {

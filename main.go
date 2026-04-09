@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -10,14 +9,18 @@ import (
 	"syscall"
 	"time"
 
+	"example.com/t/api/controller"
 	"example.com/t/core"
+	"example.com/t/logger"
 	"example.com/t/types"
-	"github.com/bytedance/gopkg/util/logger"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
+	"go.uber.org/zap"
 )
+
+var log2 = logger.GetLogger()
 
 // AppLifecycle 应用程序生命周期
 type AppLifecycle struct {
@@ -25,13 +28,13 @@ type AppLifecycle struct {
 
 // OnStart 应用程序启动时执行
 func (l *AppLifecycle) OnStart(context.Context) error {
-	logger.Info("监听服务启动")
+	log2.Info("监听服务启动")
 	return nil
 }
 
 // OnStop 应用程序停止时执行
 func (l *AppLifecycle) OnStop(context.Context) error {
-	logger.Info("监听服务停止")
+	log2.Info("监听服务停止")
 	return nil
 }
 
@@ -48,23 +51,24 @@ func main() {
 	if !debug {
 		defer func() {
 			if err := recover(); err != nil {
-				logger.Error("生产环境 抛出异常（main.go）：:", err)
+				log2.Error("生产环境 抛出异常（main.go）：:", err)
 			}
 		}()
 	}
-	// fx 内部日志
-	fx.WithLogger(func() fxevent.Logger {
-		return &fxevent.ConsoleLogger{W: os.Stdout}
-	})
-	app := fx.New(
-		// fx 内部日志
-		fx.WithLogger(func() fxevent.Logger { return &fxevent.NopLogger }),
 
+	app := fx.New(
+		fx.Provide(func() *zap.SugaredLogger { return log2 }),
+		// 将 fx 日志 统一使用日志管理器收集
+		fx.WithLogger(func(sugar *zap.SugaredLogger) fxevent.Logger {
+			return &fxevent.ZapLogger{
+				Logger: sugar.Desugar(),
+			}
+		}),
 		// 初始化配置应用配置
 		fx.Provide(func() *types.AppConfig {
 			config, err := core.LoadConfig(configFile)
 			if err != nil {
-				log.Fatal(err)
+				log2.Fatal(err)
 			}
 			config.Path = configFile
 			if debug {
@@ -72,42 +76,39 @@ func main() {
 			}
 			return config
 		}),
+		fx.Provide(core.NewAppServer),
 		fx.Invoke(func(appserver *core.AppServer) {
 			appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		}),
-		fx.Provide(core.NewAppServer),
-		//
-		//fx.Invoke(func(appserver *core.AppServer) {
-		//	appserver.Init(debug)
-		//}),
+		fx.Invoke(func(appserver *core.AppServer) {
+			appserver.Run()
+			appserver.Middlewares(debug)
+			controller.Case1(appserver.Engine)
+		}),
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数
-		fx.Invoke(func(lifecycle fx.Lifecycle, lc *AppLifecycle) {
+		fx.Invoke(func(lifecycle fx.Lifecycle, lc *AppLifecycle, server *core.AppServer) {
 			lifecycle.Append(fx.Hook{
 				OnStart: func(ctx context.Context) error {
 					return lc.OnStart(ctx)
 				},
 				OnStop: func(ctx context.Context) error {
+					err := server.Server.Shutdown(ctx)
+					if err != nil {
+						return err
+					}
 					return lc.OnStop(ctx)
 				},
 			})
 		}),
 	)
 
-	fmt.Println("app:", app)
-
 	// 启动应用程序
-	//go func() {
-	//	if err := app.Start(context.Background()); err != nil {
-	//
-	//		log.Fatal("服务启动失败：", err)
-	//	}
-	//}()
-
-	if err := app.Start(context.Background()); err != nil {
-
-		log.Fatal("服务启动失败：", err)
-	}
+	go func() {
+		if err := app.Start(context.Background()); err != nil {
+			log.Fatal("服务启动失败：", err)
+		}
+	}()
 
 	// 监听退出信号
 	quit := make(chan os.Signal, 1)
