@@ -7,7 +7,12 @@ type AppConfig struct {
 	StaticUrl string
 	Listen    string
 	LogDir    string
+	MysqlConfig
 }
 
-type SystemConfig struct {
+type MysqlConfig struct {
+	Host     string
+	Port     string
+	Username string
+	Password string
 }

@@ -11,10 +11,9 @@ import (
 )
 
 type AppServer struct {
-	Config    *types.AppConfig
-	Engine    *gin.Engine
-	Server    *http.Server
-	SysConfig *types.SystemConfig // system config cache
+	Config *types.AppConfig
+	Engine *gin.Engine
+	Server *http.Server
 }
 
 func NewAppServer(appConfig *types.AppConfig) *AppServer {

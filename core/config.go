@@ -16,7 +16,13 @@ func NewDefaultConfig() *types.AppConfig {
 		StaticDir: "./static",
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
-		LogDir:    "./staic/logs",
+		LogDir:    "./static/logs",
+		MysqlConfig: types.MysqlConfig{
+			Host:     "127.0.0.1",
+			Port:     "3306",
+			Username: "root",
+			Password: "123456",
+		},
 	}
 }
 
@@ -27,7 +33,6 @@ func LoadConfig(configFile string) (*types.AppConfig, error) {
 		logger.Info("创建配置文件: ", configFile)
 		config = NewDefaultConfig()
 		config.Path = configFile
-		// save config
 		err := SaveConfig(config)
 		if err != nil {
 			return nil, err

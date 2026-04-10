@@ -18,6 +18,7 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 var log2 = logger.GetLogger()
@@ -28,7 +29,7 @@ type AppLifecycle struct {
 
 // OnStart 应用程序启动时执行
 func (l *AppLifecycle) OnStart(context.Context) error {
-	log2.Info("监听服务启动")
+	log2.Info("监听服务启动:")
 	return nil
 }
 
@@ -80,10 +81,13 @@ func main() {
 		fx.Invoke(func(appserver *core.AppServer) {
 			appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		}),
-		fx.Invoke(func(appserver *core.AppServer) {
+		// 初始化数据库
+		fx.Provide(core.NewGormConfig),
+		fx.Provide(core.NewMysql),
+		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB) {
 			appserver.Run()
 			appserver.Middlewares(debug)
-			controller.Case1(appserver.Engine)
+			controller.CaseOne(appserver.Engine, db)
 		}),
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数
