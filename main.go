@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"example.com/t/api/controller"
+	"example.com/t/api/service"
 	"example.com/t/core"
 	"example.com/t/logger"
 	"example.com/t/types"
@@ -52,14 +52,14 @@ func main() {
 	if !debug {
 		defer func() {
 			if err := recover(); err != nil {
-				log2.Error("生产环境 抛出异常（main.go）：:", err)
+				log2.Error("生产环境 抛出异常(main.go): ", err)
 			}
 		}()
 	}
-
+	// cmd.Command_swag()
 	app := fx.New(
 		fx.Provide(func() *zap.SugaredLogger { return log2 }),
-		// 将 fx 日志 统一使用日志管理器收集
+		// 将 fx 内部日志 统一使用日志管理器收集
 		fx.WithLogger(func(sugar *zap.SugaredLogger) fxevent.Logger {
 			return &fxevent.ZapLogger{
 				Logger: sugar.Desugar(),
@@ -77,18 +77,20 @@ func main() {
 			}
 			return config
 		}),
+		// 开启 http-server
 		fx.Provide(core.NewAppServer),
+		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB) {
+			appserver.Run()
+			appserver.Middlewares(debug)
+		}),
+		// swagger 路由
 		fx.Invoke(func(appserver *core.AppServer) {
 			appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		}),
 		// 初始化数据库
 		fx.Provide(core.NewGormConfig),
 		fx.Provide(core.NewMysql),
-		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB) {
-			appserver.Run()
-			appserver.Middlewares(debug)
-			controller.CaseOne(appserver.Engine, db)
-		}),
+		// 生命周期
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数
 		fx.Invoke(func(lifecycle fx.Lifecycle, lc *AppLifecycle, server *core.AppServer) {
@@ -104,6 +106,11 @@ func main() {
 					return lc.OnStop(ctx)
 				},
 			})
+		}),
+		// 自动同步 数据库 表
+		fx.Provide(service.NewMigrationService),
+		fx.Invoke(func(migrationService *service.MigrationService) {
+			migrationService.StartMigrate()
 		}),
 	)
 

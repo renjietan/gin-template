@@ -29,7 +29,7 @@ definitions:
 info:
   contact: {}
 paths:
-  /case/1:
+  /case/one1:
     post:
       produces:
       - application/json
@@ -38,7 +38,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/controller.WsClientCountResponse'
-      summary: 测试接口1
+      summary: 测试接口1212
       tags:
       - case
   /ws/broadcast:

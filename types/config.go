@@ -15,4 +15,5 @@ type MysqlConfig struct {
 	Port     string
 	Username string
 	Password string
+	DataBase string
 }

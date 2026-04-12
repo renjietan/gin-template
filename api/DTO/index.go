@@ -1,4 +1,4 @@
-package meta
+package dto
 
 import "example.com/t/enum"
 

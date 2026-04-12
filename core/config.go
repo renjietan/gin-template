@@ -22,6 +22,7 @@ func NewDefaultConfig() *types.AppConfig {
 			Port:     "3306",
 			Username: "root",
 			Password: "123456",
+			DataBase: "springboot3",
 		},
 	}
 }

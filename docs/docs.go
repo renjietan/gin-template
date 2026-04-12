@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/case/1": {
+        "/case/one1": {
             "post": {
                 "produces": [
                     "application/json"
@@ -23,7 +23,7 @@ const docTemplate = `{
                 "tags": [
                     "case"
                 ],
-                "summary": "测试接口1",
+                "summary": "测试接口1212",
                 "responses": {
                     "200": {
                         "description": "OK",

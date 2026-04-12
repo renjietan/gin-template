@@ -1,31 +1,31 @@
 package core
 
 import (
-	"fmt"
 	"time"
 
 	"example.com/t/types"
+	"example.com/t/utility"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
 
 // NewGormLogger 返回适配后的 logger.Interface
-//func NewGormLogger() gormLogger.Interface {
-//	// 获取你现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
-//	sugar := logger2.GetLogger()
-//	zapLogger := sugar.Desugar() // 转为 *zap.Logger 供适配器使用
-//
-//	// 配置 GORM 日志行为
-//	config := gormLogger.Config{
-//		SlowThreshold:             200 * time.Millisecond,
-//		LogLevel:                  gormLogger.Warn,
-//		IgnoreRecordNotFoundError: true,
-//		Colorful:                  false, // zap 自带结构化日志，不需要颜色
-//	}
-//
-//	return logger2.NewGormZapAdapter(zapLogger, config)
-//}
+// func NewGormLogger() gormLogger.Interface {
+// 	// 获取你现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
+// 	sugar := logger2.GetLogger()
+// 	zapLogger := sugar.Desugar() // 转为 *zap.Logger 供适配器使用
+
+// 	// 配置 GORM 日志行为
+// 	config := gormLogger.Config{
+// 		SlowThreshold:             200 * time.Millisecond,
+// 		LogLevel:                  gormLogger.Warn,
+// 		IgnoreRecordNotFoundError: true,
+// 		Colorful:                  false, // zap 自带结构化日志，不需要颜色
+// 	}
+
+// 	return logger2.NewGormZapAdapter(zapLogger, config)
+// }
 
 func NewGormConfig() *gorm.Config {
 	return &gorm.Config{
@@ -38,13 +38,8 @@ func NewGormConfig() *gorm.Config {
 }
 
 func NewMysql(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
-	//"user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
-	dns := fmt.Sprintf("%s:%s@tcp(%s:%s)/dbname?charset=utf8mb4&parseTime=True&loc=Local",
-		appConfig.Username,
-		appConfig.Password,
-		appConfig.Host,
-		appConfig.Port,
-	)
+	template := `{{Username}}:{{Password}}@tcp({{Host}}:{{Port}})/{{DataBase}}?charset=utf8mb4&parseTime=True&loc=Local`
+	dns := utility.StringByTemplate(template, appConfig.MysqlConfig)
 	db, err := gorm.Open(mysql.Open(dns), config)
 	if err != nil {
 		return nil, err
