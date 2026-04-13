@@ -26,21 +26,93 @@ definitions:
         example: 3
         type: integer
     type: object
+  dto.ConfigDTO:
+    properties:
+      name:
+        description: 使用 example 提供示例值
+        example: name-张三
+        type: string
+      value:
+        example: value-张三
+        type: string
+    required:
+    - name
+    - value
+    type: object
+  dto.ConfigsDTO:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/dto.ConfigDTO'
+        type: array
+    type: object
+  entity.ConfigEntity:
+    properties:
+      created_at:
+        description: 时间字段，使用 datetime(3) 以支持毫秒精度
+        type: string
+      deleted_at:
+        description: 软删除字段，使用指针，允许为 NULL
+        type: string
+      id:
+        description: 主键，类型为 bigint unsigned，自增
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+      value:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
-  /case/one1:
+  /config/insert:
     post:
+      consumes:
+      - application/json
+      description: 配置 描述
+      parameters:
+      - description: 配置结构体
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ConfigDTO'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/controller.WsClientCountResponse'
-      summary: 测试接口1212
+            $ref: '#/definitions/entity.ConfigEntity'
+      summary: 创建 配置
       tags:
-      - case
+      - Config
+  /config/insertMany:
+    post:
+      consumes:
+      - application/json
+      description: 批量配置 描述
+      parameters:
+      - description: 配置结构体
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ConfigsDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.ConfigEntity'
+            type: array
+      summary: 批量创建 配置
+      tags:
+      - Config
   /ws/broadcast:
     post:
       consumes:

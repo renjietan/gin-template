@@ -12,7 +12,7 @@ import (
 
 // NewGormLogger 返回适配后的 logger.Interface
 // func NewGormLogger() gormLogger.Interface {
-// 	// 获取你现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
+// 	// 获取现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
 // 	sugar := logger2.GetLogger()
 // 	zapLogger := sugar.Desugar() // 转为 *zap.Logger 供适配器使用
 

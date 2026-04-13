@@ -9,7 +9,9 @@ import (
 	"syscall"
 	"time"
 
+	"example.com/t/api/controller"
 	"example.com/t/api/service"
+	"example.com/t/cmd"
 	"example.com/t/core"
 	"example.com/t/logger"
 	"example.com/t/types"
@@ -56,7 +58,7 @@ func main() {
 			}
 		}()
 	}
-	// cmd.Command_swag()
+	cmd.Command_swag()
 	app := fx.New(
 		fx.Provide(func() *zap.SugaredLogger { return log2 }),
 		// 将 fx 内部日志 统一使用日志管理器收集
@@ -99,10 +101,10 @@ func main() {
 					return lc.OnStart(ctx)
 				},
 				OnStop: func(ctx context.Context) error {
-					err := server.Server.Shutdown(ctx)
-					if err != nil {
-						return err
-					}
+					//err := server.Server.Shutdown(ctx)
+					//if err != nil {
+					//	return err
+					//}
 					return lc.OnStop(ctx)
 				},
 			})
@@ -111,6 +113,13 @@ func main() {
 		fx.Provide(service.NewMigrationService),
 		fx.Invoke(func(migrationService *service.MigrationService) {
 			migrationService.StartMigrate()
+		}),
+
+		// service 注入
+		fx.Provide(service.NewConfigService),
+		fx.Provide(controller.NewConfigController),
+		fx.Invoke(func(cfgController *controller.ConfigController) {
+			cfgController.RegisterRouter()
 		}),
 	)
 

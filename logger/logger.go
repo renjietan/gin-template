@@ -1,12 +1,5 @@
 package logger
 
-// * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// * Copyright 2023 The Geek-AI Authors. All rights reserved.
-// * Use of this source code is governed by a Apache-2.0 license
-// * that can be found in the LICENSE file.
-// * @Author yangjian102621@163.com
-// * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 import (
 	"os"
 	"strings"
@@ -25,8 +18,8 @@ func GetLogger() *zap.SugaredLogger {
 	}
 
 	logLevel := zap.NewAtomicLevelAt(getLogLevel(os.Getenv("GEEKAI_LOG_LEVEL")))
-	encoder := getEncoder()
-	writerSyncer := getLogWriter()
+	encoder := GetEncoder()
+	writerSyncer := GetLogWriter()
 	fileCore := zapcore.NewCore(encoder, writerSyncer, logLevel)
 	consoleOutput := zapcore.Lock(os.Stdout)
 	consoleCore := zapcore.NewCore(
@@ -41,7 +34,7 @@ func GetLogger() *zap.SugaredLogger {
 }
 
 // core 三个参数之  编码
-func getEncoder() zapcore.Encoder {
+func GetEncoder() zapcore.Encoder {
 	encoderConfig := zapcore.EncoderConfig{
 		TimeKey:        "time",
 		LevelKey:       "level",
@@ -57,7 +50,7 @@ func getEncoder() zapcore.Encoder {
 	return zapcore.NewConsoleEncoder(encoderConfig)
 }
 
-func getLogWriter() zapcore.WriteSyncer {
+func GetLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   "static/logs/app.log", // 日志文件路径
 		MaxSize:    100,                   // 单个文件最大 100 MB

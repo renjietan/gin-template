@@ -4,20 +4,72 @@
         "contact": {}
     },
     "paths": {
-        "/case/one1": {
+        "/config/insert": {
             "post": {
+                "description": "配置 描述",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "case"
+                    "Config"
                 ],
-                "summary": "测试接口1212",
+                "summary": "创建 配置",
+                "parameters": [
+                    {
+                        "description": "配置结构体",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ConfigDTO"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.WsClientCountResponse"
+                            "$ref": "#/definitions/entity.ConfigEntity"
+                        }
+                    }
+                }
+            }
+        },
+        "/config/insertMany": {
+            "post": {
+                "description": "批量配置 描述",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Config"
+                ],
+                "summary": "批量创建 配置",
+                "parameters": [
+                    {
+                        "description": "配置结构体",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ConfigsDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entity.ConfigEntity"
+                            }
                         }
                     }
                 }
@@ -120,6 +172,61 @@
                 "client_count": {
                     "type": "integer",
                     "example": 3
+                }
+            }
+        },
+        "dto.ConfigDTO": {
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "name": {
+                    "description": "使用 example 提供示例值",
+                    "type": "string",
+                    "example": "name-张三"
+                },
+                "value": {
+                    "type": "string",
+                    "example": "value-张三"
+                }
+            }
+        },
+        "dto.ConfigsDTO": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.ConfigDTO"
+                    }
+                }
+            }
+        },
+        "entity.ConfigEntity": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "description": "时间字段，使用 datetime(3) 以支持毫秒精度",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "description": "软删除字段，使用指针，允许为 NULL",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "主键，类型为 bigint unsigned，自增",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
                 }
             }
         }

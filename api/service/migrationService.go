@@ -1,7 +1,7 @@
 package service
 
 import (
-	"example.com/t/api/model"
+	"example.com/t/api/entity"
 	"example.com/t/types"
 	"gorm.io/gorm"
 )
@@ -25,6 +25,6 @@ func (s *MigrationService) StartMigrate() {
 }
 
 func (s *MigrationService) TableMigration() {
-	s.db.AutoMigrate(&model.Config{})
-	s.db.AutoMigrate(&model.LoginLog{})
+	s.db.AutoMigrate(&entity.ConfigEntity{})
+	s.db.AutoMigrate(&entity.LoginLog{})
 }
