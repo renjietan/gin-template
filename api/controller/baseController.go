@@ -4,13 +4,12 @@ import (
 	"strings"
 
 	"example.com/t/core"
-	logger2 "example.com/t/logger"
 	"example.com/t/utility"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
-var logger = logger2.GetLogger()
+//var logger = logger2.GetLogger()
 
 type BaseController struct {
 	App *core.AppServer

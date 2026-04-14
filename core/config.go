@@ -3,13 +3,11 @@ package core
 import (
 	"bytes"
 	"os"
+	"time"
 
-	logger2 "example.com/t/logger"
 	"example.com/t/types"
 	"github.com/BurntSushi/toml"
 )
-
-var logger = logger2.GetLogger()
 
 func NewDefaultConfig() *types.AppConfig {
 	return &types.AppConfig{
@@ -24,6 +22,13 @@ func NewDefaultConfig() *types.AppConfig {
 			Password: "123456",
 			DataBase: "springboot3",
 		},
+		LoggerConfig: types.LoggerConfig{
+			Level: "debug",
+			//FilePath:     "logs/app-%Y%m%d.log", // 每天一个文件，如 app-20260115.log
+			MaxAge:       30 * 24 * time.Hour, // 保留30天
+			FilePath:     "logs/app.log",
+			RotationTime: 24 * time.Hour, // 每天切割
+		},
 	}
 }
 
@@ -31,7 +36,7 @@ func LoadConfig(configFile string) (*types.AppConfig, error) {
 	var config *types.AppConfig
 	_, err := os.Stat(configFile)
 	if err != nil {
-		logger.Info("创建配置文件: ", configFile)
+		//logger.Info("创建配置文件: ", configFile)
 		config = NewDefaultConfig()
 		config.Path = configFile
 		err := SaveConfig(config)

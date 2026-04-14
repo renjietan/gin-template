@@ -13,17 +13,14 @@ import (
 	"example.com/t/api/service"
 	"example.com/t/cmd"
 	"example.com/t/core"
-	"example.com/t/logger"
+	"example.com/t/core/fx_module"
 	"example.com/t/types"
+	"github.com/sirupsen/logrus"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/fx"
-	"go.uber.org/fx/fxevent"
-	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
-
-var log2 = logger.GetLogger()
 
 // AppLifecycle 应用程序生命周期
 type AppLifecycle struct {
@@ -31,13 +28,13 @@ type AppLifecycle struct {
 
 // OnStart 应用程序启动时执行
 func (l *AppLifecycle) OnStart(context.Context) error {
-	log2.Info("监听服务启动:")
+	log.Printf("监听服务启动:")
 	return nil
 }
 
 // OnStop 应用程序停止时执行
 func (l *AppLifecycle) OnStop(context.Context) error {
-	log2.Info("监听服务停止")
+	log.Printf("监听服务停止")
 	return nil
 }
 
@@ -54,24 +51,23 @@ func main() {
 	if !debug {
 		defer func() {
 			if err := recover(); err != nil {
-				log2.Error("生产环境 抛出异常(main.go): ", err)
+				log.Fatal("生产环境 抛出异常(main.go): ", err)
 			}
 		}()
 	}
 	cmd.Command_swag()
 	app := fx.New(
-		fx.Provide(func() *zap.SugaredLogger { return log2 }),
 		// 将 fx 内部日志 统一使用日志管理器收集
-		fx.WithLogger(func(sugar *zap.SugaredLogger) fxevent.Logger {
-			return &fxevent.ZapLogger{
-				Logger: sugar.Desugar(),
-			}
-		}),
+		//fx.WithLogger(func() fx.Printer {
+		//	return fx.PrinterFunc(func(format string, args ...interface{}) {
+		//		logger.GlobalLog.Infof(format, args...)
+		//	})
+		//})
 		// 初始化配置应用配置
 		fx.Provide(func() *types.AppConfig {
 			config, err := core.LoadConfig(configFile)
 			if err != nil {
-				log2.Fatal(err)
+				log.Fatal(err)
 			}
 			config.Path = configFile
 			if debug {
@@ -79,11 +75,12 @@ func main() {
 			}
 			return config
 		}),
+		fx_module.LoggerModule,
 		// 开启 http-server
 		fx.Provide(core.NewAppServer),
-		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB) {
+		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {
 			appserver.Run()
-			appserver.Middlewares(debug)
+			appserver.Middlewares(debug, log)
 		}),
 		// swagger 路由
 		fx.Invoke(func(appserver *core.AppServer) {
@@ -115,7 +112,7 @@ func main() {
 			migrationService.StartMigrate()
 		}),
 
-		// service 注入
+		// 模块 - config
 		fx.Provide(service.NewConfigService),
 		fx.Provide(controller.NewConfigController),
 		fx.Invoke(func(cfgController *controller.ConfigController) {

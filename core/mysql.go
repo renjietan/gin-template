@@ -3,32 +3,28 @@ package core
 import (
 	"time"
 
+	"example.com/t/core/logger"
 	"example.com/t/types"
 	"example.com/t/utility"
+	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
 
 // NewGormLogger 返回适配后的 logger.Interface
-// func NewGormLogger() gormLogger.Interface {
-// 	// 获取现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
-// 	sugar := logger2.GetLogger()
-// 	zapLogger := sugar.Desugar() // 转为 *zap.Logger 供适配器使用
+func NewGormLogger(log *logrus.Logger) *logger.GormLogger {
+	// 获取现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
+	gormLogger := &logger.GormLogger{
+		Logger:        log,
+		SlowThreshold: 200 * time.Millisecond, // 慢查询阈值
+	}
+	return gormLogger
+}
 
-// 	// 配置 GORM 日志行为
-// 	config := gormLogger.Config{
-// 		SlowThreshold:             200 * time.Millisecond,
-// 		LogLevel:                  gormLogger.Warn,
-// 		IgnoreRecordNotFoundError: true,
-// 		Colorful:                  false, // zap 自带结构化日志，不需要颜色
-// 	}
-
-// 	return logger2.NewGormZapAdapter(zapLogger, config)
-// }
-
-func NewGormConfig() *gorm.Config {
+func NewGormConfig(log *logrus.Logger) *gorm.Config {
 	return &gorm.Config{
+		Logger: NewGormLogger(log),
 		//Logger: logger2.GetLogger().Desugar(),
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   "gin_", // 设置表前缀

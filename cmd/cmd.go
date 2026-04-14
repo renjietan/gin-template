@@ -3,8 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os/exec"
-
-	logger2 "example.com/t/logger"
 )
 
 func Command_swag() {
@@ -17,8 +15,8 @@ func Command_swag() {
 	// 设置命令的标准输出和错误输出
 	//cmd.Stdout = os.Stdout
 	//cmd.Stderr = os.Stderr
-	cmd.Stdout = logger2.GetLogWriter()
-	cmd.Stderr = logger2.GetLogWriter()
+	//cmd.Stdout = logger.GetLogWriter()
+	//cmd.Stderr = logger2.GetLogWriter()
 	// 执行命令
 	err := cmd.Run()
 	if err != nil {

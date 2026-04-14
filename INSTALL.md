@@ -25,3 +25,7 @@ go get -u github.com/valyala/fasttemplate
 ```
 go get -u go.uber.org/fx
 ```
+### 文件切分
+```aiignore
+github.com/lestrrat-go/file-rotatelogs
+```

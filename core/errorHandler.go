@@ -5,6 +5,7 @@ import (
 	"runtime/debug"
 
 	"example.com/t/types"
+	"github.com/bytedance/gopkg/util/logger"
 	"github.com/gin-gonic/gin"
 )
 
