@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -42,9 +43,13 @@ func (s *AppServer) Middlewares(debug bool, log *logrus.Logger) {
 	s.Engine.Use(errorHandler)
 	// 日志
 	s.Engine.Use(GinLoggerMiddleware(log))
+	// 异常捕获: 捕获请求处理过程中发生的 panic
+	s.Engine.Use(gin.CustomRecovery(func(c *gin.Context, err any) {
+		res := gin.H{"error": "服务器内部错误", "detail": fmt.Sprintf("%v", err)}
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": res})
+	}))
 	// 添加静态资源访问
 	s.Engine.Static("/static", s.Config.StaticDir)
-	//InitSwagger(s.Engine)
 }
 
 func (s *AppServer) Run() {

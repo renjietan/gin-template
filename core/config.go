@@ -14,7 +14,6 @@ func NewDefaultConfig() *types.AppConfig {
 		StaticDir: "./static",
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
-		LogDir:    "./static/logs",
 		MysqlConfig: types.MysqlConfig{
 			Host:     "127.0.0.1",
 			Port:     "3306",
@@ -26,8 +25,11 @@ func NewDefaultConfig() *types.AppConfig {
 			Level: "debug",
 			//FilePath:     "logs/app-%Y%m%d.log", // 每天一个文件，如 app-20260115.log
 			MaxAge:       30 * 24 * time.Hour, // 保留30天
-			FilePath:     "logs/app.log",
+			FilePath:     "static/logs/app.log",
 			RotationTime: 24 * time.Hour, // 每天切割
+		},
+		UploadConfig: types.UploadConfig{
+			UploadPath: "static/upload",
 		},
 	}
 }

@@ -9,6 +9,7 @@ import (
 	"example.com/t/types"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
+	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
 
 var GlobalLog *logrus.Logger // 全局logger实例，方便非DI场景使用
@@ -37,9 +38,21 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 	log := logrus.New()
 	log.SetLevel(level)
 	log.SetOutput(io.MultiWriter(os.Stdout, writer))
-	log.SetFormatter(&logrus.TextFormatter{
-		FullTimestamp:   true,
+	//log.SetFormatter(&logrus.TextFormatter{
+	//	FullTimestamp:   true,
+	//	TimestampFormat: "2006-01-02 15:04:05",
+	//})
+	log.SetFormatter(&prefixed.TextFormatter{
+		// 强制开启颜色
+		ForceColors: false,
+		// 强制禁用颜色（优先级高于 ForceColors）
+		DisableColors: true,
+		// 完整时间戳
+		FullTimestamp: true,
+		// 时间戳格式
 		TimestampFormat: "2006-01-02 15:04:05",
+		// 禁用排序
+		DisableSorting: true,
 	})
 	GlobalLog = log
 	return log, nil

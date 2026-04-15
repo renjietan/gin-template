@@ -1,8 +1,6 @@
 package fx_module
 
 import (
-	"fmt"
-
 	"example.com/t/core/logger"
 	"github.com/sirupsen/logrus"
 	"go.uber.org/fx"
@@ -11,7 +9,7 @@ import (
 var LoggerModule = fx.Module("logger",
 	fx.Provide(logger.NewLogger),
 	fx.Invoke(func(l *logrus.Logger) {
-		fmt.Println(l)
+		
 	}),
 )
 

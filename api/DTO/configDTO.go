@@ -13,3 +13,6 @@ type ConfigListDTO struct {
 	PagerDTO
 	Name string `json:"name" binding:"required" example:"name"`
 }
+
+type ConfigFile struct {
+}

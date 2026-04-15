@@ -34,9 +34,9 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (sql 
 	elapsed := time.Since(begin)
 	sql, rows := fc()
 	fields := logrus.Fields{
-		"sql执行语句":    sql,
+		"sql执行语句":  sql,
 		"查询结果（数量）": rows,
-		"耗时":           elapsed,
+		"耗时":       elapsed,
 	}
 	if err != nil {
 		fields["error"] = err

@@ -11,6 +11,7 @@ type AppConfig struct {
 	LogDir    string
 	MysqlConfig
 	LoggerConfig
+	UploadConfig
 }
 
 type MysqlConfig struct {
@@ -27,4 +28,8 @@ type LoggerConfig struct {
 	FilePath     string        // 日志文件路径，支持时间格式，如 "logs/app-%Y%m%d.log"
 	MaxAge       time.Duration // 日志保留时长，如 30*24*time.Hour
 	RotationTime time.Duration // 切割时间间隔，如 24*time.Hour
+}
+
+type UploadConfig struct {
+	UploadPath string
 }

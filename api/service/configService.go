@@ -50,3 +50,14 @@ func (c *ConfigService) InsertMany(d dto.ConfigsDTO) error {
 	}
 	return tx.Commit().Error
 }
+
+func (c *ConfigService) upload(d dto.ConfigDTO) entity.ConfigEntity {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	var res entity.ConfigEntity
+	c.db.Create(&entity.ConfigEntity{
+		Name:  d.Name,
+		Value: d.Value,
+	}).Scan(&res)
+	return res
+}

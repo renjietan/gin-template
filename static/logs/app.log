@@ -1,3 +1,1 @@
-2026-04-14T10:38:59.297+0800	INFO	fxevent/zap.go:51	OnStop hook executing	{"callee": "main.main.func7.2()", "caller": "main.main.func7"}
-2026-04-14T10:38:59.312+0800	INFO	gin-template/main.go:40	监听服务停止
-2026-04-14T10:38:59.313+0800	INFO	fxevent/zap.go:51	OnStop hook executed	{"callee": "main.main.func7.2()", "caller": "main.main.func7", "runtime": "1.0033ms"}
+static/logs/19630417-app.log

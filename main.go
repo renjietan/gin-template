@@ -11,7 +11,6 @@ import (
 
 	"example.com/t/api/controller"
 	"example.com/t/api/service"
-	"example.com/t/cmd"
 	"example.com/t/core"
 	"example.com/t/core/fx_module"
 	"example.com/t/types"
@@ -55,7 +54,6 @@ func main() {
 			}
 		}()
 	}
-	cmd.Command_swag()
 	app := fx.New(
 		// 将 fx 内部日志 统一使用日志管理器收集
 		//fx.WithLogger(func() fx.Printer {
@@ -111,6 +109,9 @@ func main() {
 		fx.Invoke(func(migrationService *service.MigrationService) {
 			migrationService.StartMigrate()
 		}),
+
+		// 公用模块
+		fx.Provide(service.NewUploadService),
 
 		// 模块 - config
 		fx.Provide(service.NewConfigService),

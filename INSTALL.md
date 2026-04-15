@@ -25,7 +25,12 @@ go get -u github.com/valyala/fasttemplate
 ```
 go get -u go.uber.org/fx
 ```
-### 文件切分
+### 日志相关
 ```aiignore
+# 文件切分
 github.com/lestrrat-go/file-rotatelogs
+# 日志插件
+github.com/sirupsen/logrus
+# 日志美化
+go get github.com/x-cray/logrus-prefixed-formatter
 ```
