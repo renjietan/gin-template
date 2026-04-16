@@ -1,25 +1,89 @@
-time="2026-04-15 16:52:54" level=debug msg="sql 日志链" 耗时=3.336ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 16:52:54" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=110.8118ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 16:52:54" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=48.0015ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'config' AND table_type = 'BASE TABLE'"
-time="2026-04-15 16:52:54" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=4.0966ms
-time="2026-04-15 16:52:54" level=debug msg="sql 日志链" 耗时=3.9592ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 16:52:54" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=27.8844ms sql执行语句="SELECT * FROM `config` LIMIT 1"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=43.1763ms sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'config' ORDER BY ORDINAL_POSITION"
-time="2026-04-15 16:52:55" level=warning msg="慢SQL" 查询结果（数量）=0 耗时=291.419ms sql执行语句="ALTER TABLE `config` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.0765ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=2.9935ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'config' AND index_name = 'idx_config_deleted_at'" 查询结果（数量）=-1 耗时=5.4433ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.5083ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=5.9784ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND table_type = 'BASE TABLE'" 查询结果（数量）=-1 耗时=4.1578ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=2.9996ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=2.0053ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=5.6875ms sql执行语句="SELECT * FROM `login_log` LIMIT 1" 查询结果（数量）=-1
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'login_log' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=5.5036ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=0 耗时=28.9667ms sql执行语句="ALTER TABLE `login_log` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=1.4526ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=4.063ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT DATABASE()
+  查询结果（数量）: -1
+  耗时: 5.7355ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  耗时: 114.5204ms
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'config' AND table_type = 'BASE TABLE'
+  查询结果（数量）: -1
+  耗时: 60.423ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  查询结果（数量）: -1
+  耗时: 1.6583ms
+  sql执行语句: SELECT DATABASE()
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  耗时: 2.8233ms
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT * FROM `config` LIMIT 1
+  查询结果（数量）: -1
+  耗时: 20.4824ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  查询结果（数量）: -1
+  耗时: 30.3856ms
+  sql执行语句: SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'config' ORDER BY ORDINAL_POSITION
+[2026-04-16 09:58:35] WARNING  慢SQL
+  sql执行语句: ALTER TABLE `config` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)
+  查询结果（数量）: 0
+  耗时: 247.8528ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT DATABASE()
+  查询结果（数量）: -1
+  耗时: 3.3482ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 4.978ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  查询结果（数量）: -1
+  耗时: 10.4183ms
+  sql执行语句: SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'config' AND index_name = 'idx_config_deleted_at'
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT DATABASE()
+  查询结果（数量）: -1
+  耗时: 1.0772ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 3.4501ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND table_type = 'BASE TABLE'
+  查询结果（数量）: -1
+  耗时: 5.7708ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  查询结果（数量）: -1
+  耗时: 2.0526ms
+  sql执行语句: SELECT DATABASE()
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 4.8089ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT * FROM `login_log` LIMIT 1
+  查询结果（数量）: -1
+  耗时: 7.7839ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'login_log' ORDER BY ORDINAL_POSITION
+  查询结果（数量）: -1
+  耗时: 5.5477ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: ALTER TABLE `login_log` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)
+  查询结果（数量）: 0
+  耗时: 62.7675ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  耗时: 2.4054ms
+  sql执行语句: SELECT DATABASE()
+  查询结果（数量）: -1
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 4.0223ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: 
 SELECT
 	TABLE_NAME,
 	COLUMN_NAME,
@@ -32,238 +96,63 @@ WHERE
 	AND TABLE_NAME = 'login_log' 
 ORDER BY
 	INDEX_NAME,
-	SEQ_IN_INDEX" 查询结果（数量）=3 耗时=5.4999ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=2.172ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=2.1834ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE constraint_schema = 'springboot3' AND table_name = 'login_log' AND constraint_name = 'uni_login_log_content'" 查询结果（数量）=-1 耗时=6.7277ms
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.2014ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=3.4531ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=3.6224ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=1.5253ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=3.7852ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=4.9763ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_deleted_at'"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.2094ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=3.4254ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 16:52:55" level=debug msg="sql 日志链" 耗时=3.7955ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1
-time="2026-04-15 16:58:52" level=info msg="HTTP request" path="/swagger/index.html" query= status=200 client_ip="::1" latency_ms=10 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=GET
-time="2026-04-15 16:58:52" level=info msg="HTTP request" latency_ms=1 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=GET path="/swagger/index.css" query= status=200 client_ip="::1"
-time="2026-04-15 16:58:52" level=info msg="HTTP request" path="/swagger/swagger-initializer.js" query= status=200 client_ip="::1" latency_ms=1 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=GET
-time="2026-04-15 16:58:52" level=info msg="HTTP request" method=GET path="/swagger/swagger-ui.css" query= status=200 client_ip="::1" latency_ms=3 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788"
-time="2026-04-15 16:58:52" level=info msg="HTTP request" method=GET path="/swagger/swagger-ui-bundle.js" query= status=200 client_ip="::1" latency_ms=8 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788"
-time="2026-04-15 16:58:52" level=info msg="HTTP request" query= status=200 client_ip="::1" latency_ms=8 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=GET path="/swagger/swagger-ui-standalone-preset.js"
-time="2026-04-15 16:58:52" level=info msg="HTTP request" method=GET path="/swagger/doc.json" query= status=200 client_ip="::1" latency_ms=1 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788"
-time="2026-04-15 16:58:53" level=info msg="HTTP request" status=200 client_ip="::1" latency_ms=0 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=GET path="/swagger/favicon-32x32.png" query=
-time="2026-04-15 16:59:31" level=info msg="HTTP request" method=POST path="/config/upload" query= status=200 client_ip="::1" latency_ms=27094 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788"
-time="2026-04-15 16:59:34" level=info msg="HTTP request" status=200 client_ip="::1" latency_ms=3281 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=POST path="/config/upload" query=
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=3.6479ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=79.3602ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=51.2043ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'config' AND table_type = 'BASE TABLE'"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=2.2417ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=5.9602ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=16.1579ms sql执行语句="SELECT * FROM `config` LIMIT 1"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'config' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=19.8109ms
-time="2026-04-15 17:06:02" level=warning msg="慢SQL" sql执行语句="ALTER TABLE `config` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0 耗时=245.6575ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=2.6304ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=4.1486ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'config' AND index_name = 'idx_config_deleted_at'" 查询结果（数量）=-1 耗时=7.1009ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.1016ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=4.3613ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND table_type = 'BASE TABLE'" 查询结果（数量）=-1 耗时=3.799ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.12ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=5.9328ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=6.3535ms sql执行语句="SELECT * FROM `login_log` LIMIT 1" 查询结果（数量）=-1
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'login_log' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=5.6954ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=21.6467ms sql执行语句="ALTER TABLE `login_log` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=1.8523ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=2.8259ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=4.9993ms sql执行语句="
-SELECT
-	TABLE_NAME,
-	COLUMN_NAME,
-	INDEX_NAME,
-	NON_UNIQUE 
-FROM
-	information_schema.STATISTICS 
-WHERE
-	TABLE_SCHEMA = 'springboot3' 
-	AND TABLE_NAME = 'login_log' 
-ORDER BY
-	INDEX_NAME,
-	SEQ_IN_INDEX" 查询结果（数量）=3
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.2303ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=2.7074ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE constraint_schema = 'springboot3' AND table_name = 'login_log' AND constraint_name = 'uni_login_log_content'" 查询结果（数量）=-1 耗时=4.9425ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.0804ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=2.2755ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=4.7539ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.0726ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=2.879ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=3.3498ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_deleted_at'"
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.2256ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.2826ms
-time="2026-04-15 17:06:02" level=debug msg="sql 日志链" 耗时=4.1564ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1
-time="2026-04-15 17:07:09" level=info msg="HTTP request" path="/config/upload" query= status=200 client_ip="::1" latency_ms=81 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=POST
-time="2026-04-15 17:07:21" level=info msg="HTTP request" user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=POST path="/config/upload" query= status=200 client_ip="::1" latency_ms=92
-time="2026-04-15 17:35:09" level=info msg="HTTP request" user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=POST path="/config/upload" query= status=200 client_ip="::1" latency_ms=74
-time="2026-04-15 17:35:18" level=warning msg="慢SQL" 查询结果（数量）=1 耗时=245.1832ms sql执行语句="INSERT INTO `config` (`deleted_at`,`name`,`value`) VALUES (NULL,'name-张三','value-张三')"
-time="2026-04-15 17:35:18" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=30.949ms sql执行语句="SELECT * FROM `config` WHERE `config`.`id` = 39"
-time="2026-04-15 17:35:18" level=info msg="====================日志测试====================="
-time="2026-04-15 17:42:06" level=info msg="HTTP request" latency_ms=296 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 QuarkPC/6.6.5.788" method=POST path="/config/insert" query= status=200 client_ip="::1"
-time="2026-04-15 17:42:35" level=debug msg="sql 日志链" 耗时=3.4258ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=71.885ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'config' AND table_type = 'BASE TABLE'" 查询结果（数量）=-1 耗时=60.5376ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=3.1522ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=9.9952ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 耗时=22.4456ms sql执行语句="SELECT * FROM `config` LIMIT 1" 查询结果（数量）=-1
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'config' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=34.9536ms
-time="2026-04-15 17:42:36" level=warning msg="慢SQL" 耗时=211.6744ms sql执行语句="ALTER TABLE `config` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=3.0639ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 耗时=7.3288ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'config' AND index_name = 'idx_config_deleted_at'" 查询结果（数量）=-1 耗时=7.722ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.1849ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=4.6597ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=5.4402ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND table_type = 'BASE TABLE'"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.5204ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=4.7482ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 耗时=5.4079ms sql执行语句="SELECT * FROM `login_log` LIMIT 1" 查询结果（数量）=-1
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 耗时=4.7325ms sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'login_log' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="ALTER TABLE `login_log` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0 耗时=78.1705ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=2.184ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=6.3168ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="
-SELECT
-	TABLE_NAME,
-	COLUMN_NAME,
-	INDEX_NAME,
-	NON_UNIQUE 
-FROM
-	information_schema.STATISTICS 
-WHERE
-	TABLE_SCHEMA = 'springboot3' 
-	AND TABLE_NAME = 'login_log' 
-ORDER BY
-	INDEX_NAME,
-	SEQ_IN_INDEX" 查询结果（数量）=3 耗时=9.6512ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=2.0011ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=3.0026ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE constraint_schema = 'springboot3' AND table_name = 'login_log' AND constraint_name = 'uni_login_log_content'" 查询结果（数量）=-1 耗时=7.5226ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=787.1µs
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.6947ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1 耗时=4.1443ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=2.2647ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.709ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_deleted_at'" 查询结果（数量）=-1 耗时=2.7579ms
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=0s sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" 耗时=3.1522ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 17:42:36" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1 耗时=3.0905ms
-time="2026-04-15 17:43:04" level=info msg="HTTP request" latency_ms=92 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" method=POST path="/config/upload" query= status=200 client_ip="::1"
-time="2026-04-15 17:43:12" level=debug msg="sql 日志链" sql执行语句="INSERT INTO `config` (`deleted_at`,`name`,`value`) VALUES (NULL,'name-张三','value-张三')" 查询结果（数量）=1 耗时=166.7973ms
-time="2026-04-15 17:43:12" level=debug msg="sql 日志链" 耗时=3.846ms sql执行语句="SELECT * FROM `config` WHERE `config`.`id` = 41" 查询结果（数量）=1
-time="2026-04-15 17:43:12" level=info msg="====================日志测试====================="
-time="2026-04-15 17:44:50" level=info msg="HTTP request" latency_ms=176 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" method=POST path="/config/insert" query= status=200 client_ip="::1"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=1.5294ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=10.6834ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=10.7194ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'config' AND table_type = 'BASE TABLE'" 查询结果（数量）=-1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=4.0799ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=4.1401ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT * FROM `config` LIMIT 1" 查询结果（数量）=-1 耗时=3.2407ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'config' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=26.1385ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="ALTER TABLE `config` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0 耗时=131.2475ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=3.7829ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=29.1433ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'config' AND index_name = 'idx_config_deleted_at'" 查询结果（数量）=-1 耗时=7.0047ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.9835ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=6.1786ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=16.4109ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND table_type = 'BASE TABLE'"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=8.5725ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=4.8917ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=5.2124ms sql执行语句="SELECT * FROM `login_log` LIMIT 1" 查询结果（数量）=-1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'login_log' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=10.5074ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="ALTER TABLE `login_log` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0 耗时=35.2654ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.0969ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=4.8367ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=3 耗时=4.379ms sql执行语句="
-SELECT
-	TABLE_NAME,
-	COLUMN_NAME,
-	INDEX_NAME,
-	NON_UNIQUE 
-FROM
-	information_schema.STATISTICS 
-WHERE
-	TABLE_SCHEMA = 'springboot3' 
-	AND TABLE_NAME = 'login_log' 
-ORDER BY
-	INDEX_NAME,
-	SEQ_IN_INDEX"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=1.6617ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=2.2053ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE constraint_schema = 'springboot3' AND table_name = 'login_log' AND constraint_name = 'uni_login_log_content'" 查询结果（数量）=-1 耗时=2.441ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.5017ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.2759ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=2.6371ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=895.6µs
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=2.6912ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=3.1164ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_deleted_at'" 查询结果（数量）=-1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.083ms
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" 耗时=2.8761ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 17:45:23" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1 耗时=3.5127ms
-time="2026-04-15 17:46:13" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=19.4618ms sql执行语句="INSERT INTO `config` (`deleted_at`,`name`,`value`) VALUES (NULL,'name-张三','value-张三')"
-time="2026-04-15 17:46:13" level=debug msg="sql 日志链" 耗时=3.146ms sql执行语句="SELECT * FROM `config` WHERE `config`.`id` = 42" 查询结果（数量）=1
-time="2026-04-15 17:46:13" level=info msg="====================日志测试====================="
-time="2026-04-15 18:21:57" level=info msg="HTTP request" user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" method=POST path="/config/insert" query= status=200 client_ip="::1" latency_ms=25
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=6.5251ms
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" 耗时=121.427ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=55.0035ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'config' AND table_type = 'BASE TABLE'"
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" 耗时=1.6846ms sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.8941ms
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=26.4331ms sql执行语句="SELECT * FROM `config` LIMIT 1"
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'config' ORDER BY ORDINAL_POSITION" 查询结果（数量）=-1 耗时=31.3188ms
-time="2026-04-15 18:22:25" level=warning msg="慢SQL" sql执行语句="ALTER TABLE `config` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0 耗时=211.7742ms
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.0726ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=3.9349ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1"
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'config' AND index_name = 'idx_config_deleted_at'" 查询结果（数量）=-1 耗时=15.341ms
-time="2026-04-15 18:22:25" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.7933ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=5.1973ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=4.0878ms sql执行语句="SELECT count(*) FROM information_schema.tables WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND table_type = 'BASE TABLE'" 查询结果（数量）=-1
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.1307ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=3.8573ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=3.9975ms sql执行语句="SELECT * FROM `login_log` LIMIT 1"
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=4.0143ms sql执行语句="SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'springboot3' AND table_name = 'login_log' ORDER BY ORDINAL_POSITION"
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="ALTER TABLE `login_log` MODIFY COLUMN `updated_at` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" 查询结果（数量）=0 耗时=29.4627ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=1.3751ms sql执行语句="SELECT DATABASE()"
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=2.3757ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=4.3884ms sql执行语句="
-SELECT
-	TABLE_NAME,
-	COLUMN_NAME,
-	INDEX_NAME,
-	NON_UNIQUE 
-FROM
-	information_schema.STATISTICS 
-WHERE
-	TABLE_SCHEMA = 'springboot3' 
-	AND TABLE_NAME = 'login_log' 
-ORDER BY
-	INDEX_NAME,
-	SEQ_IN_INDEX" 查询结果（数量）=3
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=2.2746ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.6128ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=6.7169ms sql执行语句="SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE constraint_schema = 'springboot3' AND table_name = 'login_log' AND constraint_name = 'uni_login_log_content'" 查询结果（数量）=-1
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=1.4691ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=4.1598ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=2.4827ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'" 查询结果（数量）=-1
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=517.5µs
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 耗时=3.5237ms sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_deleted_at'" 查询结果（数量）=-1 耗时=3.0821ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT DATABASE()" 查询结果（数量）=-1 耗时=513.9µs
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" sql执行语句="SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1" 查询结果（数量）=1 耗时=3.7965ms
-time="2026-04-15 18:22:26" level=debug msg="sql 日志链" 查询结果（数量）=-1 耗时=3.2257ms sql执行语句="SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'"
-time="2026-04-15 18:22:53" level=info msg="HTTP request" path="/config/insert" status=200 client_ip="::1" latency_ms=0 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" method=POST
-time="2026-04-15 18:22:53" level=debug msg="sql 日志链" sql执行语句="INSERT INTO `config` (`deleted_at`,`name`,`value`) VALUES (NULL,'name-张三','value-张三')" 查询结果（数量）=1 耗时=42.4412ms
-time="2026-04-15 18:22:53" level=debug msg="sql 日志链" 查询结果（数量）=1 耗时=6.9351ms sql执行语句="SELECT * FROM `config` WHERE `config`.`id` = 43"
-time="2026-04-15 18:22:53" level=info msg="====================日志测试====================="
-time="2026-04-15 18:27:00" level=info msg="HTTP request" status=200 client_ip="::1" latency_ms=0 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" method=POST path="/config/insert"
-time="2026-04-15 18:27:00" level=warning msg="慢SQL" 耗时=219.4583ms sql执行语句="INSERT INTO `config` (`deleted_at`,`name`,`value`) VALUES (NULL,'name-张三','value-张三')" 查询结果（数量）=1
-time="2026-04-15 18:27:00" level=debug msg="sql 日志链" sql执行语句="SELECT * FROM `config` WHERE `config`.`id` = 44" 查询结果（数量）=1 耗时=27.2371ms
-time="2026-04-15 18:27:00" level=info msg="====================日志测试====================="
+	SEQ_IN_INDEX
+  查询结果（数量）: 3
+  耗时: 7.429ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT DATABASE()
+  查询结果（数量）: -1
+  耗时: 2.2403ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 3.4764ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE constraint_schema = 'springboot3' AND table_name = 'login_log' AND constraint_name = 'uni_login_log_content'
+  查询结果（数量）: -1
+  耗时: 7.4941ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT DATABASE()
+  查询结果（数量）: -1
+  耗时: 1.3664ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 2.3248ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  耗时: 2.1971ms
+  sql执行语句: SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'
+  查询结果（数量）: -1
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  查询结果（数量）: -1
+  耗时: 1.0744ms
+  sql执行语句: SELECT DATABASE()
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 3.645ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_deleted_at'
+  查询结果（数量）: -1
+  耗时: 4.3585ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  查询结果（数量）: -1
+  耗时: 1.0809ms
+  sql执行语句: SELECT DATABASE()
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'springboot3%' ORDER BY SCHEMA_NAME='springboot3' DESC,SCHEMA_NAME limit 1
+  查询结果（数量）: 1
+  耗时: 2.6652ms
+[2026-04-16 09:58:35] DEBUG  sql 日志链
+  sql执行语句: SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'springboot3' AND table_name = 'login_log' AND index_name = 'idx_login_log_content'
+  查询结果（数量）: -1
+  耗时: 2.7907ms
+[2026-04-16 09:58:45] INFO   HTTP request
+  Files: map[FieldName:file FileName:MR9360-public.png Size:2923535]
+  method: POST
+  contentType: multipart/form-data
+  path: /config/upload
+  status: 200
+  client_ip: ::1
+  latency_ms: 0
+  user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36

@@ -2,7 +2,6 @@ package core
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"strings"
 	"time"
@@ -35,7 +34,6 @@ func GinLoggerMiddleware(log *logrus.Logger) gin.HandlerFunc {
 			fields["Query"] = c.Request.URL.Query()
 		}
 
-		fmt.Println("contentType", contentType)
 		if strings.Contains(contentType, "multipart/form-data") {
 			// 解析 multipart 表单，内存限制 32MB
 			if err := c.Request.ParseMultipartForm(32 << 20); err == nil {
@@ -71,10 +69,10 @@ func GinLoggerMiddleware(log *logrus.Logger) gin.HandlerFunc {
 				// 尝试解析 JSON
 				var jsonData interface{}
 				if err := json.Unmarshal(bodyBytes, &jsonData); err == nil {
-					fields["JSONBody"] = jsonData
+					fields["Body"] = jsonData
 				} else {
 					// 如果不是合法 JSON，记录原始字符串
-					fields["JSONBody"] = string(bodyBytes)
+					fields["Body"] = string(bodyBytes)
 				}
 			}
 		}

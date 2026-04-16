@@ -29,7 +29,7 @@ func NewDefaultConfig() *types.AppConfig {
 			RotationTime: 24 * time.Hour, // 每天切割
 		},
 		UploadConfig: types.UploadConfig{
-			UploadPath: "static/upload",
+			UploadPath: "static/uploads",
 		},
 	}
 }

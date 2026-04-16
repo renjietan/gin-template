@@ -42,18 +42,18 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 	//	FullTimestamp:   true,
 	//	TimestampFormat: "2006-01-02 15:04:05",
 	//})
-	log.SetFormatter(&prefixed.TextFormatter{
+	log.SetFormatter(&LinePerFieldFormatter{prefixed.TextFormatter{
 		// 强制开启颜色
-		ForceColors: false,
+		ForceColors: true,
 		// 强制禁用颜色（优先级高于 ForceColors）
-		DisableColors: true,
+		DisableColors: false,
 		// 完整时间戳
 		FullTimestamp: true,
 		// 时间戳格式
 		TimestampFormat: "2006-01-02 15:04:05",
 		// 禁用排序
 		DisableSorting: true,
-	})
+	}})
 	GlobalLog = log
 	return log, nil
 }
