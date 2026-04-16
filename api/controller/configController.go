@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+
 	dto "example.com/t/api/DTO"
 	"example.com/t/api/service"
 	"example.com/t/core"
@@ -35,9 +37,13 @@ func NewConfigController(
 
 func (config *ConfigController) RegisterRouter() {
 	group := config.App.Engine.Group("/config")
+	group.GET("list", config.list)
 	group.POST("insert", config.insert)
-	group.POST("insertMany", config.insertMany)
+	group.PATCH("insertMany", config.insertMany)
 	group.POST("upload", config.upload)
+	group.PUT("update/:id", config.update)
+	group.PUT("updates", config.updates)
+	group.DELETE("delete/:id", config.delete)
 }
 
 // @Summary 创建 配置
@@ -45,7 +51,7 @@ func (config *ConfigController) RegisterRouter() {
 // @Tags Config
 // @Accept json
 // @Produce json
-// @Param request body dto.ConfigDTO true "配置结构体"
+// @Param request body dto.ConfigDTO true "参数"
 // @Success 200 {object} entity.ConfigEntity
 // @Router /config/insert [post]
 func (config *ConfigController) insert(c *gin.Context) {
@@ -64,9 +70,9 @@ func (config *ConfigController) insert(c *gin.Context) {
 // @Tags Config
 // @Accept json
 // @Produce json
-// @Param request body dto.ConfigsDTO true "配置结构体"
+// @Param request body dto.ConfigsDTO true "参数"
 // @Success 200 {object} []entity.ConfigEntity
-// @Router /config/insertMany [post]
+// @Router /config/insertMany [patch]
 func (config *ConfigController) insertMany(c *gin.Context) {
 	var d dto.ConfigsDTO
 	if err := c.ShouldBindJSON(&d); err != nil {
@@ -83,9 +89,9 @@ func (config *ConfigController) insertMany(c *gin.Context) {
 // @Accept       multipart/form-data
 // @Produce      json
 // @Param        file  formData  file  true  "要上传的文件"
-// @Success      200   {object}  map[string]string  "上传成功"
-// @Failure      400   {object}  map[string]string  "请求参数错误"
-// @Failure      500   {object}  map[string]string  "服务器内部错误"
+// @Success      200   {object}  types.Response  "上传成功"
+// @Failure      400   {object}  types.Response  "请求参数错误"
+// @Failure      500   {object}  types.Response  "服务器内部错误"
 // @Router       /config/upload [post]
 func (config *ConfigController) upload(c *gin.Context) {
 	file, err := c.FormFile("file")
@@ -98,4 +104,102 @@ func (config *ConfigController) upload(c *gin.Context) {
 		return
 	}
 	reponse.SUCCESS(c, types.OkMsg)
+}
+
+// @Summary      更新
+// @Description  根据ID更新其基本信息
+// @Tags         Config
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int                  true  "ID"
+// @Param        req  body      dto.ConfigDTO    true  "需要更新的信息"
+// @Success      200  {object}  types.Response   "更新成功"
+// @Failure      400  {object}  types.Response  "请求参数错误"
+// @Failure      404  {object}  types.Response  "用户不存在"
+// @Failure      500  {object}  types.Response  "服务器内部错误"
+// @Router       /config/update/{id} [put]
+func (config *ConfigController) update(c *gin.Context) {
+	id := c.Param("id")
+	var d dto.ConfigDTO
+	if err := c.ShouldBindJSON(&d); err != nil {
+		reponse.ERROR(c, types.InvalidArgs)
+		return
+	}
+	if err := config.service.Update(id, d); err != nil {
+		reponse.ERROR(c, err.Error())
+		return
+	}
+	reponse.SUCCESS(c)
+	return
+}
+
+// @Summary      批量更新
+// @Description  批量更新其基本信息
+// @Tags         Config
+// @Accept       json
+// @Produce      json
+// @Param        req  body      dto.UpdatesConfigDTO    true  "需要更新的信息"
+// @Success      200  {object}  types.Response   "更新成功"
+// @Failure      400  {object}  types.Response  "请求参数错误"
+// @Failure      404  {object}  types.Response  "记录不存在"
+// @Failure      500  {object}  types.Response  "服务器内部错误"
+// @Router       /config/updates [put]
+func (config *ConfigController) updates(c *gin.Context) {
+	var d dto.UpdatesConfigDTO
+	if err := c.ShouldBindJSON(&d); err != nil {
+		reponse.ERROR(c, types.InvalidArgs)
+		return
+	}
+	if err := config.service.Updates(d.Items); err != nil {
+		reponse.ERROR(c, err.Error())
+		return
+	}
+	reponse.SUCCESS(c)
+	return
+}
+
+// @Summary      删除
+// @Description  根据ID删除
+// @Tags         Config
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int                  true  "ID"
+// @Success      200  {object}  types.Response   "更新成功"
+// @Failure      400  {object}  types.Response  "请求参数错误"
+// @Failure      404  {object}  types.Response  "用户不存在"
+// @Failure      500  {object}  types.Response  "服务器内部错误"
+// @Router       /config/delete/{id} [delete]
+func (config *ConfigController) delete(c *gin.Context) {
+	id := c.Param("id")
+	if _, err := config.service.Delete(id); err != nil {
+		reponse.ERROR(c, err.Error())
+		return
+	}
+	reponse.SUCCESS(c, types.OkMsg)
+	return
+}
+
+// @Summary      获取配置列表（分页+排序）
+// @Description  分页查询配置项，按指定字段排序。默认按创建时间倒序排列。
+// @Tags         Config
+// @Accept       json
+// @Produce      json
+// @Param		 req 		query     dto.ConfigListDTO    true  "需要更新的信息"
+// @Success      200        {object}  map[string]interface{} "分页数据"
+// @Failure      400        {object}  map[string]interface{}  "请求参数错误"
+// @Failure      500        {object}  map[string]interface{}  "服务器内部错误"
+// @Router       /config/list [get]
+func (config *ConfigController) list(c *gin.Context) {
+	var d dto.ConfigListDTO
+	if err := c.ShouldBindQuery(&d); err != nil {
+		reponse.ERROR(c, types.InvalidArgs)
+		return
+	}
+	list, err := config.service.List(d)
+	if err != nil {
+		reponse.ERROR(c, err.Error())
+		return
+	}
+	reponse.SUCCESS(c, &list)
+	fmt.Println(&list)
 }

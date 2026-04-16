@@ -29,10 +29,11 @@ definitions:
   dto.ConfigDTO:
     properties:
       name:
-        description: 使用 example 提供示例值
+        description: 配置名称
         example: name-张三
         type: string
       value:
+        description: 配置值
         example: value-张三
         type: string
     required:
@@ -46,34 +47,115 @@ definitions:
           $ref: '#/definitions/dto.ConfigDTO'
         type: array
     type: object
+  dto.UpdatesConfigDTO:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/entity.ConfigEntity'
+        type: array
+    type: object
   entity.ConfigEntity:
     properties:
       created_at:
         description: 时间字段，使用 datetime(3) 以支持毫秒精度
         type: string
       deleted_at:
+        allOf:
+        - $ref: '#/definitions/gorm.DeletedAt'
         description: 软删除字段，使用指针，允许为 NULL
-        type: string
       id:
         description: 主键，类型为 bigint unsigned，自增
         type: integer
       name:
+        description: 配置名称
         type: string
       updated_at:
         type: string
       value:
+        description: 配置的值
         type: string
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  types.BizCode:
+    enum:
+    - 0
+    - 1
+    - 401
+    type: integer
+    x-enum-comments:
+      NotAuthorized: 未授权
+    x-enum-descriptions:
+    - ""
+    - ""
+    - 未授权
+    x-enum-varnames:
+    - Success
+    - Failed
+    - NotAuthorized
+  types.Response:
+    properties:
+      code:
+        $ref: '#/definitions/types.BizCode'
+      data: {}
+      message:
+        type: string
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
     type: object
 info:
   contact: {}
 paths:
+  /config/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 根据ID删除
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/types.Response'
+        "404":
+          description: 用户不存在
+          schema:
+            $ref: '#/definitions/types.Response'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: 删除
+      tags:
+      - Config
   /config/insert:
     post:
       consumes:
       - application/json
       description: 配置 描述
       parameters:
-      - description: 配置结构体
+      - description: 参数
         in: body
         name: request
         required: true
@@ -90,12 +172,12 @@ paths:
       tags:
       - Config
   /config/insertMany:
-    post:
+    patch:
       consumes:
       - application/json
       description: 批量配置 描述
       parameters:
-      - description: 配置结构体
+      - description: 参数
         in: body
         name: request
         required: true
@@ -111,6 +193,136 @@ paths:
               $ref: '#/definitions/entity.ConfigEntity'
             type: array
       summary: 批量创建 配置
+      tags:
+      - Config
+  /config/list:
+    get:
+      consumes:
+      - application/json
+      description: 分页查询配置项，按指定字段排序。默认按创建时间倒序排列。
+      parameters:
+      - description: 名称
+        example: 张三
+        in: query
+        name: name
+        type: string
+      - description: 排序/规则 默认:desc（倒序）
+        enum:
+        - asc
+        - desc
+        in: query
+        name: order
+        type: string
+      - description: '当前页码 默认: 1'
+        example: 1
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: '条数 默认: 10'
+        example: 10
+        in: query
+        maximum: 100
+        minimum: 1
+        name: page_size
+        type: integer
+      - description: '排序 默认: created_at'
+        example: created_at
+        in: query
+        name: sort_by
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页数据
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: 请求参数错误
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: 服务器内部错误
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 获取配置列表（分页+排序）
+      tags:
+      - Config
+  /config/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: 根据ID更新其基本信息
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 需要更新的信息
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ConfigDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/types.Response'
+        "404":
+          description: 用户不存在
+          schema:
+            $ref: '#/definitions/types.Response'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: 更新
+      tags:
+      - Config
+  /config/updates:
+    put:
+      consumes:
+      - application/json
+      description: 批量更新其基本信息
+      parameters:
+      - description: 需要更新的信息
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdatesConfigDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/types.Response'
+        "404":
+          description: 记录不存在
+          schema:
+            $ref: '#/definitions/types.Response'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: 批量更新
       tags:
       - Config
   /config/upload:
@@ -130,21 +342,15 @@ paths:
         "200":
           description: 上传成功
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/types.Response'
         "400":
           description: 请求参数错误
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/types.Response'
         "500":
           description: 服务器内部错误
           schema:
-            additionalProperties:
-              type: string
-            type: object
+            $ref: '#/definitions/types.Response'
       summary: 上传单个文件
       tags:
       - Config

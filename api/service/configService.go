@@ -6,6 +6,8 @@ import (
 
 	dto "example.com/t/api/DTO"
 	"example.com/t/api/entity"
+	"example.com/t/types"
+	"example.com/t/utility/reponse"
 	"gorm.io/gorm"
 )
 
@@ -51,13 +53,58 @@ func (c *ConfigService) InsertMany(d dto.ConfigsDTO) error {
 	return tx.Commit().Error
 }
 
-func (c *ConfigService) upload(d dto.ConfigDTO) entity.ConfigEntity {
+func (c *ConfigService) Update(id string, configDTO dto.ConfigDTO) error {
 	c.lock.Lock()
 	defer c.lock.Unlock()
-	var res entity.ConfigEntity
-	c.db.Create(&entity.ConfigEntity{
-		Name:  d.Name,
-		Value: d.Value,
-	}).Scan(&res)
-	return res
+	var config entity.ConfigEntity
+	if err := c.db.First(&config, id).Error; err != nil {
+		return err
+	}
+	config.Name = configDTO.Name
+	config.Value = configDTO.Value
+	c.db.Save(&config).Scan(&config)
+	return nil
+}
+
+func (c *ConfigService) Updates(dtos []entity.ConfigEntity) error {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	var ids []uint
+	for _, u := range dtos {
+		ids = append(ids, u.ID)
+	}
+	// 构建后的SQL类似：UPDATE users SET name = CASE id WHEN 1 THEN 'name1' WHEN 2 THEN 'name2' END WHERE id IN (1,2)
+	var nameCases, valueCases string
+	for _, u := range dtos {
+		nameCases += fmt.Sprintf("WHEN %d THEN '%s' ", u.ID, u.Name)
+		valueCases += fmt.Sprintf("WHEN %d THEN '%s' ", u.ID, u.Value)
+	}
+	sql := fmt.Sprintf(`
+        UPDATE config SET 
+            name = CASE id %s END,
+            value = CASE id %s END,
+            updated_at = NOW()
+        WHERE id IN (?)
+    `, nameCases, valueCases)
+	return c.db.Exec(sql, ids).Error
+}
+
+func (c *ConfigService) Delete(id string) (entity.ConfigEntity, error) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	var a entity.ConfigEntity
+	c.db.Delete(&a, id)
+	return a, nil
+}
+
+func (c *ConfigService) List(dto dto.ConfigListDTO) (*types.PaginationResponse, error) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	query := c.db.Where("name LIKE ?", "%"+dto.Name+"%").Find(&entity.ConfigEntity{})
+	var configs []entity.ConfigEntity
+	res, err := reponse.Paginate(query, dto.PagerDTO, nil, configs)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }

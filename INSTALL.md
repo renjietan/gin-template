@@ -1,3 +1,5 @@
+swag init --parseDependency --parseInternal
+
 ### 调试
 ```
 go install github.com/go-delve/delve/cmd/dlv@latest

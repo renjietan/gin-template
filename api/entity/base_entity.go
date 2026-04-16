@@ -2,6 +2,8 @@ package entity
 
 import (
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type BaseEntity struct {
@@ -11,5 +13,5 @@ type BaseEntity struct {
 	CreatedAt time.Time `gorm:"column:created_at;type:datetime(3);not null;default:CURRENT_TIMESTAMP(3)" json:"created_at"`
 	UpdatedAt time.Time `gorm:"column:updated_at;type:datetime(3);not null;default:CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)" json:"updated_at"`
 	// 软删除字段，使用指针，允许为 NULL
-	DeletedAt *time.Time `gorm:"column:deleted_at;type:datetime(3);index" json:"deleted_at,omitempty"`
+	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at;type:datetime(3);index" json:"deleted_at,omitempty"`
 }

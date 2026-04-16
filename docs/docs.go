@@ -15,6 +15,56 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/config/delete/{id}": {
+            "delete": {
+                "description": "根据ID删除",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Config"
+                ],
+                "summary": "删除",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/config/insert": {
             "post": {
                 "description": "配置 描述",
@@ -30,7 +80,7 @@ const docTemplate = `{
                 "summary": "创建 配置",
                 "parameters": [
                     {
-                        "description": "配置结构体",
+                        "description": "参数",
                         "name": "request",
                         "in": "body",
                         "required": true,
@@ -50,7 +100,7 @@ const docTemplate = `{
             }
         },
         "/config/insertMany": {
-            "post": {
+            "patch": {
                 "description": "批量配置 描述",
                 "consumes": [
                     "application/json"
@@ -64,7 +114,7 @@ const docTemplate = `{
                 "summary": "批量创建 配置",
                 "parameters": [
                     {
-                        "description": "配置结构体",
+                        "description": "参数",
                         "name": "request",
                         "in": "body",
                         "required": true,
@@ -81,6 +131,198 @@ const docTemplate = `{
                             "items": {
                                 "$ref": "#/definitions/entity.ConfigEntity"
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "/config/list": {
+            "get": {
+                "description": "分页查询配置项，按指定字段排序。默认按创建时间倒序排列。",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Config"
+                ],
+                "summary": "获取配置列表（分页+排序）",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "张三",
+                        "description": "名称",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "asc",
+                            "desc"
+                        ],
+                        "type": "string",
+                        "description": "排序/规则 默认:desc（倒序）",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "example": 1,
+                        "description": "当前页码 默认: 1",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "maximum": 100,
+                        "minimum": 1,
+                        "type": "integer",
+                        "example": 10,
+                        "description": "条数 默认: 10",
+                        "name": "page_size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "created_at",
+                        "description": "排序 默认: created_at",
+                        "name": "sort_by",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "分页数据",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "请求参数错误",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/config/update/{id}": {
+            "put": {
+                "description": "根据ID更新其基本信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Config"
+                ],
+                "summary": "更新",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "需要更新的信息",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ConfigDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/config/updates": {
+            "put": {
+                "description": "批量更新其基本信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Config"
+                ],
+                "summary": "批量更新",
+                "parameters": [
+                    {
+                        "description": "需要更新的信息",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.UpdatesConfigDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "请求参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "记录不存在",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/types.Response"
                         }
                     }
                 }
@@ -112,28 +354,19 @@ const docTemplate = `{
                     "200": {
                         "description": "上传成功",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
+                            "$ref": "#/definitions/types.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
+                            "$ref": "#/definitions/types.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
+                            "$ref": "#/definitions/types.Response"
                         }
                     }
                 }
@@ -247,11 +480,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "name": {
-                    "description": "使用 example 提供示例值",
+                    "description": "配置名称",
                     "type": "string",
                     "example": "name-张三"
                 },
                 "value": {
+                    "description": "配置值",
                     "type": "string",
                     "example": "value-张三"
                 }
@@ -268,6 +502,17 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.UpdatesConfigDTO": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.ConfigEntity"
+                    }
+                }
+            }
+        },
         "entity.ConfigEntity": {
             "type": "object",
             "properties": {
@@ -277,20 +522,80 @@ const docTemplate = `{
                 },
                 "deleted_at": {
                     "description": "软删除字段，使用指针，允许为 NULL",
-                    "type": "string"
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/gorm.DeletedAt"
+                        }
+                    ]
                 },
                 "id": {
                     "description": "主键，类型为 bigint unsigned，自增",
                     "type": "integer"
                 },
                 "name": {
+                    "description": "配置名称",
                     "type": "string"
                 },
                 "updated_at": {
                     "type": "string"
                 },
                 "value": {
+                    "description": "配置的值",
                     "type": "string"
+                }
+            }
+        },
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "types.BizCode": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                401
+            ],
+            "x-enum-comments": {
+                "NotAuthorized": "未授权"
+            },
+            "x-enum-descriptions": [
+                "",
+                "",
+                "未授权"
+            ],
+            "x-enum-varnames": [
+                "Success",
+                "Failed",
+                "NotAuthorized"
+            ]
+        },
+        "types.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "$ref": "#/definitions/types.BizCode"
+                },
+                "data": {},
+                "message": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
                 }
             }
         }

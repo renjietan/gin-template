@@ -9,7 +9,6 @@ import (
 	"syscall"
 	"time"
 
-	"example.com/t/api/controller"
 	"example.com/t/api/service"
 	"example.com/t/core"
 	"example.com/t/core/fx_module"
@@ -109,16 +108,7 @@ func main() {
 		fx.Invoke(func(migrationService *service.MigrationService) {
 			migrationService.StartMigrate()
 		}),
-
-		// 公用模块
-		fx.Provide(service.NewUploadService),
-
-		// 模块 - config
-		fx.Provide(service.NewConfigService),
-		fx.Provide(controller.NewConfigController),
-		fx.Invoke(func(cfgController *controller.ConfigController) {
-			cfgController.RegisterRouter()
-		}),
+		fx_module.ApiModule,
 	)
 
 	// 启动应用程序
