@@ -26,5 +26,5 @@ func (s *MigrationService) StartMigrate() {
 
 func (s *MigrationService) TableMigration() {
 	s.db.AutoMigrate(&entity.ConfigEntity{})
-	s.db.AutoMigrate(&entity.LoginLog{})
+	s.db.AutoMigrate(&entity.ConfigDetailEntity{})
 }

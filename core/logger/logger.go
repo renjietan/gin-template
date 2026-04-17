@@ -25,7 +25,7 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 
 	// 配置rotatelogs（按日期切割）
 	writer, err := rotatelogs.New(
-		path.Join(path.Dir(cfg.FilePath), "%Y%m%d-"+path.Base(cfg.FilePath)),
+		path.Join(path.Dir(cfg.FilePath), "%Y-%m-%d-"+path.Base(cfg.FilePath)),
 		rotatelogs.WithLinkName(cfg.FilePath), // 生成软链指向最新日志
 		rotatelogs.WithMaxAge(time.Duration(cfg.MaxAge)*24*time.Hour),
 		rotatelogs.WithRotationTime(time.Duration(cfg.RotationTime)*time.Hour),
@@ -56,4 +56,11 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 	}})
 	GlobalLog = log
 	return log, nil
+}
+
+func L() *logrus.Logger {
+	if GlobalLog == nil {
+		panic("logger 暂未初始化")
+	}
+	return GlobalLog
 }

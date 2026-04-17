@@ -12,11 +12,13 @@ import (
 	"example.com/t/api/service"
 	"example.com/t/core"
 	"example.com/t/core/fx_module"
+	"example.com/t/core/logger"
 	"example.com/t/types"
 	"github.com/sirupsen/logrus"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/fx"
+	"go.uber.org/fx/fxevent"
 	"gorm.io/gorm"
 )
 
@@ -54,13 +56,17 @@ func main() {
 		}()
 	}
 	app := fx.New(
+
 		// 将 fx 内部日志 统一使用日志管理器收集
-		//fx.WithLogger(func() fx.Printer {
-		//	return fx.PrinterFunc(func(format string, args ...interface{}) {
-		//		logger.GlobalLog.Infof(format, args...)
-		//	})
-		//})
-		// 初始化配置应用配置
+		fx.WithLogger(func() fxevent.Logger {
+			//return &logger.FxLogger{
+			//	Logger: logger.L(),
+			//}
+			return fxevent.NopLogger
+		}),
+		// 日志初始化
+		fx.Provide(logger.NewLogger),
+		// 初始化应用配置
 		fx.Provide(func() *types.AppConfig {
 			config, err := core.LoadConfig(configFile)
 			if err != nil {
@@ -72,7 +78,7 @@ func main() {
 			}
 			return config
 		}),
-		fx_module.LoggerModule,
+
 		// 开启 http-server
 		fx.Provide(core.NewAppServer),
 		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {

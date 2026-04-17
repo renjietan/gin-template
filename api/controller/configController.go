@@ -6,7 +6,6 @@ import (
 	dto "example.com/t/api/DTO"
 	"example.com/t/api/service"
 	"example.com/t/core"
-	"example.com/t/core/logger"
 	"example.com/t/types"
 	"example.com/t/utility/reponse"
 	"github.com/gin-gonic/gin"
@@ -61,7 +60,6 @@ func (config *ConfigController) insert(c *gin.Context) {
 		return
 	}
 	res := config.service.Insert(d)
-	logger.GlobalLog.Info("====================日志测试=====================")
 	reponse.SUCCESS(c, res)
 }
 
