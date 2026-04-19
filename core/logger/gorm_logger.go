@@ -34,9 +34,10 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (sql 
 	elapsed := time.Since(begin)
 	sql, rows := fc()
 	fields := logrus.Fields{
-		"sql执行语句":  sql,
-		"查询结果（数量）": rows,
-		"耗时":       elapsed,
+		"package":  "gorm_logger",
+		"sql: ":    sql,
+		"rows: ":   rows,
+		"duration": elapsed,
 	}
 	if err != nil {
 		fields["error"] = err
@@ -44,8 +45,8 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (sql 
 		return
 	}
 	if elapsed > l.SlowThreshold && l.SlowThreshold != 0 {
-		l.Logger.WithContext(ctx).WithFields(fields).Warn("慢SQL")
+		l.Logger.WithContext(ctx).WithFields(fields).Warn("SQL查询过慢")
 	} else {
-		l.Logger.WithContext(ctx).WithFields(fields).Debug("sql 日志链")
+		l.Logger.WithContext(ctx).WithFields(fields).Debug("SQL日志: ")
 	}
 }

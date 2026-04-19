@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Http Request 全局错误处理
 func errorHandler(c *gin.Context) {
 	defer func() {
 		if r := recover(); r != nil {

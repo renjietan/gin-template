@@ -3,6 +3,7 @@ package types
 import "time"
 
 type AppConfig struct {
+	Debug bool
 	// 忽略 Path 字段
 	Path      string `toml:"-"`
 	StaticDir string // 静态资源目录

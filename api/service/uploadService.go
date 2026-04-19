@@ -27,6 +27,8 @@ func NewUploadService(db *gorm.DB, appConfig *types.AppConfig) *UploadService {
 }
 
 func (service *UploadService) Upload(c *gin.Context, file *multipart.FileHeader) error {
+	service.lock.Lock()
+	defer service.lock.Unlock()
 	ext := filepath.Ext(file.Filename)
 	newFileName := fmt.Sprintf("%d_%s%s", time.Now().Unix(), "upload", ext)
 	savePath := filepath.Join(service.config.UploadPath, newFileName)

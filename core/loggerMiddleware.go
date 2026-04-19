@@ -6,13 +6,14 @@ import (
 	"strings"
 	"time"
 
+	"example.com/t/core/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"github.com/sirupsen/logrus"
 )
 
 // GinLoggerMiddleware Gin中间件：记录每个HTTP请求的日志
-func GinLoggerMiddleware(log *logrus.Logger) gin.HandlerFunc {
+func GinLoggerMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
 		end := time.Now()
@@ -88,6 +89,7 @@ func GinLoggerMiddleware(log *logrus.Logger) gin.HandlerFunc {
 		if len(params) > 0 {
 			fields["Params"] = params
 		}
-		log.WithFields(fields).Info("HTTP request")
+		logger.L().WithFields(fields).Info("HTTP Requeset: " + c.Request.Method + " " + c.Request.RequestURI)
+		//WithFields(fields).Info("HTTP request")
 	}
 }

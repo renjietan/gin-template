@@ -12,16 +12,16 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-// NewGormLogger 返回适配后的 logger.Interface
+// Gorm 日志
 func NewGormLogger(log *logrus.Logger) *logger.GormLogger {
-	// 获取现有的 zap logger（注意 GetLogger 返回的是 *zap.SugaredLogger）
 	gormLogger := &logger.GormLogger{
 		Logger:        log,
-		SlowThreshold: 200 * time.Millisecond, // 慢查询阈值
+		SlowThreshold: 200 * time.Millisecond,
 	}
 	return gormLogger
 }
 
+// Gorm 配置
 func NewGormConfig(log *logrus.Logger) *gorm.Config {
 	return &gorm.Config{
 		Logger: NewGormLogger(log),

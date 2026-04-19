@@ -17,9 +17,7 @@ import (
 
 func staticResourceMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-
 		url := c.Request.URL.String()
-		// 拦截生成缩略图请求
 		if strings.HasPrefix(url, "/static/") && strings.Contains(url, "?imageView2") {
 			r := strings.SplitAfter(url, "imageView2")
 			size := strings.Split(r[1], "/")

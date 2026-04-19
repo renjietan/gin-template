@@ -6,7 +6,8 @@ type ConfigDTO struct {
 	// 配置名称
 	Name string `json:"name" binding:"required" example:"name-张三"`
 	// 配置值
-	Value string `json:"value" binding:"required" example:"value-张三"`
+	Value   string           `json:"value" binding:"required" example:"value-张三"`
+	Details ConfigDetailsDTO `json:"details" binding:"required"`
 }
 
 type ConfigsDTO struct {

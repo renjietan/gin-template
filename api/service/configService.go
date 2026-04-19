@@ -7,7 +7,7 @@ import (
 	dto "example.com/t/api/DTO"
 	"example.com/t/api/entity"
 	"example.com/t/types"
-	"example.com/t/utility/reponse"
+	"example.com/t/utility/response"
 	"gorm.io/gorm"
 )
 
@@ -100,9 +100,9 @@ func (c *ConfigService) Delete(id string) (entity.ConfigEntity, error) {
 func (c *ConfigService) List(dto dto.ConfigListDTO) (*types.PaginationResponse, error) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
-	query := c.db.Where("name LIKE ?", "%"+dto.Name+"%").Find(&entity.ConfigEntity{})
+	query := c.db.Preload("Details").Where("name LIKE ?", "%"+dto.Name+"%").Preload("Details").Find(&entity.ConfigEntity{})
 	var configs []entity.ConfigEntity
-	res, err := reponse.Paginate(query, dto.PagerDTO, nil, configs)
+	res, err := response.Paginate(query, dto.PagerDTO, nil, configs)
 	if err != nil {
 		return nil, err
 	}

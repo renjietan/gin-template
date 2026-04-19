@@ -1,13 +1,12 @@
 package controller
 
 import (
-	"fmt"
-
 	dto "example.com/t/api/DTO"
+	"example.com/t/api/entity"
 	"example.com/t/api/service"
 	"example.com/t/core"
 	"example.com/t/types"
-	"example.com/t/utility/reponse"
+	"example.com/t/utility/response"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -34,7 +33,7 @@ func NewConfigController(
 	}
 }
 
-func (config *ConfigController) RegisterRouter() {
+func (config *ConfigController) RegisterConfigRouters() {
 	group := config.App.Engine.Group("/config")
 	group.GET("list", config.list)
 	group.POST("insert", config.insert)
@@ -43,6 +42,7 @@ func (config *ConfigController) RegisterRouter() {
 	group.PUT("update/:id", config.update)
 	group.PUT("updates", config.updates)
 	group.DELETE("delete/:id", config.delete)
+	group.GET("test", config.test)
 }
 
 // @Summary 创建 配置
@@ -56,11 +56,11 @@ func (config *ConfigController) RegisterRouter() {
 func (config *ConfigController) insert(c *gin.Context) {
 	var d dto.ConfigDTO
 	if err := c.ShouldBindJSON(&d); err != nil {
-		reponse.ERROR(c, types.InvalidArgs)
+		response.ERROR(c, err.Error())
 		return
 	}
 	res := config.service.Insert(d)
-	reponse.SUCCESS(c, res)
+	response.SUCCESS(c, res)
 }
 
 // @Summary 批量创建 配置
@@ -74,11 +74,11 @@ func (config *ConfigController) insert(c *gin.Context) {
 func (config *ConfigController) insertMany(c *gin.Context) {
 	var d dto.ConfigsDTO
 	if err := c.ShouldBindJSON(&d); err != nil {
-		reponse.ERROR(c, types.InvalidArgs)
+		response.ERROR(c, types.InvalidArgs)
 		return
 	}
 	res := config.service.InsertMany(d)
-	reponse.SUCCESS(c, res)
+	response.SUCCESS(c, res)
 }
 
 // @Summary      上传单个文件
@@ -94,14 +94,14 @@ func (config *ConfigController) insertMany(c *gin.Context) {
 func (config *ConfigController) upload(c *gin.Context) {
 	file, err := c.FormFile("file")
 	if err != nil {
-		reponse.ERROR(c, types.InvalidArgs)
+		response.ERROR(c, types.InvalidArgs)
 	}
 	err2 := config.upload_service.Upload(c, file)
 	if err2 != nil {
-		reponse.ERROR(c, types.UploadFaild)
+		response.ERROR(c, types.UploadFaild)
 		return
 	}
-	reponse.SUCCESS(c, types.OkMsg)
+	response.SUCCESS(c, types.OkMsg)
 }
 
 // @Summary      更新
@@ -120,14 +120,14 @@ func (config *ConfigController) update(c *gin.Context) {
 	id := c.Param("id")
 	var d dto.ConfigDTO
 	if err := c.ShouldBindJSON(&d); err != nil {
-		reponse.ERROR(c, types.InvalidArgs)
+		response.ERROR(c, types.InvalidArgs)
 		return
 	}
 	if err := config.service.Update(id, d); err != nil {
-		reponse.ERROR(c, err.Error())
+		response.ERROR(c, err.Error())
 		return
 	}
-	reponse.SUCCESS(c)
+	response.SUCCESS(c)
 	return
 }
 
@@ -145,14 +145,14 @@ func (config *ConfigController) update(c *gin.Context) {
 func (config *ConfigController) updates(c *gin.Context) {
 	var d dto.UpdatesConfigDTO
 	if err := c.ShouldBindJSON(&d); err != nil {
-		reponse.ERROR(c, types.InvalidArgs)
+		response.ERROR(c, types.InvalidArgs)
 		return
 	}
 	if err := config.service.Updates(d.Items); err != nil {
-		reponse.ERROR(c, err.Error())
+		response.ERROR(c, err.Error())
 		return
 	}
-	reponse.SUCCESS(c)
+	response.SUCCESS(c)
 	return
 }
 
@@ -170,11 +170,10 @@ func (config *ConfigController) updates(c *gin.Context) {
 func (config *ConfigController) delete(c *gin.Context) {
 	id := c.Param("id")
 	if _, err := config.service.Delete(id); err != nil {
-		reponse.ERROR(c, err.Error())
+		response.ERROR(c, err.Error())
 		return
 	}
-	reponse.SUCCESS(c, types.OkMsg)
-	return
+	response.SUCCESS(c, types.OkMsg)
 }
 
 // @Summary      获取配置列表（分页+排序）
@@ -190,14 +189,32 @@ func (config *ConfigController) delete(c *gin.Context) {
 func (config *ConfigController) list(c *gin.Context) {
 	var d dto.ConfigListDTO
 	if err := c.ShouldBindQuery(&d); err != nil {
-		reponse.ERROR(c, types.InvalidArgs)
+		response.ERROR(c, types.InvalidArgs)
 		return
 	}
 	list, err := config.service.List(d)
 	if err != nil {
-		reponse.ERROR(c, err.Error())
+		response.ERROR(c, err.Error())
 		return
 	}
-	reponse.SUCCESS(c, &list)
-	fmt.Println(&list)
+	response.SUCCESS(c, &list)
+}
+
+// @Summary      测试
+// @Description  测试
+// @Tags         Config
+// @Accept       json
+// @Produce      json
+// @Param		 req 		query     dto.ConfigListDTO    true  "需要更新的信息"
+// @Success      200        {object}  map[string]interface{} "分页数据"
+// @Failure      400        {object}  map[string]interface{}  "请求参数错误"
+// @Failure      500        {object}  map[string]interface{}  "服务器内部错误"
+// @Router       /config/test [get]
+func (config *ConfigController) test(c *gin.Context) {
+	var configs []entity.ConfigEntity
+	if err := config.DB.Preload("Details").Find(&configs).Error; err != nil {
+		response.ERROR(c, err.Error())
+		return
+	}
+	response.SUCCESS(c, configs)
 }

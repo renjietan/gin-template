@@ -19,7 +19,6 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
-	"gorm.io/gorm"
 )
 
 // AppLifecycle 应用程序生命周期
@@ -56,19 +55,20 @@ func main() {
 		}()
 	}
 	app := fx.New(
-
-		// 将 fx 内部日志 统一使用日志管理器收集
-		fx.WithLogger(func() fxevent.Logger {
-			//return &logger.FxLogger{
-			//	Logger: logger.L(),
-			//}
-			return fxevent.NopLogger
-		}),
 		// 日志初始化
 		fx.Provide(logger.NewLogger),
+		// 注入 FX 日志管理器，转为 FX 服务
+		//fx.Provide(logger.NewFxLogger),
+		// TODO：将 fx 内部日志 统一使用日志管理器收集
+		fx.WithLogger(func(l *logrus.Logger) fxevent.Logger {
+			return &logger.FxLogger{
+				Logger: l,
+			}
+			//return fxevent.NopLogger
+		}),
 		// 初始化应用配置
 		fx.Provide(func() *types.AppConfig {
-			config, err := core.LoadConfig(configFile)
+			config, err := core.LoadConfig(configFile, debug)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -80,11 +80,19 @@ func main() {
 		}),
 
 		// 开启 http-server
-		fx.Provide(core.NewAppServer),
-		fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {
-			appserver.Run()
-			appserver.Middlewares(debug, log)
-		}),
+		fx_module.GinModule(debug),
+		//fx.Provide(core.NewAppServer),
+		//fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {
+		//	//appserver.Middlewares(debug, log)
+		//	appserver.Middlewares(debug, log)
+		//}),
+		//// 路由必须在 注册中间件 后执行
+		//// 设计原理: 中间件 被初始化后, 往后每一个新增的路由, 中间件将挂载到新的路由上，所以需要 先 注入中间件
+		//fx_module.ApiModule,
+		//fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {
+		//	appserver.Run(debug, log)
+		//}),
+
 		// swagger 路由
 		fx.Invoke(func(appserver *core.AppServer) {
 			appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
@@ -114,9 +122,7 @@ func main() {
 		fx.Invoke(func(migrationService *service.MigrationService) {
 			migrationService.StartMigrate()
 		}),
-		fx_module.ApiModule,
 	)
-
 	// 启动应用程序
 	go func() {
 		if err := app.Start(context.Background()); err != nil {

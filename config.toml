@@ -1,3 +1,4 @@
+Debug = true
 StaticDir = "./static"
 StaticUrl = "http://localhost:8080/static"
 Listen = "0.0.0.0:3344"
@@ -8,7 +9,7 @@ Username = "root"
 Password = "123456"
 DataBase = "springboot3"
 Level = "debug"
-FilePath = "static/logs/app.log"
+FilePath = "static/logs/app"
 MaxAge = "720h0m0s"
 RotationTime = "24h0m0s"
 UploadPath = "static/uploads"

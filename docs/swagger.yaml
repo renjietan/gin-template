@@ -28,6 +28,8 @@ definitions:
     type: object
   dto.ConfigDTO:
     properties:
+      details:
+        $ref: '#/definitions/dto.ConfigDetailsDTO'
       name:
         description: 配置名称
         example: name-张三
@@ -37,8 +39,18 @@ definitions:
         example: value-张三
         type: string
     required:
+    - details
     - name
     - value
+    type: object
+  dto.ConfigDetailsDTO:
+    properties:
+      content:
+        description: 配置详情
+        example: 配置详情
+        type: string
+    required:
+    - content
     type: object
   dto.ConfigsDTO:
     properties:
@@ -54,6 +66,25 @@ definitions:
           $ref: '#/definitions/entity.ConfigEntity'
         type: array
     type: object
+  entity.ConfigDetailEntity:
+    properties:
+      cid:
+        type: string
+      content:
+        type: string
+      created_at:
+        description: 时间字段，使用 datetime(3) 以支持毫秒精度
+        type: string
+      deleted_at:
+        allOf:
+        - $ref: '#/definitions/gorm.DeletedAt'
+        description: 软删除字段，使用指针，允许为 NULL
+      id:
+        description: 主键，类型为 bigint unsigned，自增
+        type: integer
+      updated_at:
+        type: string
+    type: object
   entity.ConfigEntity:
     properties:
       created_at:
@@ -63,6 +94,10 @@ definitions:
         allOf:
         - $ref: '#/definitions/gorm.DeletedAt'
         description: 软删除字段，使用指针，允许为 NULL
+      details:
+        items:
+          $ref: '#/definitions/entity.ConfigDetailEntity'
+        type: array
       id:
         description: 主键，类型为 bigint unsigned，自增
         type: integer
@@ -252,6 +287,63 @@ paths:
       summary: 获取配置列表（分页+排序）
       tags:
       - Config
+  /config/test:
+    get:
+      consumes:
+      - application/json
+      description: 测试
+      parameters:
+      - description: 名称
+        example: 张三
+        in: query
+        name: name
+        type: string
+      - description: 排序/规则 默认:desc（倒序）
+        enum:
+        - asc
+        - desc
+        in: query
+        name: order
+        type: string
+      - description: '当前页码 默认: 1'
+        example: 1
+        in: query
+        minimum: 1
+        name: page
+        type: integer
+      - description: '条数 默认: 10'
+        example: 10
+        in: query
+        maximum: 100
+        minimum: 1
+        name: page_size
+        type: integer
+      - description: '排序 默认: created_at'
+        example: created_at
+        in: query
+        name: sort_by
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页数据
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: 请求参数错误
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: 服务器内部错误
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 测试
+      tags:
+      - Config
   /config/update/{id}:
     put:
       consumes:
@@ -354,6 +446,35 @@ paths:
       summary: 上传单个文件
       tags:
       - Config
+  /config_detail/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 根据cId 获取 配置详情
+      parameters:
+      - description: 配置ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 上传成功
+          schema:
+            $ref: '#/definitions/types.Response'
+        "400":
+          description: 请求参数错误
+          schema:
+            $ref: '#/definitions/types.Response'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/types.Response'
+      summary: 根据cId 获取 配置详情
+      tags:
+      - ConfigDetail
   /ws/broadcast:
     post:
       consumes:

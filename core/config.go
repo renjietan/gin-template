@@ -9,8 +9,9 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-func NewDefaultConfig() *types.AppConfig {
+func NewDefaultConfig(debug bool) *types.AppConfig {
 	return &types.AppConfig{
+		Debug:     debug,
 		StaticDir: "./static",
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
@@ -22,10 +23,10 @@ func NewDefaultConfig() *types.AppConfig {
 			DataBase: "springboot3",
 		},
 		LoggerConfig: types.LoggerConfig{
-			Level: "debug",
-			//FilePath:     "logs/app-%Y%m%d.log", // 每天一个文件，如 app-20260115.log
-			MaxAge:       30 * 24 * time.Hour, // 保留30天
-			FilePath:     "static/logs/app.log",
+			Level:  "debug",
+			MaxAge: 30 * 24 * time.Hour, // 保留30天
+			//FilePath: "static/logs/app.log",
+			FilePath:     "static/logs/app",
 			RotationTime: 24 * time.Hour, // 每天切割
 		},
 		UploadConfig: types.UploadConfig{
@@ -34,12 +35,12 @@ func NewDefaultConfig() *types.AppConfig {
 	}
 }
 
-func LoadConfig(configFile string) (*types.AppConfig, error) {
+func LoadConfig(configFile string, debug bool) (*types.AppConfig, error) {
 	var config *types.AppConfig
 	_, err := os.Stat(configFile)
 	if err != nil {
 		//logger.Info("创建配置文件: ", configFile)
-		config = NewDefaultConfig()
+		config = NewDefaultConfig(debug)
 		config.Path = configFile
 		err := SaveConfig(config)
 		if err != nil {
