@@ -59,7 +59,6 @@ func main() {
 		fx.Provide(logger.NewLogger),
 		// 注入 FX 日志管理器，转为 FX 服务
 		//fx.Provide(logger.NewFxLogger),
-		// TODO：将 fx 内部日志 统一使用日志管理器收集
 		fx.WithLogger(func(l *logrus.Logger) fxevent.Logger {
 			return &logger.FxLogger{
 				Logger: l,

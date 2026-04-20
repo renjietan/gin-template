@@ -128,7 +128,6 @@ func (config *ConfigController) update(c *gin.Context) {
 		return
 	}
 	response.SUCCESS(c)
-	return
 }
 
 // @Summary      批量更新
@@ -153,7 +152,6 @@ func (config *ConfigController) updates(c *gin.Context) {
 		return
 	}
 	response.SUCCESS(c)
-	return
 }
 
 // @Summary      删除
