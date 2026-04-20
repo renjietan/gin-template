@@ -23,11 +23,14 @@ func NewConfigService(db *gorm.DB) *ConfigService {
 func (c *ConfigService) Insert(d dto.ConfigDTO) entity.ConfigEntity {
 	c.lock.Lock()
 	defer c.lock.Unlock()
-	var res entity.ConfigEntity
-	c.db.Create(&entity.ConfigEntity{
+	res := entity.ConfigEntity{
 		Name:  d.Name,
 		Value: d.Value,
-	}).Scan(&res)
+		Details: []entity.ConfigDetailEntity{
+			{Content: d.Details.Content},
+		},
+	}
+	c.db.Create(&res)
 	return res
 }
 

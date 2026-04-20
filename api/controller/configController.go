@@ -45,7 +45,7 @@ func (config *ConfigController) RegisterConfigRouters() {
 	group.GET("test", config.test)
 }
 
-// @Summary 创建 配置
+// @Summary 创建 配置 - 含关联 插入
 // @Description 配置 描述
 // @Tags Config
 // @Accept json
