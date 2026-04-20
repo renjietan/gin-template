@@ -36,3 +36,9 @@ github.com/sirupsen/logrus
 # 日志美化
 go get github.com/x-cray/logrus-prefixed-formatter
 ```
+
+### NACOS
+- 安装:
+  go get -u github.com/nacos-group/nacos-sdk-go/v2
+- 注意：
+  下载完成后，需要执行 go mod tidy

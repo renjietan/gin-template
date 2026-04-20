@@ -77,7 +77,7 @@ const docTemplate = `{
                 "tags": [
                     "Config"
                 ],
-                "summary": "创建 配置",
+                "summary": "创建 配置 - 含关联 插入",
                 "parameters": [
                     {
                         "description": "参数",

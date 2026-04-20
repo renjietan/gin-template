@@ -203,7 +203,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/entity.ConfigEntity'
-      summary: 创建 配置
+      summary: 创建 配置 - 含关联 插入
       tags:
       - Config
   /config/insertMany:

@@ -32,6 +32,23 @@ func NewDefaultConfig(debug bool) *types.AppConfig {
 		UploadConfig: types.UploadConfig{
 			UploadPath: "static/uploads",
 		},
+		NacosConfig: types.NacosConfig{
+			Nacos_Host:                "0.0.0.0",
+			Nacos_Port:                8848,
+			Nacos_ContextPath:         "/nacos",
+			Nacos_UserName:            "nacos",
+			Nacos_PassWord:            "123456",
+			Nacos_GroupName:           "DEFAULT_GROUP",
+			Nacos_NameSpaceId:         "nacos-namespace-id",
+			Nacos_DataId:              "nacos-dataId",
+			Nacos_LogDir:              "/static/logs/nacos/log",
+			Nacos_CacheDir:            "/static/logs/nacos/cache",
+			Nacos_NotLoadCacheAtStart: true,
+			//Nacos_RotateTime: 0
+			//Nacos_MaxAge
+			Nacos_LogLevel:  "info",
+			Nacos_TimeoutMs: 500,
+		},
 	}
 }
 
