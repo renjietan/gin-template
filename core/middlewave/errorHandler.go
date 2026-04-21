@@ -1,4 +1,4 @@
-package core
+package middlewave
 
 import (
 	"net/http"
@@ -10,7 +10,7 @@ import (
 )
 
 // Http Request 全局错误处理
-func errorHandler(c *gin.Context) {
+func ErrorHandlerMiddleWave(c *gin.Context) {
 	defer func() {
 		if r := recover(); r != nil {
 			logger.Errorf("errorHandler 异常捕获: %v", r)

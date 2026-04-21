@@ -15,8 +15,6 @@ import (
 	"example.com/t/core/logger"
 	"example.com/t/types"
 	"github.com/sirupsen/logrus"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 )
@@ -80,22 +78,7 @@ func main() {
 
 		// 开启 http-server
 		fx_module.GinModule(debug),
-		//fx.Provide(core.NewAppServer),
-		//fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {
-		//	//appserver.Middlewares(debug, log)
-		//	appserver.Middlewares(debug, log)
-		//}),
-		//// 路由必须在 注册中间件 后执行
-		//// 设计原理: 中间件 被初始化后, 往后每一个新增的路由, 中间件将挂载到新的路由上，所以需要 先 注入中间件
-		//fx_module.ApiModule,
-		//fx.Invoke(func(appserver *core.AppServer, db *gorm.DB, log *logrus.Logger) {
-		//	appserver.Run(debug, log)
-		//}),
 
-		// swagger 路由
-		fx.Invoke(func(appserver *core.AppServer) {
-			appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-		}),
 		// 初始化数据库
 		fx.Provide(core.NewGormConfig),
 		fx.Provide(core.NewMysql),

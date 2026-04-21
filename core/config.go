@@ -80,6 +80,5 @@ func SaveConfig(config *types.AppConfig) error {
 	if err := encoder.Encode(&config); err != nil {
 		return err
 	}
-
 	return os.WriteFile(config.Path, buf.Bytes(), 0644)
 }

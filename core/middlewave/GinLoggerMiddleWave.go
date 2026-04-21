@@ -1,4 +1,4 @@
-package core
+package middlewave
 
 import (
 	"bytes"
@@ -12,8 +12,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// GinLoggerMiddleware Gin中间件：记录每个HTTP请求的日志
-func GinLoggerMiddleware() gin.HandlerFunc {
+// GinLoggerMiddleWave Gin中间件：记录每个HTTP请求的日志
+func GinLoggerMiddleWave() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
 		end := time.Now()

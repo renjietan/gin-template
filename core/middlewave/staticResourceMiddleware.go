@@ -1,4 +1,4 @@
-package core
+package middlewave
 
 import (
 	"bytes"
@@ -15,7 +15,7 @@ import (
 	"golang.org/x/image/webp"
 )
 
-func staticResourceMiddleware() gin.HandlerFunc {
+func StaticResourceMiddleWave() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		url := c.Request.URL.String()
 		if strings.HasPrefix(url, "/static/") && strings.Contains(url, "?imageView2") {
@@ -36,7 +36,12 @@ func staticResourceMiddleware() gin.HandlerFunc {
 				c.String(http.StatusNotFound, "Image not found")
 				return
 			}
-			defer file.Close()
+			defer func(file *os.File) {
+				err := file.Close()
+				if err != nil {
+					panic("文件关闭失败: " + err.Error())
+				}
+			}(file)
 
 			// 解码图片
 			img, _, err := image.Decode(file)

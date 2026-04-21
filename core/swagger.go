@@ -1,18 +1,14 @@
 package core
 
 import (
-	"fmt"
-
 	"example.com/t/docs"
 	"github.com/gin-gonic/gin"
 )
 
-func InitSwagger(r *gin.Engine) {
-	fmt.Println("启动模式=========================", gin.Mode(), gin.ReleaseMode)
-	SwaggerConfig()
+type SwaggerConfig struct {
 }
 
-func SwaggerConfig() {
+func InitSwagger(r *gin.Engine) {
 	docs.SwaggerInfo.Title = "Swagger Gin Template API"
 	docs.SwaggerInfo.Description = "Swagger Gin Template API Service"
 	docs.SwaggerInfo.Version = "1.0"
@@ -26,7 +22,7 @@ func SwaggerConfig() {
 }
 
 const docTemplate = `{
-    "schemes": 1111{{ marshal .Schemes }},
+    "schemes": {{ marshal .Schemes }},
     "swagger": "2.0",
     "info": {
         "description": "{{escape .Description}}",

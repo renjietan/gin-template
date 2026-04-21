@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="AppConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AppLifecycle">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AppServer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/app_server.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Base">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/udp/utils/stuct/base.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BaseController">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/baseController.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BaseEntity">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/entity/base_entity.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="BroadcastRequest">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/ws.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ClientInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/ws/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigController">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/configController.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/configDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigDetailEntity">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/entity/config_detail_entity.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigDetailsController">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/configDetailsController.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigDetailsDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigDetailsService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/service/ConfigDetailsService.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigEntity">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/entity/config_entity.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigListDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/configDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/service/configService.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ConfigsDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/configDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ErrorResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/ws.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="FxLogger">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/logger/fx_logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GormLogger">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/logger/gorm_logger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LinePerFieldFormatter">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/logger/text_fromat.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoggerConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MigrationService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/service/migrationService.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="MysqlConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="NacosConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="NacosSerivce">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/nacosService.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PagerDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/pagerDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PaginationResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/Response.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Response">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/Response.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SafeMap">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utility/safe_map.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="StatusResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/ws.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SwaggerConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/swagger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TimeoutManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utility/timeout/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UDPClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/udp/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UpdatesConfigDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/configDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UploadConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UploadService">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/service/uploadService.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WS_META_File">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/wsMetaFileDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WebSocketManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/ws/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WsClientCountResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/ws.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="resetOptions">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utility/timeout/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="timerCommand">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utility/timeout/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="timerInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utility/timeout/index.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677097918" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigDetailsDTO" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/DTO/configDTO.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677097926" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigDTO" />
+                  <option value="ConfigsDTO" />
+                  <option value="UpdatesConfigDTO" />
+                  <option value="ConfigListDTO" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/DTO/pagerDTO.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776332227520" />
+              <option name="schema">
+                <list>
+                  <option value="PagerDTO" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/DTO/wsMetaFileDTO.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776044486737" />
+              <option name="schema">
+                <list>
+                  <option value="WS_META_File" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/controller/baseController.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776134336727" />
+              <option name="schema">
+                <list>
+                  <option value="BaseController" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/controller/configController.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776678635132" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigController" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/controller/configDetailsController.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677097952" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigDetailsController" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/controller/ws.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775786973079" />
+              <option name="schema">
+                <list>
+                  <option value="WsClientCountResponse" />
+                  <option value="BroadcastRequest" />
+                  <option value="StatusResponse" />
+                  <option value="ErrorResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/entity/base_entity.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776313038090" />
+              <option name="schema">
+                <list>
+                  <option value="BaseEntity" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/entity/config_detail_entity.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677097963" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigDetailEntity" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/entity/config_entity.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776414382246" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigEntity" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/service/ConfigDetailsService.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677097975" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigDetailsService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/service/configService.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776678206948" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/service/migrationService.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776391987377" />
+              <option name="schema">
+                <list>
+                  <option value="MigrationService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/service/uploadService.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098003" />
+              <option name="schema">
+                <list>
+                  <option value="UploadService" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/udp/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775786973080" />
+              <option name="schema">
+                <list>
+                  <option value="UDPClient" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/udp/utils/gen/login.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775786973086" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/udp/utils/parse/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775786973091" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/udp/utils/stuct/base.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775786973096" />
+              <option name="schema">
+                <list>
+                  <option value="Base" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/ws/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775786973099" />
+              <option name="schema">
+                <list>
+                  <option value="ClientInfo" />
+                  <option value="WebSocketManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/cmd/cmd.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098022" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/app_server.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776742128305" />
+              <option name="schema">
+                <list>
+                  <option value="AppServer" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776744758414" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/apiModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776744432991" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/ginModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776742238247" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/logger/fx_logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098129" />
+              <option name="schema">
+                <list>
+                  <option value="FxLogger" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/logger/gorm_logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098141" />
+              <option name="schema">
+                <list>
+                  <option value="GormLogger" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/logger/logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098360" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/logger/text_fromat.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776304227940" />
+              <option name="schema">
+                <list>
+                  <option value="LinePerFieldFormatter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/corsMiddleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776736740208" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/errorHandler.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776736724535" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/loggerMiddleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776736764993" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/parameterHandlerMiddleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776741526540" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/staticResourceMiddleware.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776741855452" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098402" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/nacosService.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776735516132" />
+              <option name="schema">
+                <list>
+                  <option value="NacosSerivce" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/swagger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776750184249" />
+              <option name="schema">
+                <list>
+                  <option value="SwaggerConfig" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/docs/docs.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776735516141" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/enum/timeout_cmd_type.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1768197107672" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/enum/ws_event.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1768185832993" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/enum/ws_type.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1768185836394" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776742456681" />
+              <option name="schema">
+                <list>
+                  <option value="AppLifecycle" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/Response.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776314313458" />
+              <option name="schema">
+                <list>
+                  <option value="Response" />
+                  <option value="PaginationResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776735516197" />
+              <option name="schema">
+                <list>
+                  <option value="AppConfig" />
+                  <option value="MysqlConfig" />
+                  <option value="LoggerConfig" />
+                  <option value="UploadConfig" />
+                  <option value="NacosConfig" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/byte.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776740860354" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/common.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775123955861" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/fast_template.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776044486919" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/json.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776044486925" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/response/pagerList.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098867" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/response/response.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677098886" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/safe_map.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1767834153288" />
+              <option name="schema">
+                <list>
+                  <option value="SafeMap" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/strings.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1775123607661" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/tern.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1767773012567" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utility/timeout/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1768201855959" />
+              <option name="schema">
+                <list>
+                  <option value="timerInfo" />
+                  <option value="timerCommand" />
+                  <option value="resetOptions" />
+                  <option value="TimeoutManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="app_config" value="AppConfig" />
+        <entry key="app_lifecycle" value="AppLifecycle" />
+        <entry key="app_server" value="AppServer" />
+        <entry key="base" value="Base" />
+        <entry key="base_controller" value="BaseController" />
+        <entry key="base_entity" value="BaseEntity" />
+        <entry key="broadcast_request" value="BroadcastRequest" />
+        <entry key="client_info" value="ClientInfo" />
+        <entry key="config_controller" value="ConfigController" />
+        <entry key="config_detail_entity" value="ConfigDetailEntity" />
+        <entry key="config_details_controller" value="ConfigDetailsController" />
+        <entry key="config_details_dto" value="ConfigDetailsDTO" />
+        <entry key="config_details_service" value="ConfigDetailsService" />
+        <entry key="config_dto" value="ConfigDTO" />
+        <entry key="config_entity" value="ConfigEntity" />
+        <entry key="config_list_dto" value="ConfigListDTO" />
+        <entry key="config_service" value="ConfigService" />
+        <entry key="configs_dto" value="ConfigsDTO" />
+        <entry key="error_response" value="ErrorResponse" />
+        <entry key="fx_logger" value="FxLogger" />
+        <entry key="gorm_logger" value="GormLogger" />
+        <entry key="line_per_field_formatter" value="LinePerFieldFormatter" />
+        <entry key="logger_config" value="LoggerConfig" />
+        <entry key="migration_service" value="MigrationService" />
+        <entry key="mysql_config" value="MysqlConfig" />
+        <entry key="nacos_config" value="NacosConfig" />
+        <entry key="nacos_serivce" value="NacosSerivce" />
+        <entry key="pager_dto" value="PagerDTO" />
+        <entry key="pagination_response" value="PaginationResponse" />
+        <entry key="reset_options" value="resetOptions" />
+        <entry key="response" value="Response" />
+        <entry key="safe_map" value="SafeMap" />
+        <entry key="status_response" value="StatusResponse" />
+        <entry key="swagger_config" value="SwaggerConfig" />
+        <entry key="timeout_manager" value="TimeoutManager" />
+        <entry key="timer_command" value="timerCommand" />
+        <entry key="timer_info" value="timerInfo" />
+        <entry key="udp_client" value="UDPClient" />
+        <entry key="updates_config_dto" value="UpdatesConfigDTO" />
+        <entry key="upload_config" value="UploadConfig" />
+        <entry key="upload_service" value="UploadService" />
+        <entry key="web_socket_manager" value="WebSocketManager" />
+        <entry key="ws_client_count_response" value="WsClientCountResponse" />
+        <entry key="ws_meta__file" value="WS_META_File" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1776740222521" />
+  </component>
+</project>

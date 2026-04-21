@@ -1,4 +1,4 @@
-package core
+package middlewave
 
 import (
 	"bytes"
@@ -9,7 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func parameterHandlerMiddleware() gin.HandlerFunc {
+// 中间件-参数处理
+func ParameterHandlerMiddleWave() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// GET 参数处理
 		params := c.Request.URL.Query()

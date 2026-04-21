@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"example.com/t/core/middlewave"
 	"example.com/t/types"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -37,24 +38,24 @@ func NewAppServer(appConfig *types.AppConfig) *AppServer {
 		Engine: engine,
 		Server: server,
 	}
-	res.Middlewares(appConfig.Debug)
+	res.Middlewares()
 	//res.Server = server
 	return res
 }
 
-func (s *AppServer) Middlewares(debug bool) {
+func (s *AppServer) Middlewares() {
 	//允许跨域请求 API
-	s.Engine.Use(corsMiddleware())
+	s.Engine.Use(middlewave.CorsMiddleWave())
 	// 静态资源
-	s.Engine.Use(staticResourceMiddleware())
+	s.Engine.Use(middlewave.StaticResourceMiddleWave())
 	// 权限
 	//s.Engine.Use(authorizeMiddleware(s, client))
 	// 参数处理
-	s.Engine.Use(parameterHandlerMiddleware())
+	s.Engine.Use(middlewave.ParameterHandlerMiddleWave())
 	// 错误处理
-	s.Engine.Use(errorHandler)
+	s.Engine.Use(middlewave.ErrorHandlerMiddleWave)
 	// 日志
-	s.Engine.Use(GinLoggerMiddleware())
+	s.Engine.Use(middlewave.GinLoggerMiddleWave())
 	//// 异常捕获: 捕获请求处理过程中发生的 panic
 	s.Engine.Use(gin.CustomRecovery(func(c *gin.Context, err any) {
 		res := gin.H{"error": "服务器内部错误", "detail": fmt.Sprintf("%v", err)}
@@ -65,7 +66,6 @@ func (s *AppServer) Middlewares(debug bool) {
 }
 
 func (s *AppServer) Run(debug bool, log *logrus.Logger) {
-	fmt.Printf("==============", debug, log)
 	// 注意：这里使用协程,
 	// ListenAndServe 会阻塞 main 主协程，内部会启动一个循环，持续接受和处理连接
 	go func() {
