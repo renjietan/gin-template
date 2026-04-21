@@ -64,6 +64,7 @@ func (l *FxLogger) LogEvent(event fxevent.Event) {
 		val = val.Elem()
 	}
 	l.info["LifeCycleName"] = val.Name()
+	l.info["package"] = "fx_logger"
 	l.Logger.WithFields(l.info).Info(l.lifeCycleMame)
 }
 

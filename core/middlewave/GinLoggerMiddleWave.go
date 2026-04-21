@@ -22,6 +22,7 @@ func GinLoggerMiddleWave() gin.HandlerFunc {
 		method := c.Request.Method
 		contentType := c.ContentType()
 		fields := logrus.Fields{
+			"package":     "GinLoggerMiddleWave",
 			"method":      method,
 			"contentType": contentType,
 			"path":        c.Request.URL.Path,

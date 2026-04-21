@@ -9,7 +9,6 @@ import (
 	"syscall"
 	"time"
 
-	"example.com/t/api/service"
 	"example.com/t/core"
 	"example.com/t/core/fx_module"
 	"example.com/t/core/logger"
@@ -77,11 +76,12 @@ func main() {
 		}),
 
 		// 开启 http-server
-		fx_module.GinModule(debug),
+		fx_module.FxGinModule(debug),
 
-		// 初始化数据库
-		fx.Provide(core.NewGormConfig),
-		fx.Provide(core.NewMysql),
+		fx_module.FXSqlModule,
+		// nacos
+		fx_module.FXNacosModule,
+
 		// 生命周期
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数
@@ -98,11 +98,6 @@ func main() {
 					return lc.OnStop(ctx)
 				},
 			})
-		}),
-		// 自动同步 数据库 表
-		fx.Provide(service.NewMigrationService),
-		fx.Invoke(func(migrationService *service.MigrationService) {
-			migrationService.StartMigrate()
 		}),
 	)
 	// 启动应用程序

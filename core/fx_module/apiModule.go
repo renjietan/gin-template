@@ -9,7 +9,7 @@ import (
 	"go.uber.org/fx"
 )
 
-var ApiModule = fx.Module("fx-api-module",
+var FXApiModule = fx.Module("fx-api-module",
 	// 公用模块
 	fx.Invoke(func(appserver *core.AppServer) { // swagger 路由
 		appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

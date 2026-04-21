@@ -188,6 +188,7 @@
         <entry key="NacosSerivce">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/api/service/nacosService.go" />
               <option value="file://$PROJECT_DIR$/core/nacosService.go" />
             </set>
           </value>
@@ -489,6 +490,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/api/service/nacosService.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776765566322" />
+              <option name="schema">
+                <list>
+                  <option value="NacosSerivce" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/api/service/uploadService.go">
           <value>
             <ScannedPath>
@@ -574,28 +587,42 @@
         <entry key="file://$PROJECT_DIR$/core/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776744758414" />
+              <option name="lastModified" value="1776765399071" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/apiModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776744432991" />
+              <option name="lastModified" value="1776757675781" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/ginModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776742238247" />
+              <option name="lastModified" value="1776757825115" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/nacosModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776765607680" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/sqlModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776759397604" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/logger/fx_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098129" />
+              <option name="lastModified" value="1776757526826" />
               <option name="schema">
                 <list>
                   <option value="FxLogger" />
@@ -607,7 +634,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/gorm_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098141" />
+              <option name="lastModified" value="1776757520595" />
               <option name="schema">
                 <list>
                   <option value="GormLogger" />
@@ -619,7 +646,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098360" />
+              <option name="lastModified" value="1776757536585" />
             </ScannedPath>
           </value>
         </entry>
@@ -632,6 +659,13 @@
                   <option value="LinePerFieldFormatter" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/GinLoggerMiddleWave.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776757450349" />
             </ScannedPath>
           </value>
         </entry>
@@ -732,7 +766,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776742456681" />
+              <option name="lastModified" value="1776759421875" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
@@ -757,7 +791,7 @@
         <entry key="file://$PROJECT_DIR$/types/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776735516197" />
+              <option name="lastModified" value="1776765381940" />
               <option name="schema">
                 <list>
                   <option value="AppConfig" />

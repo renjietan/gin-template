@@ -32,11 +32,6 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 	}
 
 	// 配置rotatelogs（按日期切割）
-	//cfg_fileName := path.Base(cfg.FilePath) // 返回 ”app.log“
-	//prefix := cfg_fileName[:strings.LastIndex(cfg_fileName, ".")]    // 返回 ”app“
-	//postfix := cfg_fileName[strings.LastIndex(cfg_fileName, ".")+1:] // 返回 ”log“
-	//loc, _ := time.LoadLocation("Asia/Shanghai")
-	//fmt.Printf("location is %v\n", loc)
 	writer, err := rotatelogs.New(
 		path.Join(path.Dir(cfg.FilePath), path.Base(cfg.FilePath)+".%Y-%m-%d.log"),
 		rotatelogs.WithLinkName(cfg.FilePath+".log"),                  // 生成软链指向最新日志
