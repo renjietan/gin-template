@@ -1,29 +1,19 @@
 package main
 
-import (
-	"net"
-)
+import "fmt"
 
-func main() {
-	// 监听TCP端口
-	listener, err := net.Listen("tcp", ":8080")
-	if err != nil {
-		panic(err)
-	}
-	defer listener.Close()
-
-	for {
-		// 接受连接
-		conn, err := listener.Accept()
-		if err != nil {
-			continue // 继续接受其他连接
-		}
-
-		go handleConnection(conn)
-	}
+type test struct {
+	Name string
 }
 
-func handleConnection(conn net.Conn) {
-	defer conn.Close()
-	// 处理连接逻辑
+func main() {
+	a := test{
+		Name: "test1",
+	}
+	b := test{
+		Name: "test2",
+	}
+	fmt.Println(a)
+	fmt.Println(b)
+	fmt.Println(&a.Name)
 }

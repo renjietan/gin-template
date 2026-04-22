@@ -129,6 +129,13 @@
             </set>
           </value>
         </entry>
+        <entry key="ErrorMsg">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/ws/index.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="ErrorResponse">
           <value>
             <set>
@@ -189,7 +196,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/api/service/nacosService.go" />
-              <option value="file://$PROJECT_DIR$/core/nacosService.go" />
             </set>
           </value>
         </entry>
@@ -295,6 +301,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/utility/timeout/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="test">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/test/index.go" />
             </set>
           </value>
         </entry>
@@ -493,7 +506,7 @@
         <entry key="file://$PROJECT_DIR$/api/service/nacosService.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776765566322" />
+              <option name="lastModified" value="1776840823951" />
               <option name="schema">
                 <list>
                   <option value="NacosSerivce" />
@@ -555,10 +568,11 @@
         <entry key="file://$PROJECT_DIR$/api/ws/index.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1775786973099" />
+              <option name="lastModified" value="1776851983458" />
               <option name="schema">
                 <list>
                   <option value="ClientInfo" />
+                  <option value="ErrorMsg" />
                   <option value="WebSocketManager" />
                 </list>
               </option>
@@ -587,7 +601,7 @@
         <entry key="file://$PROJECT_DIR$/core/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776765399071" />
+              <option name="lastModified" value="1776826914015" />
             </ScannedPath>
           </value>
         </entry>
@@ -608,7 +622,7 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/nacosModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776765607680" />
+              <option name="lastModified" value="1776828095076" />
             </ScannedPath>
           </value>
         </entry>
@@ -622,7 +636,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/fx_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776757526826" />
+              <option name="lastModified" value="1776850334524" />
               <option name="schema">
                 <list>
                   <option value="FxLogger" />
@@ -646,7 +660,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776757536585" />
+              <option name="lastModified" value="1776827961679" />
             </ScannedPath>
           </value>
         </entry>
@@ -683,13 +697,6 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/middlewave/loggerMiddleware.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776736764993" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/core/middlewave/parameterHandlerMiddleware.go">
           <value>
             <ScannedPath>
@@ -711,18 +718,6 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/nacosService.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776735516132" />
-              <option name="schema">
-                <list>
-                  <option value="NacosSerivce" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/core/swagger.go">
           <value>
             <ScannedPath>
@@ -738,7 +733,7 @@
         <entry key="file://$PROJECT_DIR$/docs/docs.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776735516141" />
+              <option name="lastModified" value="1776765731985" />
             </ScannedPath>
           </value>
         </entry>
@@ -775,6 +770,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/test/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776850166020" />
+              <option name="schema">
+                <list>
+                  <option value="test" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/types/Response.go">
           <value>
             <ScannedPath>
@@ -791,7 +798,7 @@
         <entry key="file://$PROJECT_DIR$/types/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776765381940" />
+              <option name="lastModified" value="1776826033864" />
               <option name="schema">
                 <list>
                   <option value="AppConfig" />
@@ -909,6 +916,7 @@
         <entry key="config_list_dto" value="ConfigListDTO" />
         <entry key="config_service" value="ConfigService" />
         <entry key="configs_dto" value="ConfigsDTO" />
+        <entry key="error_msg" value="ErrorMsg" />
         <entry key="error_response" value="ErrorResponse" />
         <entry key="fx_logger" value="FxLogger" />
         <entry key="gorm_logger" value="GormLogger" />
@@ -925,6 +933,7 @@
         <entry key="safe_map" value="SafeMap" />
         <entry key="status_response" value="StatusResponse" />
         <entry key="swagger_config" value="SwaggerConfig" />
+        <entry key="test" value="test" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
         <entry key="timer_info" value="timerInfo" />
@@ -937,6 +946,6 @@
         <entry key="ws_meta__file" value="WS_META_File" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1776740222521" />
+    <option name="lastTimeChecked" value="1776849215100" />
   </component>
 </project>

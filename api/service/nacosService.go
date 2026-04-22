@@ -1,10 +1,6 @@
 package service
 
 import (
-	"fmt"
-	"log"
-	"net"
-
 	"example.com/t/types"
 	"example.com/t/utility"
 	"github.com/nacos-group/nacos-sdk-go/v2/clients"
@@ -12,7 +8,6 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/clients/naming_client"
 	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
-	"github.com/sirupsen/logrus"
 )
 
 // NacosSerivce /**
@@ -28,10 +23,12 @@ type NacosSerivce struct {
 	ConfigClient  config_client.IConfigClient
 	NamingClient  naming_client.INamingClient
 	app_config    *types.AppConfig
-	Content       []byte
+	Contents      map[string]interface{}
 }
 
-func NewNacosSerivce(config *types.AppConfig, l *logrus.Logger) *NacosSerivce {
+type Nacos_err map[string]interface{}
+
+func NewNacosSerivce(config *types.AppConfig) (*NacosSerivce, Nacos_err) {
 	// Nacos 服务端配置
 	sc := []constant.ServerConfig{
 		{
@@ -66,8 +63,7 @@ func NewNacosSerivce(config *types.AppConfig, l *logrus.Logger) *NacosSerivce {
 		ServerConfigs: sc,
 	})
 	if err != nil {
-		panic(fmt.Errorf("创建nacos客户端失败: %w", err))
-		return nil
+		return nil, parseInfo(config, "创建配置客户端失败: ", err.Error())
 	}
 	// 创建服务注册客户端
 	namingClient, err := clients.NewNamingClient(vo.NacosClientParam{
@@ -75,17 +71,17 @@ func NewNacosSerivce(config *types.AppConfig, l *logrus.Logger) *NacosSerivce {
 		ServerConfigs: sc,
 	})
 	if err != nil {
-		panic(fmt.Errorf("创建naming客户端失败: %w", err))
+		return nil, parseInfo(config, "创建服务注册客户端失败: ", err.Error())
 	}
 	return &NacosSerivce{
 		ConfigClient: configClient,
 		NamingClient: namingClient,
 		app_config:   config,
-	}
+	}, nil
 }
 
 // LoadAndWatchConfig 首次拉取配置，并启动监听协程
-func (ns *NacosSerivce) LoadAndWatchConfig() error {
+func (ns *NacosSerivce) LoadAndWatchConfig() Nacos_err {
 	dataId := ns.app_config.NacosConfig.Nacos_DataId
 	groupName := ns.app_config.NacosConfig.Nacos_GroupName
 	// 首次获取配置
@@ -94,37 +90,41 @@ func (ns *NacosSerivce) LoadAndWatchConfig() error {
 		Group:  groupName,
 	})
 	if err != nil {
-		return fmt.Errorf("获取配置失败: %w", err)
+		return parseInfo(ns.app_config, "首次获取配置失败", err.Error())
 	}
-	s, _ := utility.JsonStrToMap(content)
-	fmt.Println(s)
-	//// 解析并更新全局配置
-	//if err := updateConfig(content); err != nil {
-	//	return fmt.Errorf("parse initial config failed: %w", err)
-	//}
-
+	s, parseErr := utility.JsonStrToMap(content)
+	if parseErr != nil {
+		return parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
+	}
+	ns.Contents = s
 	// 监听配置变更
 	err = ns.ConfigClient.ListenConfig(vo.ConfigParam{
 		DataId: dataId,
 		Group:  groupName,
 		OnChange: func(namespace, group, dataId, data string) {
-			fmt.Println("=======================")
+			s, parseErr := utility.JsonStrToMap(content)
+			if parseErr != nil {
+				//return parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
+			}
+			ns.Contents = s
 		},
 	})
 	if err != nil {
-		return fmt.Errorf("listen config failed: %w", err)
+		return parseInfo(ns.app_config, "开启nacos监听器失败", err.Error())
 	}
 	return nil
 }
 
 // 服务注册
-func (ns *NacosSerivce) RegisterService() error {
+func (ns *NacosSerivce) RegisterService() Nacos_err {
+	serviceName := ns.app_config.AppName
+	host := ns.app_config.NacosConfig.Nacos_Host
+	port := ns.app_config.NacosConfig.Nacos_Port
 	// 获取本机可用 IP（实际中可能需要配置或从环境变量获取）
-	ip := getOutboundIP()
 	_, err := ns.NamingClient.RegisterInstance(vo.RegisterInstanceParam{
-		Ip:          ip,
-		Port:        ns.app_config.Nacos_Port,
-		ServiceName: ns.app_config.AppName,
+		Ip:          host,
+		Port:        port,
+		ServiceName: serviceName,
 		Weight:      100,
 		Enable:      true,
 		Healthy:     true,
@@ -132,35 +132,44 @@ func (ns *NacosSerivce) RegisterService() error {
 		Metadata:    map[string]string{"gin-version": "1.9.0"},
 	})
 	if err != nil {
-		return fmt.Errorf("register service failed: %w", err)
+		return parseInfo(ns.app_config, "服务注册失败", err.Error())
 	}
-	log.Printf("✅ Service registered to Nacos: %s@%s:%d\n", ns.app_config.AppName, ip, ns.app_config.Nacos_Port)
 	return nil
 }
 
 // deregisterService 优雅关闭时注销服务
-func (ns *NacosSerivce) deregisterService(serviceName string) error {
-	ip := getOutboundIP()
+func (ns *NacosSerivce) deregisterService() error {
+	serviceName := ns.app_config.AppName
+	host := ns.app_config.NacosConfig.Nacos_Host
+	port := ns.app_config.NacosConfig.Nacos_Port
 	_, err := ns.NamingClient.DeregisterInstance(vo.DeregisterInstanceParam{
-		Ip:          ip,
-		Port:        ns.app_config.Nacos_Port,
+		Ip:          host,
+		Port:        port,
 		ServiceName: serviceName,
 		Ephemeral:   true,
 	})
 	if err != nil {
 		return err
 	}
-	log.Println("✅ Service deregistered from Nacos")
 	return nil
 }
 
-// 获取本机出口 IP（简单实现）
-func getOutboundIP() string {
-	conn, err := net.Dial("udp", "8.8.8.8:80")
-	if err != nil {
-		log.Fatal(err)
+// parseError /**
+/**
+ * @FILE   nacosService
+ * @AUTHOR TAN
+ * @DESCRIPTION
+ * @DATE 10:58:01 CST 2026-04-22
+ * @PARAM
+ * @RETURN
+ **/
+func parseInfo(config *types.AppConfig, title string, err interface{}) Nacos_err {
+	errors := map[string]interface{}{
+		"namespace-id": config.NacosConfig.Nacos_NameSpaceId,
+		"data-id":      config.NacosConfig.Nacos_DataId,
+		"group-name":   config.NacosConfig.Nacos_GroupName,
+		"title":        title,
+		"errors":       err,
 	}
-	defer conn.Close()
-	localAddr := conn.LocalAddr().(*net.UDPAddr)
-	return localAddr.IP.String()
+	return errors
 }

@@ -71,3 +71,15 @@ func (l *FxLogger) LogEvent(event fxevent.Event) {
 func (l *FxLogger) Info(msg string) {
 	l.Logger.Info(msg)
 }
+
+func (l *FxLogger) Debug(msg string) {
+	l.Logger.Debug(msg)
+}
+
+func (l *FxLogger) Warn(msg string) {
+	l.Logger.Warn(msg)
+}
+
+func (l *FxLogger) Error(msg string) {
+	l.Logger.Warn(msg)
+}
