@@ -77,11 +77,12 @@ func main() {
 
 		// 开启 http-server
 		fx_module.FxGinModule(debug),
-
+		// mysql
 		fx_module.FXSqlModule,
 		// nacos
 		fx_module.FXNacosModule,
-
+		// websocket
+		fx_module.FxWsModule,
 		// 生命周期
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数

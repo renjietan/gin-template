@@ -1,27 +1,16 @@
 package logger
 
 import (
-	"bytes"
-	"encoding/json"
 	"io"
 	"os"
 	"path"
 	"time"
 
 	"example.com/t/types"
-	"example.com/t/utility"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
 	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
-
-//type  struct{}
-//
-//func (myClock) Now() time.Time {
-//	now := time.Now()
-//	fmt.Printf("[Clock.Now] %v, Location: %s\n", now, now.Location())
-//	return now
-//}
 
 var GlobalLog *logrus.Logger // 全局logger实例，方便非DI场景使用
 
@@ -65,6 +54,7 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 		// 禁用排序
 		DisableSorting: true,
 	}})
+	// 启用调用者信息上报 (否则 CallerFirst 不生效)
 	GlobalLog = log
 	return log, nil
 }
@@ -74,18 +64,4 @@ func L() *logrus.Logger {
 		panic("logger 暂未初始化")
 	}
 	return GlobalLog
-}
-
-func BeautifyJsonStr(obj map[string]interface{}) string {
-	rawJSON, e := utility.MapToJsonStr(obj)
-	if e != nil {
-		panic(e.Error())
-	}
-	// 美化
-	var prettyJSON bytes.Buffer
-	err := json.Indent(&prettyJSON, []byte(rawJSON), "", "  ") // 前缀为空，缩进为两个空格
-	if err != nil {
-		panic(err.Error())
-	}
-	return prettyJSON.String()
 }

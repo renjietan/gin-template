@@ -57,15 +57,20 @@ func (l *FxLogger) LogEvent(event fxevent.Event) {
 		l.info["FunctionName"] = e.FunctionName
 		l.info["Method"] = e.Method
 	}
-	l.info["package"] = "fx_logger"
+
 	// 通过反射 获取 event 的名称，最终得到 英文字符
 	val := reflect.TypeOf(event)
 	if val.Kind() == reflect.Ptr {
 		val = val.Elem()
 	}
 	l.info["LifeCycleName"] = val.Name()
-	l.info["package"] = "fx_logger"
-	l.Logger.WithFields(l.info).Info(l.lifeCycleMame)
+	msg := BeautifyJsonStr(l.info)
+	//l.info["package"] = "fx_logger"
+	//l.info["package"] = "fx_logger"
+	l.Logger.WithFields(logrus.Fields{
+		"package": "fx_logger",
+		"msg":     msg,
+	}).Info(l.lifeCycleMame)
 }
 
 func (l *FxLogger) Info(msg string) {

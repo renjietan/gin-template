@@ -21,14 +21,6 @@ type ClientInfo struct {
 	info   string
 }
 
-type ErrorMsg struct {
-	Event string
-	Data  string
-	Title string
-	Error string
-}
-
-// WebSocketManager WebSocket 管理器
 type WebSocketManager struct {
 	// 所有连接的客户端
 	Clients map[*websocket.Conn]ClientInfo
@@ -46,7 +38,7 @@ type WebSocketManager struct {
 
 // NewWebSocketManager 创建并初始化 WebSocket 管理器
 func NewWebSocketManager(l *logrus.Logger) *WebSocketManager {
-	manager := &WebSocketManager{
+	return &WebSocketManager{
 		Clients:            make(map[*websocket.Conn]ClientInfo),
 		Broadcast_Msg_Chan: make(chan []byte, 256),
 		Register_Chan:      make(chan *websocket.Conn),
@@ -61,9 +53,6 @@ func NewWebSocketManager(l *logrus.Logger) *WebSocketManager {
 		},
 		l: l,
 	}
-	// 启动管理器协程
-	go manager.run()
-	return manager
 }
 
 // 客户端-新增
@@ -114,7 +103,10 @@ func (m *WebSocketManager) Close() {
 
 	// 关闭所有客户端连接
 	for conn := range m.Clients {
-		conn.Close()
+		err := conn.Close()
+		if err != nil {
+			m.l.Error(err.Error())
+		}
 		delete(m.Clients, conn)
 	}
 	close(m.Broadcast_Msg_Chan)
@@ -123,7 +115,7 @@ func (m *WebSocketManager) Close() {
 }
 
 // 主循环
-func (m *WebSocketManager) run() {
+func (m *WebSocketManager) Run() {
 	for {
 		select {
 		case conn := <-m.Register_Chan:

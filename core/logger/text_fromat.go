@@ -2,9 +2,11 @@ package logger
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"strings"
 
+	"example.com/t/utility"
 	"github.com/sirupsen/logrus"
 	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
@@ -47,4 +49,18 @@ func (f *LinePerFieldFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 	}
 
 	return buf.Bytes(), nil
+}
+
+func BeautifyJsonStr(obj map[string]interface{}) string {
+	rawJSON, e := utility.MapToJsonStr(obj)
+	if e != nil {
+		panic(e.Error())
+	}
+	// 美化
+	var prettyJSON bytes.Buffer
+	err := json.Indent(&prettyJSON, []byte(rawJSON), "", "  ") // 前缀为空，缩进为两个空格
+	if err != nil {
+		panic(err.Error())
+	}
+	return prettyJSON.String()
 }

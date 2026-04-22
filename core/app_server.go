@@ -19,12 +19,12 @@ type AppServer struct {
 }
 
 func NewAppServer(appConfig *types.AppConfig) *AppServer {
+	gin.DefaultWriter = logrus.StandardLogger().Out
 	gin.SetMode(gin.ReleaseMode)
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		fmt.Printf("endpoint %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
 	engine := gin.Default()
-
 	server := &http.Server{
 		Addr:           appConfig.Listen,
 		Handler:        engine,
