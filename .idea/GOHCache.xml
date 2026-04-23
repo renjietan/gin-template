@@ -329,6 +329,20 @@
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/../../study/Study4/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776923376327" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../study/Study4/utils/mySqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776926200127" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go">
           <value>
             <ScannedPath>
@@ -679,7 +693,7 @@
         <entry key="file://$PROJECT_DIR$/core/middlewave/GinLoggerMiddleWave.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776757450349" />
+              <option name="lastModified" value="1776907012246" />
             </ScannedPath>
           </value>
         </entry>
