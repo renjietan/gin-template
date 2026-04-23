@@ -129,13 +129,6 @@
             </set>
           </value>
         </entry>
-        <entry key="ErrorMsg">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/api/ws/index.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="ErrorResponse">
           <value>
             <set>
@@ -304,13 +297,6 @@
             </set>
           </value>
         </entry>
-        <entry key="test">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/test/index.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="timerCommand">
           <value>
             <set>
@@ -329,20 +315,6 @@
     </option>
     <option name="scannedPathMapping">
       <map>
-        <entry key="file://$PROJECT_DIR$/../../study/Study4/main.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776923376327" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/../../study/Study4/utils/mySqlite.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776926200127" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go">
           <value>
             <ScannedPath>
@@ -582,11 +554,10 @@
         <entry key="file://$PROJECT_DIR$/api/ws/index.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776851983458" />
+              <option name="lastModified" value="1776906525578" />
               <option name="schema">
                 <list>
                   <option value="ClientInfo" />
-                  <option value="ErrorMsg" />
                   <option value="WebSocketManager" />
                 </list>
               </option>
@@ -603,7 +574,7 @@
         <entry key="file://$PROJECT_DIR$/core/app_server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776742128305" />
+              <option name="lastModified" value="1776906525587" />
               <option name="schema">
                 <list>
                   <option value="AppServer" />
@@ -647,10 +618,17 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/wsModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776906525597" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/logger/fx_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776850334524" />
+              <option name="lastModified" value="1776906525604" />
               <option name="schema">
                 <list>
                   <option value="FxLogger" />
@@ -662,7 +640,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/gorm_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776757520595" />
+              <option name="lastModified" value="1776906525617" />
               <option name="schema">
                 <list>
                   <option value="GormLogger" />
@@ -674,26 +652,19 @@
         <entry key="file://$PROJECT_DIR$/core/logger/logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776827961679" />
+              <option name="lastModified" value="1776906525625" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/logger/text_fromat.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776304227940" />
+              <option name="lastModified" value="1776906525633" />
               <option name="schema">
                 <list>
                   <option value="LinePerFieldFormatter" />
                 </list>
               </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/core/middlewave/GinLoggerMiddleWave.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776907012246" />
             </ScannedPath>
           </value>
         </entry>
@@ -708,6 +679,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1776736724535" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/ginLoggerMiddleWave.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776907012246" />
             </ScannedPath>
           </value>
         </entry>
@@ -775,22 +753,10 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776759421875" />
+              <option name="lastModified" value="1776906525674" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/index.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776850166020" />
-              <option name="schema">
-                <list>
-                  <option value="test" />
                 </list>
               </option>
             </ScannedPath>
@@ -930,7 +896,6 @@
         <entry key="config_list_dto" value="ConfigListDTO" />
         <entry key="config_service" value="ConfigService" />
         <entry key="configs_dto" value="ConfigsDTO" />
-        <entry key="error_msg" value="ErrorMsg" />
         <entry key="error_response" value="ErrorResponse" />
         <entry key="fx_logger" value="FxLogger" />
         <entry key="gorm_logger" value="GormLogger" />
@@ -947,7 +912,6 @@
         <entry key="safe_map" value="SafeMap" />
         <entry key="status_response" value="StatusResponse" />
         <entry key="swagger_config" value="SwaggerConfig" />
-        <entry key="test" value="test" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
         <entry key="timer_info" value="timerInfo" />
@@ -960,6 +924,6 @@
         <entry key="ws_meta__file" value="WS_META_File" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1776849215100" />
+    <option name="lastTimeChecked" value="1776938430394" />
   </component>
 </project>
