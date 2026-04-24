@@ -614,7 +614,7 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/sqlModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776759397604" />
+              <option name="lastModified" value="1777010353975" />
             </ScannedPath>
           </value>
         </entry>
@@ -707,6 +707,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1776677098402" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/sql_driver/mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777010308255" />
             </ScannedPath>
           </value>
         </entry>

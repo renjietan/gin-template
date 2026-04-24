@@ -1,4 +1,4 @@
-package service
+package nacos
 
 import (
 	"example.com/t/types"

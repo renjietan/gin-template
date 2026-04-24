@@ -86,5 +86,5 @@ func (l *FxLogger) Warn(msg string) {
 }
 
 func (l *FxLogger) Error(msg string) {
-	l.Logger.Warn(msg)
+	l.Logger.Error(msg)
 }

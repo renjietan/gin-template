@@ -39,6 +39,7 @@ func NewAppLifeCycle() *AppLifecycle {
 }
 
 func main() {
+
 	configFile := os.Getenv("CONFIG_FILE")
 	if configFile == "" {
 		configFile = "config.toml"
@@ -54,9 +55,8 @@ func main() {
 	app := fx.New(
 		// 日志初始化
 		fx.Provide(logger.NewLogger),
-		// 注入 FX 日志管理器，转为 FX 服务
-		//fx.Provide(logger.NewFxLogger),
 		fx.WithLogger(func(l *logrus.Logger) fxevent.Logger {
+			// TODO: 此处还需优化
 			return &logger.FxLogger{
 				Logger: l,
 			}
@@ -66,7 +66,9 @@ func main() {
 		fx.Provide(func() *types.AppConfig {
 			config, err := core.LoadConfig(configFile, debug)
 			if err != nil {
-				log.Fatal(err)
+				// TODO：此处无法 使用 logrus ，
+				// 因为 logger.NewLogger 中引入了 AppConfig， 此处 引入 logrus  会导致循环依赖引入
+				log.Fatal("配置文件：读取失败")
 			}
 			config.Path = configFile
 			if debug {
@@ -78,7 +80,9 @@ func main() {
 		// 开启 http-server
 		fx_module.FxGinModule(debug),
 		// mysql
-		fx_module.FXSqlModule,
+		fx_module.FXMySqlModule,
+		// redis
+		fx_module.FxRedisModule,
 		// nacos
 		fx_module.FXNacosModule,
 		// websocket

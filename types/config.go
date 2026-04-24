@@ -15,6 +15,7 @@ type AppConfig struct {
 	LoggerConfig
 	UploadConfig
 	NacosConfig
+	RedisConfig
 }
 
 type MysqlConfig struct {
@@ -59,4 +60,13 @@ type NacosConfig struct {
 	Nacos_MaxBackups           int    `toml:"nacos_max_backups"`             // 保留的旧日志文件最大数量
 	Nacos_Compress             bool   `toml:"nacos_compress"`                // 是否使用本地时间格式化备份文件名
 	Nacos_LocalTime            bool   `toml:"nacos_local_time"`              // 是否压缩旧日志文件
+}
+
+type RedisConfig struct {
+	Redis_Host        string `toml:"redis_host"`
+	Redis_Port        int    `toml:"redis_port"`
+	Redis_Password    string `toml:"redis_password"`
+	Redis_DB          int    `toml:"redis_db"`
+	Redis_PoolSize    int    `toml:"redis_pool_size"`
+	Redis_PoolTimeout int    `toml:"redis_pool_timeout"`
 }

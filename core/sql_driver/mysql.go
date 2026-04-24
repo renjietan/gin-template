@@ -1,4 +1,4 @@
-package core
+package sql_driver
 
 import (
 	"time"
@@ -11,6 +11,25 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 )
+
+func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
+	template := `{{Username}}:{{Password}}@tcp({{Host}}:{{Port}})/{{DataBase}}?charset=utf8mb4&parseTime=True&loc=Local`
+	dns := utility.StringByTemplate(template, appConfig.MysqlConfig)
+	db, err := gorm.Open(mysql.Open(dns), config)
+	if err != nil {
+		return nil, err
+	}
+
+	sqlDB, err := db.DB()
+	if err != nil {
+		return nil, err
+	}
+
+	sqlDB.SetMaxIdleConns(32)
+	sqlDB.SetMaxOpenConns(512)
+	sqlDB.SetConnMaxLifetime(time.Hour)
+	return db, nil
+}
 
 // Gorm 日志
 func NewGormLogger(log *logrus.Logger) *logger.GormLogger {
@@ -31,23 +50,4 @@ func NewGormConfig(log *logrus.Logger) *gorm.Config {
 			SingularTable: false,  // 使用单数表名形式
 		},
 	}
-}
-
-func NewMysql(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
-	template := `{{Username}}:{{Password}}@tcp({{Host}}:{{Port}})/{{DataBase}}?charset=utf8mb4&parseTime=True&loc=Local`
-	dns := utility.StringByTemplate(template, appConfig.MysqlConfig)
-	db, err := gorm.Open(mysql.Open(dns), config)
-	if err != nil {
-		return nil, err
-	}
-
-	sqlDB, err := db.DB()
-	if err != nil {
-		return nil, err
-	}
-
-	sqlDB.SetMaxIdleConns(32)
-	sqlDB.SetMaxOpenConns(512)
-	sqlDB.SetConnMaxLifetime(time.Hour)
-	return db, nil
 }

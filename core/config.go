@@ -56,6 +56,14 @@ func NewDefaultConfig(debug bool) *types.AppConfig {
 			Nacos_Compress:             true,
 			Nacos_LocalTime:            true,
 		},
+		RedisConfig: types.RedisConfig{
+			Redis_Host:        "0.0.0.0",
+			Redis_Port:        6379,
+			Redis_Password:    "",
+			Redis_DB:          0,
+			Redis_PoolSize:    20,
+			Redis_PoolTimeout: 5,
+		},
 	}
 }
 
@@ -63,14 +71,12 @@ func LoadConfig(configFile string, debug bool) (*types.AppConfig, error) {
 	var config *types.AppConfig
 	_, err := os.Stat(configFile)
 	if err != nil {
-		//logger.Info("创建配置文件: ", configFile)
 		config = NewDefaultConfig(debug)
 		config.Path = configFile
 		err := SaveConfig(config)
 		if err != nil {
 			return nil, err
 		}
-
 		return config, nil
 	}
 	_, err = toml.DecodeFile(configFile, &config)
