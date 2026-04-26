@@ -22,18 +22,18 @@ func NewDefaultConfig() *types.AppConfig {
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
 		MysqlConfig: types.MysqlConfig{
-			Host:     "127.0.0.1",
-			Port:     "3306",
-			Username: "root",
-			Password: "123456",
-			DataBase: "springboot3",
+			MysqlHost:     "127.0.0.1",
+			MysqlPort:     "3306",
+			MysqlUsername: "root",
+			MysqlPassword: "123456",
+			MysqlDataBase: "springboot3",
 		},
 		LoggerConfig: types.LoggerConfig{
-			Level:  "debug",
-			MaxAge: 30 * 24 * time.Hour, // 保留30天
+			LoggerLevel:  "debug",
+			LoggerMaxAge: 30 * 24 * time.Hour, // 保留30天
 			//FilePath: "static/logs/app.log",
-			FilePath:     "static/logs/app",
-			RotationTime: 24 * time.Hour, // 每天切割
+			LoggerFilePath:     "static/logs/app",
+			LoggerRotationTime: 24 * time.Hour, // 每天切割
 		},
 		UploadConfig: types.UploadConfig{
 			UploadPath: "static/uploads",
@@ -70,8 +70,8 @@ func NewDefaultConfig() *types.AppConfig {
 			Redis_PoolTimeout: 5,
 		},
 		SqliteConfig: types.SqliteConfig{
-			Path:          filepath.Join(path_wd, "static", "db"),
-			EncryptionKey: "123456",
+			SqlitePath:          filepath.Join(path_wd, "static", "db"),
+			SqliteEncryptionKey: "123456",
 		},
 	}
 }

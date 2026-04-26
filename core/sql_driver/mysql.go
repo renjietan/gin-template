@@ -13,7 +13,7 @@ import (
 )
 
 func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
-	template := `{{Username}}:{{Password}}@tcp({{Host}}:{{Port}})/{{DataBase}}?charset=utf8mb4&parseTime=True&loc=Local`
+	template := `{{MysqlUsername}}:{{MysqlPassword}}@tcp({{MysqlHost}}:{{MysqlPort}})/{{MysqlDataBase}}?charset=utf8mb4&parseTime=True&loc=Local`
 	dns := utility.StringByTemplate(template, appConfig.MysqlConfig)
 	db, err := gorm.Open(mysql.Open(dns), config)
 	if err != nil {
@@ -31,7 +31,6 @@ func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, 
 	return db, nil
 }
 
-// Gorm 日志
 func NewGormLogger(log *logrus.Logger) *logger.GormLogger {
 	gormLogger := &logger.GormLogger{
 		Logger:        log,
@@ -40,7 +39,6 @@ func NewGormLogger(log *logrus.Logger) *logger.GormLogger {
 	return gormLogger
 }
 
-// Gorm 配置
 func NewGormConfig(log *logrus.Logger) *gorm.Config {
 	return &gorm.Config{
 		Logger: NewGormLogger(log),
