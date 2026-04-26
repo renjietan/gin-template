@@ -90,7 +90,7 @@ func main() {
 		// mysql
 		fx_module.FXMySqlModule,
 		// sqlite
-		fx_module.FXSQLiteModule,
+		//fx_module.FXSQLiteModule,
 		// redis
 		fx_module.FxRedisModule,
 		// nacos
