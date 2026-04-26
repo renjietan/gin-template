@@ -10,13 +10,13 @@ import (
 )
 
 func NewRedisDriver(app_config *types.AppConfig) (*redis.Client, error) {
-	url := fmt.Sprintf("%s:%d", app_config.Redis_Host, app_config.Redis_Port)
+	url := fmt.Sprintf("%s:%d", app_config.Redis.Host, app_config.Redis.Port)
 	client := redis.NewClient(&redis.Options{
 		Addr:        url,
-		Password:    app_config.RedisConfig.Redis_Password,
-		DB:          app_config.RedisConfig.Redis_DB,
-		PoolSize:    app_config.RedisConfig.Redis_PoolSize,
-		PoolTimeout: time.Duration(app_config.RedisConfig.Redis_PoolTimeout) * time.Second,
+		Password:    app_config.Redis.Password,
+		DB:          app_config.Redis.DB,
+		PoolSize:    app_config.Redis.PoolSize,
+		PoolTimeout: time.Duration(app_config.Redis.PoolTimeout) * time.Second,
 	})
 	_, err := client.Ping(context.Background()).Result()
 	if err != nil {

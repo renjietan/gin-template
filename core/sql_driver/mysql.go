@@ -13,8 +13,8 @@ import (
 )
 
 func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
-	template := `{{MysqlUsername}}:{{MysqlPassword}}@tcp({{MysqlHost}}:{{MysqlPort}})/{{MysqlDataBase}}?charset=utf8mb4&parseTime=True&loc=Local`
-	dns := utility.StringByTemplate(template, appConfig.MysqlConfig)
+	template := `{{Username}}:{{Password}}@tcp({{Host}}:{{Port}})/{{Database}}?charset=utf8mb4&parseTime=True&loc=Local`
+	dns := utility.StringByTemplate(template, appConfig.Mysql)
 	db, err := gorm.Open(mysql.Open(dns), config)
 	if err != nil {
 		return nil, err

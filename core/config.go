@@ -11,7 +11,7 @@ import (
 )
 
 func NewDefaultConfig() *types.AppConfig {
-	path_wd, err := os.Getwd()
+	pathWd, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
@@ -21,57 +21,56 @@ func NewDefaultConfig() *types.AppConfig {
 		StaticDir: "./static",
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
-		MysqlConfig: types.MysqlConfig{
-			MysqlHost:     "127.0.0.1",
-			MysqlPort:     "3306",
-			MysqlUsername: "root",
-			MysqlPassword: "123456",
-			MysqlDataBase: "springboot3",
+		Mysql: types.MysqlConfig{
+			Host:     "127.0.0.1",
+			Port:     "3306",
+			Username: "root",
+			Password: "123456",
+			Database: "springboot3",
 		},
-		LoggerConfig: types.LoggerConfig{
-			LoggerLevel:  "debug",
-			LoggerMaxAge: 30 * 24 * time.Hour, // 保留30天
-			//FilePath: "static/logs/app.log",
-			LoggerFilePath:     "static/logs/app",
-			LoggerRotationTime: 24 * time.Hour, // 每天切割
+		Logger: types.LoggerConfig{
+			Level:        "debug",
+			MaxAge:       30 * 24 * time.Hour, // 保留30天
+			Filepath:     filepath.Join(pathWd, "static", "logs", "app"),
+			RotationTime: 24 * time.Hour, // 每天切割
 		},
-		UploadConfig: types.UploadConfig{
-			UploadPath: "static/uploads",
+		Upload: types.UploadConfig{
+			Filepath: filepath.Join(pathWd, "static", "uploads"),
 		},
-		NacosConfig: types.NacosConfig{
-			Nacos_Host:                 "0.0.0.0",
-			Nacos_Port:                 8848,
-			Nacos_GrpcPort:             9848,
-			Nacos_ContextPath:          "/nacos",
-			Nacos_UserName:             "nacos",
-			Nacos_PassWord:             "123456",
-			Nacos_GroupName:            "DEFAULT_GROUP",
-			Nacos_NameSpaceId:          "nacos-namespace-id",
-			Nacos_DataId:               "nacos-dataId",
-			Nacos_LogDir:               "/static/logs/nacos/log",
-			Nacos_CacheDir:             "/static/logs/nacos/cache",
-			Nacos_NotLoadCacheAtStart:  true,
-			Nacos_RotateTime:           "24h",
-			Nacos_MaxAge:               30,
-			Nacos_MaxSize:              100,
-			Nacos_LogLevel:             "info",
-			Nacos_TimeoutMs:            500,
-			Nacos_UpdateCacheWhenEmpty: true,
-			Nacos_MaxBackups:           30,
-			Nacos_Compress:             true,
-			Nacos_LocalTime:            true,
+		Ns: types.NsConfig{
+			Host:                 "0.0.0.0",
+			Port:                 8848,
+			GrpcPort:             9848,
+			ContextPath:          "/nacos",
+			UserName:             "nacos",
+			PassWord:             "123456",
+			GroupName:            "DEFAULT_GROUP",
+			NameSpaceId:          "nacos-namespace-id",
+			DataId:               "nacos-dataId",
+			LogDir:               filepath.Join(pathWd, "static", "nacos", "log"),
+			CacheDir:             filepath.Join(pathWd, "static", "nacos", "cache"),
+			NotLoadCacheAtStart:  true,
+			RotateTime:           "24h",
+			MaxAge:               30,
+			MaxSize:              100,
+			LogLevel:             "info",
+			TimeoutMs:            500,
+			UpdateCacheWhenEmpty: true,
+			MaxBackups:           30,
+			Compress:             true,
+			LocalTime:            true,
 		},
-		RedisConfig: types.RedisConfig{
-			Redis_Host:        "0.0.0.0",
-			Redis_Port:        6379,
-			Redis_Password:    "",
-			Redis_DB:          0,
-			Redis_PoolSize:    20,
-			Redis_PoolTimeout: 5,
+		Redis: types.RedisConfig{
+			Host:        "0.0.0.0",
+			Port:        6379,
+			Password:    "",
+			DB:          0,
+			PoolSize:    20,
+			PoolTimeout: 5,
 		},
-		SqliteConfig: types.SqliteConfig{
-			SqlitePath:          filepath.Join(path_wd, "static", "db"),
-			SqliteEncryptionKey: "123456",
+		Sqlite: types.SqliteConfig{
+			BasePath:            filepath.Join(pathWd, "static", "db"),
+			SqliteEncryptionKey: "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99",
 		},
 	}
 }

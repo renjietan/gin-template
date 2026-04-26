@@ -5,6 +5,6 @@ import (
 	"go.uber.org/fx"
 )
 
-var FXSqlliteModule = fx.Module("fx-sqlite-module",
+var FXSQLiteModule = fx.Module("fx-sqlite-module",
 	fx.Provide(sql_driver.NewSqliteDriver),
 )

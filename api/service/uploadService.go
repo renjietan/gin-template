@@ -31,6 +31,6 @@ func (service *UploadService) Upload(c *gin.Context, file *multipart.FileHeader)
 	defer service.lock.Unlock()
 	ext := filepath.Ext(file.Filename)
 	newFileName := fmt.Sprintf("%d_%s%s", time.Now().Unix(), "upload", ext)
-	savePath := filepath.Join(service.config.UploadPath, newFileName)
+	savePath := filepath.Join(service.config.Upload.Filepath, newFileName)
 	return c.SaveUploadedFile(file, savePath)
 }

@@ -89,7 +89,8 @@ func main() {
 		fx_module.FxGinModule(debug),
 		// mysql
 		fx_module.FXMySqlModule,
-		fx_module.FXSqlliteModule,
+		// sqlite
+		fx_module.FXSQLiteModule,
 		// redis
 		fx_module.FxRedisModule,
 		// nacos
