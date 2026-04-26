@@ -36,10 +36,14 @@ func NewSqliteDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB,
 	if err != nil {
 		return nil, err
 	}
+	test(db)
+	return db, nil
+}
+
+func test(db *gorm.DB) {
 	db.AutoMigrate(&User{})
 	db.Create(&User{Name: "Alice"})
 	var user User
 	db.First(&user)
 	println("查询结果:", user.Name)
-	return db, nil
 }
