@@ -195,25 +195,27 @@ func (m *WebSocketManager) read(conn *websocket.Conn) {
 
 // TODO：发送时 的数据处理（没写完）
 func (m *WebSocketManager) handleRecv(message string) (s string, err any) {
-	rec_json, err := utility.JsonStrToMap(string(message))
+	recJson := map[string]interface{}{}
+	err = utility.Interface2Interface(string(message), &m)
 	if err != nil {
 		return "", err
 	}
-	e := rec_json["Event"]
-	data_str := rec_json["Data"]
+	e := recJson["Event"]
+	dataStr := recJson["Data"]
 	switch e {
 	case enum.WS_EVENT_PING:
-		str, err := utility.MapToJsonStr(map[string]any{
+
+		str := utility.Interface2String(&map[string]any{
 			"Event": enum.WS_EVENT_PONG,
-			"Data":  data_str,
+			"Data":  dataStr,
 			"type":  enum.WS_TYPE_SERVER,
 		})
-		return str, err
+		return str, nil
 	default:
-		return utility.MapToJsonStr(map[string]any{
+		return utility.Interface2String(&map[string]any{
 			"Event": enum.WS_EVENT_UNKNOWN,
-			"Data":  data_str,
+			"Data":  dataStr,
 			"type":  enum.WS_TYPE_SERVER,
-		})
+		}), nil
 	}
 }

@@ -92,7 +92,8 @@ func (ns *NacosSerivce) LoadAndWatchConfig() Nacos_err {
 	if err != nil {
 		return parseInfo(ns.app_config, "首次获取配置失败", err.Error())
 	}
-	s, parseErr := utility.JsonStrToMap(content)
+	s := map[string]interface{}{}
+	parseErr := utility.Interface2Interface(content, &s)
 	if parseErr != nil {
 		return parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
 	}
@@ -102,11 +103,10 @@ func (ns *NacosSerivce) LoadAndWatchConfig() Nacos_err {
 		DataId: dataId,
 		Group:  groupName,
 		OnChange: func(namespace, group, dataId, data string) {
-			s, parseErr := utility.JsonStrToMap(content)
-			if parseErr != nil {
-				//return parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
+			err := utility.Interface2Interface(content, &ns.Contents)
+			if err != nil {
+				parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
 			}
-			ns.Contents = s
 		},
 	})
 	if err != nil {

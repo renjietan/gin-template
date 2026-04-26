@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strconv"
 	"syscall"
 	"time"
@@ -38,8 +39,14 @@ func NewAppLifeCycle() *AppLifecycle {
 	return &AppLifecycle{}
 }
 
-func main() {
+func getCurrentPath() string {
+	if ex, err := os.Executable(); err == nil {
+		return filepath.Dir(ex)
+	}
+	return "./"
+}
 
+func main() {
 	configFile := os.Getenv("CONFIG_FILE")
 	if configFile == "" {
 		configFile = "config.toml"
@@ -64,13 +71,14 @@ func main() {
 		}),
 		// 初始化应用配置
 		fx.Provide(func() *types.AppConfig {
-			config, err := core.LoadConfig(configFile, debug)
+			config, err := core.LoadConfig(configFile)
 			if err != nil {
-				// TODO：此处无法 使用 logrus ，
+				// 此处无法 使用 logrus
 				// 因为 logger.NewLogger 中引入了 AppConfig， 此处 引入 logrus  会导致循环依赖引入
 				log.Fatal("配置文件：读取失败")
 			}
 			config.Path = configFile
+			config.Debug = debug
 			if debug {
 				_ = core.SaveConfig(config)
 			}
@@ -81,6 +89,7 @@ func main() {
 		fx_module.FxGinModule(debug),
 		// mysql
 		fx_module.FXMySqlModule,
+		fx_module.FXSqlliteModule,
 		// redis
 		fx_module.FxRedisModule,
 		// nacos
@@ -116,11 +125,10 @@ func main() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-
 	// 关闭应用程序
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := app.Stop(ctx); err != nil {
-		log.Fatal("任务停止失败（main.go）:", err)
+		logger.L().Fatal(err)
 	}
 }

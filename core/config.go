@@ -3,15 +3,20 @@ package core
 import (
 	"bytes"
 	"os"
+	"path/filepath"
 	"time"
 
 	"example.com/t/types"
 	"github.com/BurntSushi/toml"
 )
 
-func NewDefaultConfig(debug bool) *types.AppConfig {
+func NewDefaultConfig() *types.AppConfig {
+	path_wd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
 	return &types.AppConfig{
-		Debug:     debug,
+		Debug:     false,
 		AppName:   "gin-template",
 		StaticDir: "./static",
 		StaticUrl: "http://localhost:8080/static",
@@ -64,14 +69,18 @@ func NewDefaultConfig(debug bool) *types.AppConfig {
 			Redis_PoolSize:    20,
 			Redis_PoolTimeout: 5,
 		},
+		SqliteConfig: types.SqliteConfig{
+			Path:          filepath.Join(path_wd, "static", "db"),
+			EncryptionKey: "123456",
+		},
 	}
 }
 
-func LoadConfig(configFile string, debug bool) (*types.AppConfig, error) {
+func LoadConfig(configFile string) (*types.AppConfig, error) {
 	var config *types.AppConfig
 	_, err := os.Stat(configFile)
 	if err != nil {
-		config = NewDefaultConfig(debug)
+		config = NewDefaultConfig()
 		config.Path = configFile
 		err := SaveConfig(config)
 		if err != nil {

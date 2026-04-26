@@ -15,7 +15,8 @@ import (
  * @PARAM
  * @RETURN
  **/
-func NewSqliteDriver(appConfig *types.AppConfig) {
-	db_file := utility.Tern(appConfig.Debug == true, "sqlite3_dev.db", "sqlite3_prod.db")
-	fmt.Println(db_file)
+func NewSqliteDriver(appConfig *types.AppConfig) (string, error) {
+	dbFile := utility.Tern(appConfig.Debug == true, "sqlite3_dev.db", "sqlite3_prod.db")
+	fmt.Println("dbFile", dbFile)
+	return "dbFile", nil
 }

@@ -52,15 +52,12 @@ func (f *LinePerFieldFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 }
 
 func BeautifyJsonStr(obj map[string]interface{}) string {
-	rawJSON, e := utility.MapToJsonStr(obj)
-	if e != nil {
-		panic(e.Error())
-	}
+	rawJSON := utility.Interface2String(&obj)
 	// 美化
 	var prettyJSON bytes.Buffer
-	err := json.Indent(&prettyJSON, []byte(rawJSON), "", "  ") // 前缀为空，缩进为两个空格
+	err := json.Indent(&prettyJSON, []byte(rawJSON), "", "") // 前缀为空，缩进为两个空格
 	if err != nil {
-		panic(err.Error())
+		fmt.Println("BeautifyJsonStr error:", err)
 	}
 	return prettyJSON.String()
 }

@@ -16,8 +16,8 @@ type AppConfig struct {
 	UploadConfig
 	NacosConfig
 	RedisConfig
+	SqliteConfig
 }
-
 type MysqlConfig struct {
 	Host     string
 	Port     string
@@ -26,7 +26,11 @@ type MysqlConfig struct {
 	DataBase string
 }
 
-// Logger Config 日志配置
+type SqliteConfig struct {
+	Path          string
+	EncryptionKey string
+}
+
 type LoggerConfig struct {
 	Level        string        // 日志级别 debug/info/warn/error
 	FilePath     string        // 日志文件路径，支持时间格式，如 "logs/app-%Y%m%d.log"
