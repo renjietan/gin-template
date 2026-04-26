@@ -6,7 +6,8 @@ import (
 
 	"example.com/t/types"
 	"example.com/t/utility"
-	sqlcipher "github.com/gdanko/gorm-sqlcipher"
+	//sqlcipher "github.com/gdanko/gorm-sqlcipher"
+	sqliteEncrypt "github.com/ShaoQ1ang/gorm-sqlite-cipher"
 	//"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -19,16 +20,26 @@ import (
  * @PARAM
  * @RETURN
  **/
+type User struct {
+	ID   uint
+	Name string
+}
+
 func NewSqliteDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
-	//_pragma_cipher_page_size=4096
-	params := fmt.Sprintf("?_pragma_key=x'%s'&_pragma_cipher_compatibility=3", appConfig.Sqlite.SqliteEncryptionKey)
-	dbFileName := utility.Tern(appConfig.Debug == false, "dev.db", "prod.db"+params)
+	// _pragma_cipher_page_size=4096
+	// _pragma_cipher_compatibility=3
+	params := fmt.Sprintf("?_pragma_key=x'%s'&_pragma_cipher_page_size=4096", appConfig.Sqlite.SqliteEncryptionKey)
+	dbFileName := utility.Tern(appConfig.Debug, "dev.db", "prod.db"+params)
 	dbFullPath := filepath.Join(appConfig.Sqlite.BasePath, appConfig.AppName+"-"+dbFileName.(string))
-	//db, err := gorm.Open(sqlite.Open(dns), config)
 	//db, err := gorm.Open(sqlite.Open(dbFullPath), config)
-	db, err := gorm.Open(sqlcipher.Open(dbFullPath), config)
+	db, err := gorm.Open(sqliteEncrypt.Open(dbFullPath), config)
 	if err != nil {
 		return nil, err
 	}
+	db.AutoMigrate(&User{})
+	db.Create(&User{Name: "Alice"})
+	var user User
+	db.First(&user)
+	println("查询结果:", user.Name)
 	return db, nil
 }

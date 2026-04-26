@@ -4,9 +4,9 @@ go 1.25.5
 
 require (
 	github.com/BurntSushi/toml v1.6.0
+	github.com/ShaoQ1ang/gorm-sqlite-cipher v0.0.0-20250226022537-621ed547f915
 	github.com/bytedance/gopkg v0.1.4
 	github.com/elliotchance/orderedmap/v3 v3.1.0
-	github.com/gdanko/gorm-sqlcipher v0.0.0-20240818172314-97e237fc6bca
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/goccy/go-json v0.10.6
@@ -93,7 +93,7 @@ require (
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/mutecomm/go-sqlcipher v0.0.0-20190227152316-55dbde17881f // indirect
+	github.com/mutecomm/go-sqlcipher/v4 v4.4.2 // indirect
 	github.com/onsi/gomega v1.39.1 // indirect
 	github.com/orcaman/concurrent-map v0.0.0-20210501183033-44dafcb38ecc // indirect
 	github.com/pelletier/go-toml/v2 v2.3.0 // indirect
