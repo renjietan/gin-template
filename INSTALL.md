@@ -42,5 +42,3 @@ go get github.com/x-cray/logrus-prefixed-formatter
   go get -u github.com/nacos-group/nacos-sdk-go/v2
 - 注意：
   下载完成后，需要执行 go mod tidy
-
-docker run -d  -p 9848:9848 -p 7848:7848 -p 8848:8848 -e MODE=standalone -v E:\docker-volumes\nacos\init.d\custom.properties:/home/nacos/init.d\custom.properties -v E:\docker-volumes\nacos\logs:/home/nacos/logs --restart always --name nacos nacos/nacos-server
