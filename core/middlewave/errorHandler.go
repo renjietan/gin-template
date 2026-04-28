@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"runtime/debug"
 
+	"example.com/t/core/logger"
 	"example.com/t/types"
-	"github.com/bytedance/gopkg/util/logger"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +13,7 @@ import (
 func ErrorHandlerMiddleWave(c *gin.Context) {
 	defer func() {
 		if r := recover(); r != nil {
-			logger.Errorf("errorHandler 异常捕获: %v", r)
+			logger.L().Errorf("errorHandler 异常捕获: %v", r)
 			debug.PrintStack()
 			c.JSON(http.StatusBadRequest, types.Response{Code: types.Failed, Message: types.ErrorMsg})
 			c.Abort()

@@ -42,3 +42,6 @@ go get github.com/x-cray/logrus-prefixed-formatter
   go get -u github.com/nacos-group/nacos-sdk-go/v2
 - 注意：
   下载完成后，需要执行 go mod tidy
+
+### sqlite 加密
+go get -u "github.com/ShaoQ1ang/gorm-sqlite-cipher"

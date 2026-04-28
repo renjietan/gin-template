@@ -14,7 +14,7 @@ var FXApiModule = fx.Module("fx-api-module",
 	fx.Invoke(func(appserver *core.AppServer) { // swagger 路由
 		appserver.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		// 根据环境变量来判断是否需要 禁用 swagger
-		appserver.Engine.GET("/swagger1/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "APP_DEBUG"))
+		//appserver.Engine.GET("/swagger1/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "APP_DEBUG"))
 	}),
 	fx.Provide(service.NewUploadService), // 图片上传
 	// 模块 - config

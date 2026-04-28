@@ -97,7 +97,7 @@
         <entry key="ConfigDetailsService">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/service/ConfigDetailsService.go" />
+              <option value="file://$PROJECT_DIR$/api/service/configDetailsService.go" />
             </set>
           </value>
         </entry>
@@ -188,7 +188,7 @@
         <entry key="NacosSerivce">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/service/nacosService.go" />
+              <option value="file://$PROJECT_DIR$/core/nacos/nacos.go" />
             </set>
           </value>
         </entry>
@@ -203,6 +203,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/types/Response.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="RedisConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
             </set>
           </value>
         </entry>
@@ -266,6 +273,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/api/service/uploadService.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/sql_driver/sqlite.go" />
             </set>
           </value>
         </entry>
@@ -453,7 +467,7 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/api/service/ConfigDetailsService.go">
+        <entry key="file://$PROJECT_DIR$/api/service/configDetailsService.go">
           <value>
             <ScannedPath>
               <option name="lastModified" value="1776677097975" />
@@ -484,18 +498,6 @@
               <option name="schema">
                 <list>
                   <option value="MigrationService" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/api/service/nacosService.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776840823951" />
-              <option name="schema">
-                <list>
-                  <option value="NacosSerivce" />
                 </list>
               </option>
             </ScannedPath>
@@ -574,7 +576,7 @@
         <entry key="file://$PROJECT_DIR$/core/app_server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525587" />
+              <option name="lastModified" value="1777282394585" />
               <option name="schema">
                 <list>
                   <option value="AppServer" />
@@ -586,35 +588,56 @@
         <entry key="file://$PROJECT_DIR$/core/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776826914015" />
+              <option name="lastModified" value="1777014711678" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/cron/cron.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777277678659" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/apiModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776757675781" />
+              <option name="lastModified" value="1777280076688" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/ginModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776757825115" />
+              <option name="lastModified" value="1777280179735" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/nacosModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776828095076" />
+              <option name="lastModified" value="1777011604981" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/redisModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777017946509" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/sqlModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777010353975" />
+              <option name="lastModified" value="1777013482526" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/sqliteModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777280769837" />
             </ScannedPath>
           </value>
         </entry>
@@ -628,7 +651,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/fx_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525604" />
+              <option name="lastModified" value="1777022322531" />
               <option name="schema">
                 <list>
                   <option value="FxLogger" />
@@ -652,7 +675,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525625" />
+              <option name="lastModified" value="1777024064601" />
             </ScannedPath>
           </value>
         </entry>
@@ -671,14 +694,14 @@
         <entry key="file://$PROJECT_DIR$/core/middlewave/corsMiddleware.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776736740208" />
+              <option name="lastModified" value="1777339458525" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/middlewave/errorHandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776736724535" />
+              <option name="lastModified" value="1777339274560" />
             </ScannedPath>
           </value>
         </entry>
@@ -703,17 +726,41 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/mysql.go">
+        <entry key="file://$PROJECT_DIR$/core/nacos/nacos.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098402" />
+              <option name="lastModified" value="1777011605001" />
+              <option name="schema">
+                <list>
+                  <option value="NacosSerivce" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/redis_drivers/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777012563070" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/sql_driver/mysql.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777010308255" />
+              <option name="lastModified" value="1777012214194" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/sql_driver/sqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777280783745" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -760,7 +807,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525674" />
+              <option name="lastModified" value="1777280161359" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
@@ -785,7 +832,7 @@
         <entry key="file://$PROJECT_DIR$/types/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776826033864" />
+              <option name="lastModified" value="1777012296558" />
               <option name="schema">
                 <list>
                   <option value="AppConfig" />
@@ -793,6 +840,7 @@
                   <option value="LoggerConfig" />
                   <option value="UploadConfig" />
                   <option value="NacosConfig" />
+                  <option value="RedisConfig" />
                 </list>
               </option>
             </ScannedPath>
@@ -914,6 +962,7 @@
         <entry key="nacos_serivce" value="NacosSerivce" />
         <entry key="pager_dto" value="PagerDTO" />
         <entry key="pagination_response" value="PaginationResponse" />
+        <entry key="redis_config" value="RedisConfig" />
         <entry key="reset_options" value="resetOptions" />
         <entry key="response" value="Response" />
         <entry key="safe_map" value="SafeMap" />
@@ -926,11 +975,12 @@
         <entry key="updates_config_dto" value="UpdatesConfigDTO" />
         <entry key="upload_config" value="UploadConfig" />
         <entry key="upload_service" value="UploadService" />
+        <entry key="user" value="User" />
         <entry key="web_socket_manager" value="WebSocketManager" />
         <entry key="ws_client_count_response" value="WsClientCountResponse" />
         <entry key="ws_meta__file" value="WS_META_File" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1776938430394" />
+    <option name="lastTimeChecked" value="1777255632225" />
   </component>
 </project>

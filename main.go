@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"strconv"
 	"syscall"
 	"time"
@@ -37,13 +36,6 @@ func (l *AppLifecycle) OnStop(context.Context) error {
 
 func NewAppLifeCycle() *AppLifecycle {
 	return &AppLifecycle{}
-}
-
-func getCurrentPath() string {
-	if ex, err := os.Executable(); err == nil {
-		return filepath.Dir(ex)
-	}
-	return "./"
 }
 
 func main() {
@@ -86,7 +78,7 @@ func main() {
 		}),
 
 		// 开启 http-server
-		fx_module.FxGinModule(debug),
+		fx_module.FxGinModule,
 		// mysql
 		fx_module.FXMySqlModule,
 		// sqlite

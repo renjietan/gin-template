@@ -14,12 +14,12 @@ log_dir = ""
 
 [Logger]
   level = "debug"
-  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\logs\\app"
+  file_path = "D:\\work\\go\\template\\gin-template\\static\\logs\\app"
   max_age = "720h0m0s"
   rotation_time = "24h0m0s"
 
 [Upload]
-  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\uploads"
+  file_path = "D:\\work\\go\\template\\gin-template\\static\\uploads"
 
 [Ns]
   host = "0.0.0.0"
@@ -31,8 +31,8 @@ log_dir = ""
   group_name = "DEFAULT_GROUP"
   namespaceId = "nacos-namespace-id"
   dataId = "nacos-dataId"
-  log_dir = "D:\\work\\go\\template\\sever\\gin-template\\static\\nacos\\log"
-  cache_dir = "D:\\work\\go\\template\\sever\\gin-template\\static\\nacos\\cache"
+  log_dir = "D:\\work\\go\\template\\gin-template\\static\\nacos\\log"
+  cache_dir = "D:\\work\\go\\template\\gin-template\\static\\nacos\\cache"
   not_load_cache_as_start = true
   rotate_time = "24h"
   max_age = 30
@@ -53,5 +53,5 @@ log_dir = ""
   pool_timeout = 5
 
 [Sqlite]
-  base_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\db"
+  base_path = "D:\\work\\go\\template\\gin-template\\static\\db"
   sqlite_encryption_key = "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"

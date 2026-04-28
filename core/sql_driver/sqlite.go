@@ -2,6 +2,7 @@ package sql_driver
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"example.com/t/types"
@@ -12,32 +13,25 @@ import (
 	"gorm.io/gorm"
 )
 
-/**
- * @FILE   sqlite
-* @AUTHOR TAN
- * @DESCRIPTION
- * @DATE 14:02:43 CST 2026-04-24
- * @PARAM
- * @RETURN
- **/
-type User struct {
-	ID   uint
-	Name string
-}
-
 func NewSqliteDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
-	// _pragma_cipher_page_size=4096
 	// _pragma_cipher_compatibility=3
 	params := fmt.Sprintf("?_pragma_key=%s&_pragma_cipher_page_size=4096", appConfig.Sqlite.SqliteEncryptionKey)
 	dbFileName := utility.Tern(appConfig.Debug, "dev.db", "prod.db"+params)
+	if err := os.MkdirAll(appConfig.Sqlite.BasePath, 0777); err != nil {
+		panic("NewSqliteDriver: " + err.Error())
+	}
 	dbFullPath := filepath.Join(appConfig.Sqlite.BasePath, appConfig.AppName+"-"+dbFileName.(string))
 	//db, err := gorm.Open(sqlite.Open(dbFullPath), config)
 	db, err := gorm.Open(sqliteEncrypt.Open(dbFullPath), config)
 	if err != nil {
 		return nil, err
 	}
-	test(db)
 	return db, nil
+}
+
+type User struct {
+	ID   uint
+	Name string
 }
 
 func test(db *gorm.DB) {

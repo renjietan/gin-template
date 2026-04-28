@@ -9,7 +9,6 @@ import (
 	"example.com/t/core/middlewave"
 	"example.com/t/types"
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
 )
 
 type AppServer struct {
@@ -19,8 +18,9 @@ type AppServer struct {
 }
 
 func NewAppServer(appConfig *types.AppConfig) *AppServer {
-	gin.DefaultWriter = logrus.StandardLogger().Out
+	//gin.DefaultWriter = logrus.StandardLogger().Out
 	gin.SetMode(gin.ReleaseMode)
+	gin.ForceConsoleColor()
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		fmt.Printf("endpoint %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
@@ -65,7 +65,7 @@ func (s *AppServer) Middlewares() {
 	s.Engine.Static("/static", s.Config.StaticDir)
 }
 
-func (s *AppServer) Run(debug bool, log *logrus.Logger) {
+func (s *AppServer) Run() {
 	// 注意：这里使用协程,
 	// ListenAndServe 会阻塞 main 主协程，内部会启动一个循环，持续接受和处理连接
 	go func() {

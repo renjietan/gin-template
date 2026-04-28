@@ -21,7 +21,7 @@ func CorsMiddleWave() gin.HandlerFunc {
 
 		c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
 		// 允许跨域设置可以返回其他子段，可以自定义字段
-		c.Header("Access-Control-Allow-Headers", "Authorization, Body-Length, Body-Type, Admin-Authorization,content-type")
+		c.Header("Access-Control-Allow-Headers", "Authorization, Body-Length, Body-Type, X-CSRF-Token,content-type")
 		// 注意：允许浏览器（客户端）可以解析的头部
 		c.Header("Access-Control-Expose-Headers", "Body-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers")
 		// 设置缓存时间
@@ -30,7 +30,7 @@ func CorsMiddleWave() gin.HandlerFunc {
 		c.Header("Access-Control-Allow-Credentials", "true")
 
 		if method == http.MethodOptions {
-			c.JSON(http.StatusOK, "success!")
+			c.AbortWithStatus(http.StatusNoContent)
 		}
 
 		defer func() {
