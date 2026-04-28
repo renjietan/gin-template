@@ -55,7 +55,7 @@ func main() {
 		// 日志初始化
 		fx.Provide(logger.NewLogger),
 		fx.WithLogger(func(l *logrus.Logger) fxevent.Logger {
-			// TODO: 此处还需优化
+			// TODO: 此处可能还需优化
 			return &logger.FxLogger{
 				Logger: l,
 			}
@@ -89,6 +89,8 @@ func main() {
 		fx_module.FXNacosModule,
 		// websocket
 		fx_module.FxWsModule,
+		// cron
+		fx_module.FXCronModule,
 		// 生命周期
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数

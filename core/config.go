@@ -22,11 +22,25 @@ func NewDefaultConfig() *types.AppConfig {
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
 		Mysql: types.MysqlConfig{
+			Enable:   true,
 			Host:     "127.0.0.1",
 			Port:     "3306",
 			Username: "root",
 			Password: "123456",
 			Database: "springboot3",
+		},
+		Sqlite: types.SqliteConfig{
+			Enable:              true,
+			BasePath:            filepath.Join(pathWd, "static", "db"),
+			SqliteEncryptionKey: "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99",
+		},
+		Redis: types.RedisConfig{
+			Host:        "0.0.0.0",
+			Port:        6379,
+			Password:    "",
+			DB:          0,
+			PoolSize:    20,
+			PoolTimeout: 5,
 		},
 		Logger: types.LoggerConfig{
 			Level:        "debug",
@@ -59,18 +73,6 @@ func NewDefaultConfig() *types.AppConfig {
 			MaxBackups:           30,
 			Compress:             true,
 			LocalTime:            true,
-		},
-		Redis: types.RedisConfig{
-			Host:        "0.0.0.0",
-			Port:        6379,
-			Password:    "",
-			DB:          0,
-			PoolSize:    20,
-			PoolTimeout: 5,
-		},
-		Sqlite: types.SqliteConfig{
-			BasePath:            filepath.Join(pathWd, "static", "db"),
-			SqliteEncryptionKey: "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99",
 		},
 	}
 }

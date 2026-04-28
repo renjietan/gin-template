@@ -6,11 +6,25 @@ listen = "0.0.0.0:3344"
 log_dir = ""
 
 [Mysql]
+  enable = true
   host = "127.0.0.1"
   port = "3306"
   username = "root"
   password = "123456"
   data_base = "springboot3"
+
+[Sqlite]
+  enable = true
+  base_path = "D:\\work\\go\\template\\gin-template\\static\\db"
+  sqlite_encryption_key = "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"
+
+[Redis]
+  host = "0.0.0.0"
+  port = 6379
+  password = ""
+  db = 0
+  pool_size = 20
+  pool_timeout = 5
 
 [Logger]
   level = "debug"
@@ -43,15 +57,3 @@ log_dir = ""
   max_backups = 30
   compress = true
   local_time = true
-
-[Redis]
-  host = "0.0.0.0"
-  port = 6379
-  password = ""
-  db = 0
-  pool_size = 20
-  pool_timeout = 5
-
-[Sqlite]
-  base_path = "D:\\work\\go\\template\\gin-template\\static\\db"
-  sqlite_encryption_key = "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"

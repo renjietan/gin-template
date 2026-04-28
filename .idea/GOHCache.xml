@@ -129,6 +129,13 @@
             </set>
           </value>
         </entry>
+        <entry key="CronManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="ErrorResponse">
           <value>
             <set>
@@ -192,6 +199,13 @@
             </set>
           </value>
         </entry>
+        <entry key="NsConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="PagerDTO">
           <value>
             <set>
@@ -227,6 +241,20 @@
             </set>
           </value>
         </entry>
+        <entry key="SqlManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/sql_driver/sqlManager.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="SqliteConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="StatusResponse">
           <value>
             <set>
@@ -238,6 +266,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/core/swagger.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Test">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/test/test1/test.go" />
             </set>
           </value>
         </entry>
@@ -304,10 +339,38 @@
             </set>
           </value>
         </entry>
+        <entry key="mockJob">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/cron/cron_test.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="resetOptions">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/utility/timeout/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="task">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="taskManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="timer">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
             </set>
           </value>
         </entry>
@@ -588,14 +651,33 @@
         <entry key="file://$PROJECT_DIR$/core/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777014711678" />
+              <option name="lastModified" value="1777344700359" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/cron/cron.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777277678659" />
+              <option name="lastModified" value="1777368450196" />
+              <option name="schema">
+                <list>
+                  <option value="task" />
+                  <option value="taskManager" />
+                  <option value="CronManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/cron/cron_test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777366653911" />
+              <option name="schema">
+                <list>
+                  <option value="mockJob" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -603,6 +685,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1777280076688" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/cronModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777368703721" />
             </ScannedPath>
           </value>
         </entry>
@@ -637,7 +726,7 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/sqliteModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777280769837" />
+              <option name="lastModified" value="1777367168028" />
             </ScannedPath>
           </value>
         </entry>
@@ -729,7 +818,7 @@
         <entry key="file://$PROJECT_DIR$/core/nacos/nacos.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777011605001" />
+              <option name="lastModified" value="1777366201476" />
               <option name="schema">
                 <list>
                   <option value="NacosSerivce" />
@@ -745,10 +834,36 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/sql_driver/init.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777343175733" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/sql_driver/initialize.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777343439257" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/sql_driver/mysql.go">
           <value>
             <ScannedPath>
               <option name="lastModified" value="1777012214194" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/sql_driver/sqlManager.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777346251861" />
+              <option name="schema">
+                <list>
+                  <option value="SqlManager" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -771,6 +886,25 @@
               <option name="schema">
                 <list>
                   <option value="SwaggerConfig" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/test/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777343461365" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/test/test1/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777344233345" />
+              <option name="schema">
+                <list>
+                  <option value="Test" />
                 </list>
               </option>
             </ScannedPath>
@@ -807,12 +941,19 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777280161359" />
+              <option name="lastModified" value="1777369421002" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777345724804" />
             </ScannedPath>
           </value>
         </entry>
@@ -832,14 +973,15 @@
         <entry key="file://$PROJECT_DIR$/types/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777012296558" />
+              <option name="lastModified" value="1777344637041" />
               <option name="schema">
                 <list>
                   <option value="AppConfig" />
                   <option value="MysqlConfig" />
+                  <option value="SqliteConfig" />
                   <option value="LoggerConfig" />
                   <option value="UploadConfig" />
-                  <option value="NacosConfig" />
+                  <option value="NsConfig" />
                   <option value="RedisConfig" />
                 </list>
               </option>
@@ -951,23 +1093,31 @@
         <entry key="config_list_dto" value="ConfigListDTO" />
         <entry key="config_service" value="ConfigService" />
         <entry key="configs_dto" value="ConfigsDTO" />
+        <entry key="cron_manager" value="CronManager" />
         <entry key="error_response" value="ErrorResponse" />
         <entry key="fx_logger" value="FxLogger" />
         <entry key="gorm_logger" value="GormLogger" />
         <entry key="line_per_field_formatter" value="LinePerFieldFormatter" />
         <entry key="logger_config" value="LoggerConfig" />
         <entry key="migration_service" value="MigrationService" />
+        <entry key="mock_job" value="mockJob" />
         <entry key="mysql_config" value="MysqlConfig" />
         <entry key="nacos_config" value="NacosConfig" />
         <entry key="nacos_serivce" value="NacosSerivce" />
+        <entry key="ns_config" value="NsConfig" />
         <entry key="pager_dto" value="PagerDTO" />
         <entry key="pagination_response" value="PaginationResponse" />
         <entry key="redis_config" value="RedisConfig" />
         <entry key="reset_options" value="resetOptions" />
         <entry key="response" value="Response" />
         <entry key="safe_map" value="SafeMap" />
+        <entry key="sql_manager" value="SqlManager" />
+        <entry key="sqlite_config" value="SqliteConfig" />
         <entry key="status_response" value="StatusResponse" />
         <entry key="swagger_config" value="SwaggerConfig" />
+        <entry key="task" value="task" />
+        <entry key="task_manager" value="taskManager" />
+        <entry key="test" value="Test" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
         <entry key="timer_info" value="timerInfo" />

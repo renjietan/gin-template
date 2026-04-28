@@ -10,19 +10,12 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 )
 
-// NacosSerivce /**
-/**
- * @FILE   nacosService
- * @AUTHOR TAN
- * @DESCRIPTION Nacos 服务
- * @DATE 16:00:32 CST 2026-04-21
- **/
 type NacosSerivce struct {
 	ServiceConfig []constant.ServerConfig
 	ClientConfig  constant.ClientConfig
 	ConfigClient  config_client.IConfigClient
 	NamingClient  naming_client.INamingClient
-	app_config    *types.AppConfig
+	appConfig     *types.AppConfig
 	Contents      map[string]interface{}
 }
 
@@ -76,26 +69,26 @@ func NewNacosSerivce(config *types.AppConfig) (*NacosSerivce, Nacos_err) {
 	return &NacosSerivce{
 		ConfigClient: configClient,
 		NamingClient: namingClient,
-		app_config:   config,
+		appConfig:    config,
 	}, nil
 }
 
 // LoadAndWatchConfig 首次拉取配置，并启动监听协程
 func (ns *NacosSerivce) LoadAndWatchConfig() Nacos_err {
-	dataId := ns.app_config.Ns.DataId
-	groupName := ns.app_config.Ns.GroupName
+	dataId := ns.appConfig.Ns.DataId
+	groupName := ns.appConfig.Ns.GroupName
 	// 首次获取配置
 	content, err := ns.ConfigClient.GetConfig(vo.ConfigParam{
 		DataId: dataId,
 		Group:  groupName,
 	})
 	if err != nil {
-		return parseInfo(ns.app_config, "首次获取配置失败", err.Error())
+		return parseInfo(ns.appConfig, "首次获取配置失败", err.Error())
 	}
 	s := map[string]interface{}{}
 	parseErr := utility.Interface2Interface(content, &s)
 	if parseErr != nil {
-		return parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
+		return parseInfo(ns.appConfig, "首次获取配置时，字符串转map失败", err.Error())
 	}
 	ns.Contents = s
 	// 监听配置变更
@@ -105,21 +98,21 @@ func (ns *NacosSerivce) LoadAndWatchConfig() Nacos_err {
 		OnChange: func(namespace, group, dataId, data string) {
 			err := utility.Interface2Interface(content, &ns.Contents)
 			if err != nil {
-				parseInfo(ns.app_config, "首次获取配置时，字符串转map失败", err.Error())
+				parseInfo(ns.appConfig, "首次获取配置时，字符串转map失败", err.Error())
 			}
 		},
 	})
 	if err != nil {
-		return parseInfo(ns.app_config, "开启nacos监听器失败", err.Error())
+		return parseInfo(ns.appConfig, "开启nacos监听器失败", err.Error())
 	}
 	return nil
 }
 
 // 服务注册
 func (ns *NacosSerivce) RegisterService() Nacos_err {
-	serviceName := ns.app_config.AppName
-	host := ns.app_config.Ns.Host
-	port := ns.app_config.Ns.Port
+	serviceName := ns.appConfig.AppName
+	host := ns.appConfig.Ns.Host
+	port := ns.appConfig.Ns.Port
 	// 获取本机可用 IP（实际中可能需要配置或从环境变量获取）
 	_, err := ns.NamingClient.RegisterInstance(vo.RegisterInstanceParam{
 		Ip:          host,
@@ -132,16 +125,16 @@ func (ns *NacosSerivce) RegisterService() Nacos_err {
 		Metadata:    map[string]string{"gin-version": "1.9.0"},
 	})
 	if err != nil {
-		return parseInfo(ns.app_config, "服务注册失败", err.Error())
+		return parseInfo(ns.appConfig, "服务注册失败", err.Error())
 	}
 	return nil
 }
 
 // deregisterService 优雅关闭时注销服务
 func (ns *NacosSerivce) deregisterService() error {
-	serviceName := ns.app_config.AppName
-	host := ns.app_config.Ns.Host
-	port := ns.app_config.Ns.Port
+	serviceName := ns.appConfig.AppName
+	host := ns.appConfig.Ns.Host
+	port := ns.appConfig.Ns.Port
 	_, err := ns.NamingClient.DeregisterInstance(vo.DeregisterInstanceParam{
 		Ip:          host,
 		Port:        port,

@@ -12,13 +12,14 @@ type AppConfig struct {
 	LogDir    string `toml:"log_dir"`
 	/* 注意这里不可以用匿名嵌入子结构体，否则写入toml文件时, 无法形成树状结构 */
 	Mysql  MysqlConfig
+	Sqlite SqliteConfig
+	Redis  RedisConfig
 	Logger LoggerConfig
 	Upload UploadConfig
 	Ns     NsConfig
-	Redis  RedisConfig
-	Sqlite SqliteConfig
 }
 type MysqlConfig struct {
+	Enable   bool   `toml:"enable"`
 	Host     string `toml:"host"`
 	Port     string `toml:"port"`
 	Username string `toml:"username"`
@@ -27,6 +28,7 @@ type MysqlConfig struct {
 }
 
 type SqliteConfig struct {
+	Enable              bool   `toml:"enable"`
 	BasePath            string `toml:"base_path"`
 	SqliteEncryptionKey string `toml:"sqlite_encryption_key"`
 }
