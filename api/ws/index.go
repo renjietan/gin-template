@@ -55,7 +55,7 @@ func NewWebSocketManager(l *logrus.Logger) *WebSocketManager {
 	}
 }
 
-// 客户端-新增
+// HandleWebSocket 客户端-新增
 func (m *WebSocketManager) HandleWebSocket(c *gin.Context) {
 	conn, err := m.upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
@@ -128,7 +128,6 @@ func (m *WebSocketManager) Run() {
 			}
 			m.mu.Unlock()
 			log.Printf("新客户端连接，当前连接数: %d", len(m.Clients))
-
 		case conn := <-m.Unregister_Chan:
 			// 注销客户端
 			m.mu.Lock()

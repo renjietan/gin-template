@@ -14,6 +14,7 @@ require (
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/nacos-group/nacos-sdk-go/v2 v2.3.5
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
+	github.com/olahol/melody v1.4.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/sirupsen/logrus v1.9.4
 	github.com/stretchr/testify v1.11.1
