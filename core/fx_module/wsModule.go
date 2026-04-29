@@ -1,13 +1,21 @@
 package fx_module
 
 import (
-	"example.com/t/api/ws"
+	"example.com/t/api/wsManager"
 	"go.uber.org/fx"
 )
 
 var FxWsModule = fx.Module("fx-ws-module",
-	fx.Provide(ws.NewWebSocketManager),
-	fx.Invoke(func(ws *ws.WebSocketManager) {
-		go ws.Run()
+	//fx.Provide(ws.NewWebSocketManager),
+	//fx.Invoke(func(ws *ws.WebSocketManager, appserver *core.AppServer) {
+	//	//appserver.Engine.Use(func(c *gin.Context) {
+	//	//	c.Set("ws", ws.HandleWebSocket)
+	//	//	c.Next()
+	//	//})
+	//}),
+	fx.Provide(wsManager.NewWsManager),
+	fx.Invoke(func(ws *wsManager.WsManager) {
+		ws.InitRouter()
+		ws.HandleFunds()
 	}),
 )

@@ -339,6 +339,13 @@
             </set>
           </value>
         </entry>
+        <entry key="WsManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/wsManager/wsManager.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="mockJob">
           <value>
             <set>
@@ -388,10 +395,24 @@
             </set>
           </value>
         </entry>
+        <entry key="wsManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/wsManager/wsManager.go" />
+            </set>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/../../study/melody-master-examples/examples/gophers/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777449898469" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go">
           <value>
             <ScannedPath>
@@ -629,6 +650,18 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/api/wsManager/wsManager.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777452502151" />
+              <option name="schema">
+                <list>
+                  <option value="WsManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/cmd/cmd.go">
           <value>
             <ScannedPath>
@@ -691,7 +724,7 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/cronModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777368703721" />
+              <option name="lastModified" value="1777425904446" />
             </ScannedPath>
           </value>
         </entry>
@@ -733,7 +766,7 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/wsModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525597" />
+              <option name="lastModified" value="1777451125870" />
             </ScannedPath>
           </value>
         </entry>
@@ -1128,6 +1161,7 @@
         <entry key="user" value="User" />
         <entry key="web_socket_manager" value="WebSocketManager" />
         <entry key="ws_client_count_response" value="WsClientCountResponse" />
+        <entry key="ws_manager" value="WsManager" />
         <entry key="ws_meta__file" value="WS_META_File" />
       </map>
     </option>
