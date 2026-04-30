@@ -55,7 +55,7 @@ func BeautifyJsonStr(obj map[string]interface{}) string {
 	rawJSON := utility.Interface2String(&obj)
 	// 美化
 	var prettyJSON bytes.Buffer
-	err := json.Indent(&prettyJSON, []byte(rawJSON), "", "") // 前缀为空，缩进为两个空格
+	err := json.Indent(&prettyJSON, []byte(rawJSON), "", "  ") // 前缀为空，缩进为两个空格
 	if err != nil {
 		fmt.Println("BeautifyJsonStr error:", err)
 	}

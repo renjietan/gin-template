@@ -65,12 +65,10 @@ func (l *FxLogger) LogEvent(event fxevent.Event) {
 	}
 	l.info["LifeCycleName"] = val.Name()
 	msg := BeautifyJsonStr(l.info)
-	//l.info["package"] = "fx_logger"
-	//l.info["package"] = "fx_logger"
 	l.Logger.WithFields(logrus.Fields{
 		"package": "fx_logger",
 		"msg":     msg,
-	}).Info(l.lifeCycleMame)
+	}).Info(val.Name())
 }
 
 func (l *FxLogger) Info(msg string) {
