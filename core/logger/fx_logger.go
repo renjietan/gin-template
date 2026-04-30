@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"fmt"
 	"reflect"
 	"sync"
 
@@ -65,24 +66,29 @@ func (l *FxLogger) LogEvent(event fxevent.Event) {
 	}
 	l.info["LifeCycleName"] = val.Name()
 	msg := BeautifyJsonStr(l.info)
+	name := fmt.Sprintf("✅ %s", val.Name())
 	l.Logger.WithFields(logrus.Fields{
 		"package": "fx_logger",
 		"msg":     msg,
-	}).Info(val.Name())
+	}).Info(name)
 }
 
 func (l *FxLogger) Info(msg string) {
+	fmt.Println("================================= Info ==================================================")
 	l.Logger.Info(msg)
 }
 
 func (l *FxLogger) Debug(msg string) {
+	fmt.Println("================================== Debug =================================================")
 	l.Logger.Debug(msg)
 }
 
 func (l *FxLogger) Warn(msg string) {
+	fmt.Println("====================================== Warn =============================================")
 	l.Logger.Warn(msg)
 }
 
 func (l *FxLogger) Error(msg string) {
+	fmt.Println("====================================== Error =============================================")
 	l.Logger.Error(msg)
 }
