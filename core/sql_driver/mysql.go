@@ -3,13 +3,10 @@ package sql_driver
 import (
 	"time"
 
-	"example.com/t/core/logger"
 	"example.com/t/types"
 	"example.com/t/utility"
-	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
 )
 
 func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, error) {
@@ -29,23 +26,4 @@ func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, 
 	sqlDB.SetMaxOpenConns(512)
 	sqlDB.SetConnMaxLifetime(time.Hour)
 	return db, nil
-}
-
-func NewGormLogger(log *logrus.Logger) *logger.GormLogger {
-	gormLogger := &logger.GormLogger{
-		Logger:        log,
-		SlowThreshold: 200 * time.Millisecond,
-	}
-	return gormLogger
-}
-
-func NewGormConfig(log *logrus.Logger) *gorm.Config {
-	return &gorm.Config{
-		Logger: NewGormLogger(log),
-		//Logger: logger2.GetLogger().Desugar(),
-		NamingStrategy: schema.NamingStrategy{
-			TablePrefix:   "gin_", // 设置表前缀
-			SingularTable: false,  // 使用单数表名形式
-		},
-	}
 }

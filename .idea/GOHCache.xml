@@ -24,6 +24,14 @@
             </set>
           </value>
         </entry>
+        <entry key="Args">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/cmd/args.go" />
+              <option value="file://$PROJECT_DIR$/test/main.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Base">
           <value>
             <set>
@@ -55,7 +63,7 @@
         <entry key="ClientInfo">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/ws/index.go" />
+              <option value="file://$PROJECT_DIR$/api/ws/ws.go" />
             </set>
           </value>
         </entry>
@@ -185,13 +193,6 @@
             </set>
           </value>
         </entry>
-        <entry key="NacosConfig">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/types/config.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="NacosSerivce">
           <value>
             <set>
@@ -203,6 +204,14 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Options">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/cmd/args.go" />
+              <option value="file://$PROJECT_DIR$/test/main.go" />
             </set>
           </value>
         </entry>
@@ -269,10 +278,31 @@
             </set>
           </value>
         </entry>
-        <entry key="Test">
+        <entry key="Test1">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/core/test/test1/test.go" />
+              <option value="file://$PROJECT_DIR$/api/DTO/testDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TestController">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/controller/testController.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TestDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/testDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="TestFormDTO">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/api/DTO/testDTO.go" />
             </set>
           </value>
         </entry>
@@ -328,7 +358,7 @@
         <entry key="WebSocketManager">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/ws/index.go" />
+              <option value="file://$PROJECT_DIR$/api/ws/ws.go" />
             </set>
           </value>
         </entry>
@@ -342,7 +372,14 @@
         <entry key="WsManager">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/wsManager/wsManager.go" />
+              <option value="file://$PROJECT_DIR$/core/wsManager/wsManager.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WsType">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/wsManager/ws_type.go" />
             </set>
           </value>
         </entry>
@@ -374,13 +411,6 @@
             </set>
           </value>
         </entry>
-        <entry key="timer">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="timerCommand">
           <value>
             <set>
@@ -395,24 +425,10 @@
             </set>
           </value>
         </entry>
-        <entry key="wsManager">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/api/wsManager/wsManager.go" />
-            </set>
-          </value>
-        </entry>
       </map>
     </option>
     <option name="scannedPathMapping">
       <map>
-        <entry key="file://$PROJECT_DIR$/../../study/melody-master-examples/examples/gophers/main.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1777449898469" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go">
           <value>
             <ScannedPath>
@@ -447,6 +463,18 @@
               <option name="schema">
                 <list>
                   <option value="PagerDTO" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/DTO/testDTO.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777519097246" />
+              <option name="schema">
+                <list>
+                  <option value="TestFormDTO" />
                 </list>
               </option>
             </ScannedPath>
@@ -495,6 +523,18 @@
               <option name="schema">
                 <list>
                   <option value="ConfigDetailsController" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/controller/testController.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777519510146" />
+              <option name="schema">
+                <list>
+                  <option value="TestController" />
                 </list>
               </option>
             </ScannedPath>
@@ -590,7 +630,7 @@
         <entry key="file://$PROJECT_DIR$/api/service/uploadService.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098003" />
+              <option name="lastModified" value="1777256454745" />
               <option name="schema">
                 <list>
                   <option value="UploadService" />
@@ -637,10 +677,10 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/api/ws/index.go">
+        <entry key="file://$PROJECT_DIR$/api/ws/ws.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525578" />
+              <option name="lastModified" value="1777425028242" />
               <option name="schema">
                 <list>
                   <option value="ClientInfo" />
@@ -650,13 +690,13 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/api/wsManager/wsManager.go">
+        <entry key="file://$PROJECT_DIR$/cmd/args.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777452502151" />
+              <option name="lastModified" value="1777541807939" />
               <option name="schema">
                 <list>
-                  <option value="WsManager" />
+                  <option value="Args" />
                 </list>
               </option>
             </ScannedPath>
@@ -665,7 +705,14 @@
         <entry key="file://$PROJECT_DIR$/cmd/cmd.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098022" />
+              <option name="lastModified" value="1777542931260" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/cmd/drvier-key.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777539896335" />
             </ScannedPath>
           </value>
         </entry>
@@ -735,6 +782,20 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/gormConfigModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777543639148" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/mySqlModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777543828086" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/nacosModule.go">
           <value>
             <ScannedPath>
@@ -749,13 +810,6 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/fx_module/sqlModule.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1777013482526" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/sqliteModule.go">
           <value>
             <ScannedPath>
@@ -766,7 +820,7 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/wsModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777451125870" />
+              <option name="lastModified" value="1777514572803" />
             </ScannedPath>
           </value>
         </entry>
@@ -797,14 +851,14 @@
         <entry key="file://$PROJECT_DIR$/core/logger/logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777024064601" />
+              <option name="lastModified" value="1777256454799" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/logger/text_fromat.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776906525633" />
+              <option name="lastModified" value="1777256454808" />
               <option name="schema">
                 <list>
                   <option value="LinePerFieldFormatter" />
@@ -841,6 +895,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/middlewave/rateLimitMiddlewave.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777256454815" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/middlewave/staticResourceMiddleware.go">
           <value>
             <ScannedPath>
@@ -863,28 +924,21 @@
         <entry key="file://$PROJECT_DIR$/core/redis_drivers/redis.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777012563070" />
+              <option name="lastModified" value="1777256454830" />
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/sql_driver/init.go">
+        <entry key="file://$PROJECT_DIR$/core/sql_driver/gorm_config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777343175733" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/core/sql_driver/initialize.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1777343439257" />
+              <option name="lastModified" value="1777543481899" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/sql_driver/mysql.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777012214194" />
+              <option name="lastModified" value="1777543751854" />
             </ScannedPath>
           </value>
         </entry>
@@ -924,20 +978,25 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/test/test.go">
+        <entry key="file://$PROJECT_DIR$/core/wsManager/wsManager.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777343461365" />
+              <option name="lastModified" value="1777452502151" />
+              <option name="schema">
+                <list>
+                  <option value="WsManager" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/core/test/test1/test.go">
+        <entry key="file://$PROJECT_DIR$/core/wsManager/ws_type.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777344233345" />
+              <option name="lastModified" value="1777516049087" />
               <option name="schema">
                 <list>
-                  <option value="Test" />
+                  <option value="WsType" />
                 </list>
               </option>
             </ScannedPath>
@@ -974,7 +1033,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777369421002" />
+              <option name="lastModified" value="1777543721146" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
@@ -986,7 +1045,19 @@
         <entry key="file://$PROJECT_DIR$/test/index.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777345724804" />
+              <option name="lastModified" value="1777532443334" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777542040331" />
+              <option name="schema">
+                <list>
+                  <option value="Args" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -1031,21 +1102,7 @@
         <entry key="file://$PROJECT_DIR$/utility/common.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1775123955861" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utility/fast_template.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776044486919" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utility/json.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776044486925" />
+              <option name="lastModified" value="1777256454909" />
             </ScannedPath>
           </value>
         </entry>
@@ -1078,14 +1135,7 @@
         <entry key="file://$PROJECT_DIR$/utility/strings.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1775123607661" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utility/tern.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1767773012567" />
+              <option name="lastModified" value="1777256454917" />
             </ScannedPath>
           </value>
         </entry>
@@ -1104,6 +1154,13 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/utility/validator.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1777256454925" />
+            </ScannedPath>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="tableStructMapping">
@@ -1111,6 +1168,7 @@
         <entry key="app_config" value="AppConfig" />
         <entry key="app_lifecycle" value="AppLifecycle" />
         <entry key="app_server" value="AppServer" />
+        <entry key="args" value="Args" />
         <entry key="base" value="Base" />
         <entry key="base_controller" value="BaseController" />
         <entry key="base_entity" value="BaseEntity" />
@@ -1135,9 +1193,9 @@
         <entry key="migration_service" value="MigrationService" />
         <entry key="mock_job" value="mockJob" />
         <entry key="mysql_config" value="MysqlConfig" />
-        <entry key="nacos_config" value="NacosConfig" />
         <entry key="nacos_serivce" value="NacosSerivce" />
         <entry key="ns_config" value="NsConfig" />
+        <entry key="options" value="Options" />
         <entry key="pager_dto" value="PagerDTO" />
         <entry key="pagination_response" value="PaginationResponse" />
         <entry key="redis_config" value="RedisConfig" />
@@ -1150,7 +1208,10 @@
         <entry key="swagger_config" value="SwaggerConfig" />
         <entry key="task" value="task" />
         <entry key="task_manager" value="taskManager" />
-        <entry key="test" value="Test" />
+        <entry key="test1" value="Test1" />
+        <entry key="test_controller" value="TestController" />
+        <entry key="test_dto" value="TestDTO" />
+        <entry key="test_form_dto" value="TestFormDTO" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
         <entry key="timer_info" value="timerInfo" />
@@ -1163,8 +1224,9 @@
         <entry key="ws_client_count_response" value="WsClientCountResponse" />
         <entry key="ws_manager" value="WsManager" />
         <entry key="ws_meta__file" value="WS_META_File" />
+        <entry key="ws_type" value="WsType" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1777255632225" />
+    <option name="lastTimeChecked" value="1777517006012" />
   </component>
 </project>

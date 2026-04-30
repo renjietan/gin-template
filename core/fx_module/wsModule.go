@@ -1,7 +1,7 @@
 package fx_module
 
 import (
-	"example.com/t/api/wsManager"
+	"example.com/t/core/wsManager"
 	"go.uber.org/fx"
 )
 

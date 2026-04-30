@@ -9,6 +9,7 @@ import (
 	"syscall"
 	"time"
 
+	"example.com/t/cmd"
 	"example.com/t/core"
 	"example.com/t/core/fx_module"
 	"example.com/t/core/logger"
@@ -47,10 +48,11 @@ func main() {
 	if !debug {
 		defer func() {
 			if err := recover(); err != nil {
-				log.Fatal("生产环境 抛出异常(main.go): ", err)
+				log.Fatal("❌ 生产环境 抛出异常(main.go): ", err)
 			}
 		}()
 	}
+	options := cmd.InitFxModule()
 	app := fx.New(
 		// 日志初始化
 		fx.Provide(logger.NewLogger),
@@ -67,7 +69,7 @@ func main() {
 			if err != nil {
 				// 此处无法 使用 logrus
 				// 因为 logger.NewLogger 中引入了 AppConfig， 此处 引入 logrus  会导致循环依赖引入
-				log.Fatal("配置文件：读取失败")
+				log.Fatal("❌ 配置文件：读取失败")
 			}
 			config.Path = configFile
 			config.Debug = debug
@@ -79,18 +81,21 @@ func main() {
 
 		// 开启 http-server
 		fx_module.FxGinModule,
-		// mysql
-		fx_module.FXMySqlModule,
-		// sqlite
-		fx_module.FXSQLiteModule,
-		// redis
-		fx_module.FxRedisModule,
-		// nacos
-		fx_module.FXNacosModule,
-		// websocket
-		fx_module.FxWsModule,
-		// cron
-		fx_module.FXCronModule,
+		fx_module.FxGormConfigModule,
+		//// 1、mysql
+		//fx_module.FXMySqlModule,
+		//// 2、sqlite
+		//fx_module.FXSQLiteModule,
+		//// 3、redis
+		//fx_module.FxRedisModule,
+		//// 4、nacos
+		//fx_module.FXNacosModule,
+		//// 5、websocket
+		//fx_module.FxWsModule,
+		//// 6、cron
+		//fx_module.FXCronModule,
+
+		options,
 		// 生命周期
 		fx.Provide(NewAppLifeCycle),
 		// 注册生命周期回调函数
