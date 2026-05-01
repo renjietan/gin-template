@@ -35,17 +35,17 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (sql 
 	elapsed := time.Since(begin)
 	sql, rows := fc()
 	fields := logrus.Fields{
-		"package": "gorm_logger",
-		"sql":     fmt.Sprintf("[数量:%v] [%s]%s", rows, elapsed, sql),
+		"rows": rows,
+		"SQL":  fmt.Sprintf("【%s】%s", elapsed, sql),
 	}
 	if err != nil {
 		fields["error"] = err
-		l.Logger.WithContext(ctx).WithFields(fields).Error("SQL执行失败")
+		l.Logger.WithContext(ctx).WithFields(fields).Error("❌ GOORM")
 		return
 	}
 	if elapsed > l.SlowThreshold && l.SlowThreshold != 0 {
-		l.Logger.WithContext(ctx).WithFields(fields).Warn("SQL查询过慢")
+		l.Logger.WithContext(ctx).WithFields(fields).Warn("⚠️ GOORM")
 	} else {
-		l.Logger.WithContext(ctx).WithFields(fields).Debug("SQL日志: ")
+		l.Logger.WithContext(ctx).WithFields(fields).Debug("🔵 GOORM")
 	}
 }

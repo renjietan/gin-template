@@ -25,13 +25,11 @@ type AppLifecycle struct {
 
 // OnStart 应用程序启动时执行
 func (l *AppLifecycle) OnStart(context.Context) error {
-	log.Printf("监听服务启动:")
 	return nil
 }
 
 // OnStop 应用程序停止时执行
 func (l *AppLifecycle) OnStop(context.Context) error {
-	log.Printf("监听服务停止")
 	return nil
 }
 
@@ -117,7 +115,7 @@ func main() {
 	// 启动应用程序
 	go func() {
 		if err := app.Start(context.Background()); err != nil {
-			log.Fatal("服务启动失败：", err)
+			log.Fatal("", err)
 		}
 	}()
 

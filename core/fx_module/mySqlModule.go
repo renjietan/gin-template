@@ -8,7 +8,6 @@ import (
 
 var FXMySqlModule = fx.Module("fx-sql-module",
 	// 初始化数据库
-	//fx.Provide(sql_driver.NewGormConfig),
 	fx.Provide(sql_driver.NewMysqlDriver),
 	// 自动同步 数据库 表
 	fx.Provide(service.NewMigrationService),

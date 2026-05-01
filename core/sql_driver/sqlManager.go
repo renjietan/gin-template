@@ -12,8 +12,8 @@ type SqlManager struct {
 }
 
 func NewSqlManager(app_config *types.AppConfig) *SqlManager {
-	if app_config.Sqlite.Enable == true {
-		
-	}
+	//if app_config.Sqlite.Enable == true {
+	//
+	//}
 	return nil
 }

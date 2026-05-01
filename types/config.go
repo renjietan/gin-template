@@ -19,7 +19,6 @@ type AppConfig struct {
 	Ns     NsConfig
 }
 type MysqlConfig struct {
-	Enable   bool   `toml:"enable"`
 	Host     string `toml:"host"`
 	Port     string `toml:"port"`
 	Username string `toml:"username"`
@@ -28,7 +27,6 @@ type MysqlConfig struct {
 }
 
 type SqliteConfig struct {
-	Enable              bool   `toml:"enable"`
 	BasePath            string `toml:"base_path"`
 	SqliteEncryptionKey string `toml:"sqlite_encryption_key"`
 }

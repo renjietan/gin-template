@@ -22,7 +22,7 @@ func NewDefaultConfig() *types.AppConfig {
 		StaticUrl: "http://localhost:8080/static",
 		Listen:    "0.0.0.0:3344",
 		Mysql: types.MysqlConfig{
-			Enable:   true,
+			//Enable:   true,
 			Host:     "127.0.0.1",
 			Port:     "3306",
 			Username: "root",
@@ -30,7 +30,7 @@ func NewDefaultConfig() *types.AppConfig {
 			Database: "springboot3",
 		},
 		Sqlite: types.SqliteConfig{
-			Enable:              true,
+			//Enable:              true,
 			BasePath:            filepath.Join(pathWd, "static", "db"),
 			SqliteEncryptionKey: "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99",
 		},
