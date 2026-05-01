@@ -40,7 +40,7 @@ func (t *TestController) RegisterTestRouters() {
 // @Tags Test
 // @Accept json
 // @Produce json
-// @Param request form dto.TestFormDTO true "参数"
+// @Param request body dto.TestFormDTO true "参数"
 // @Router /test/form [post]
 func (config *TestController) Form(c *gin.Context) {
 	var params dto.TestFormDTO

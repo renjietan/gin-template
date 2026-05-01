@@ -497,6 +497,33 @@ const docTemplate = `{
                 }
             }
         },
+        "/test/form": {
+            "post": {
+                "description": "form",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Test"
+                ],
+                "summary": "form",
+                "parameters": [
+                    {
+                        "description": "参数",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.TestFormDTO"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/ws/broadcast": {
             "post": {
                 "consumes": [
@@ -641,6 +668,21 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/dto.ConfigDTO"
                     }
+                }
+            }
+        },
+        "dto.TestFormDTO": {
+            "type": "object",
+            "required": [
+                "password",
+                "user"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
                 }
             }
         },

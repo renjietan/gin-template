@@ -40,8 +40,22 @@ func NewLogger(appConfig *types.AppConfig) (*logrus.Logger, error) {
 	log.SetOutput(io.MultiWriter(os.Stdout, writer))
 	//log.SetFormatter(&logrus.TextFormatter{
 	//	FullTimestamp:   true,
-	//	TimestampFormat: "2006-01-02 15:04:05",
+	//	TimestampFormat: time.RFC3339Nano,
+	//	DisableColors:   false,
+	//	ForceColors:     true,
 	//})
+
+	//log.SetFormatter(&logrus.JSONFormatter{
+	//	TimestampFormat: time.RFC3339Nano,
+	//	FieldMap: logrus.FieldMap{
+	//		"FieldKeyTime":  "@timestamp",
+	//		"FieldKeyLevel": "@level",
+	//		"FieldKeyMsg":   "@message",
+	//		"FieldKeyFunc":  "@caller",
+	//	},
+	//	PrettyPrint: true,
+	//})
+
 	log.SetFormatter(&LinePerFieldFormatter{prefixed.TextFormatter{
 		// 强制开启颜色
 		ForceColors: true,

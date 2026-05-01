@@ -59,6 +59,16 @@ definitions:
           $ref: '#/definitions/dto.ConfigDTO'
         type: array
     type: object
+  dto.TestFormDTO:
+    properties:
+      password:
+        type: string
+      user:
+        type: string
+    required:
+    - password
+    - user
+    type: object
   dto.UpdatesConfigDTO:
     properties:
       items:
@@ -475,6 +485,24 @@ paths:
       summary: 根据cId 获取 配置详情
       tags:
       - ConfigDetail
+  /test/form:
+    post:
+      consumes:
+      - application/json
+      description: form
+      parameters:
+      - description: 参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TestFormDTO'
+      produces:
+      - application/json
+      responses: {}
+      summary: form
+      tags:
+      - Test
   /ws/broadcast:
     post:
       consumes:

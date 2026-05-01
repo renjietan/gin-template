@@ -21,7 +21,6 @@ func NewMysqlDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB, 
 	if err != nil {
 		return nil, err
 	}
-
 	sqlDB.SetMaxIdleConns(32)
 	sqlDB.SetMaxOpenConns(512)
 	sqlDB.SetConnMaxLifetime(time.Hour)
