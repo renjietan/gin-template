@@ -20,11 +20,22 @@ func NewMigrationService(db *gorm.DB, appConfig *types.AppConfig) *MigrationServ
 
 func (s *MigrationService) StartMigrate() {
 	go func() {
-		s.TableMigration()
+		err := s.TableMigration()
+		if err != nil {
+			return
+		}
 	}()
 }
 
-func (s *MigrationService) TableMigration() {
-	s.db.AutoMigrate(&entity.ConfigEntity{})
-	s.db.AutoMigrate(&entity.ConfigDetailEntity{})
+func (s *MigrationService) TableMigration() error {
+	var err error
+	err = s.db.AutoMigrate(&entity.ConfigEntity{})
+	if err != nil {
+		return err
+	}
+	err = s.db.AutoMigrate(&entity.ConfigDetailEntity{})
+	if err != nil {
+		return err
+	}
+	return nil
 }

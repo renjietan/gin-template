@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"example.com/t/core/logger"
+	"example.com/t/core/component/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"github.com/sirupsen/logrus"

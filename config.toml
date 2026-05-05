@@ -1,11 +1,12 @@
-debug = true
 app_name = "gin-template"
+version = "1.0.0"
 static_dir = "./static"
-static_url = "http://localhost:8080/static"
-listen = "0.0.0.0:3344"
+host = "localhost"
+port = 3344
 log_dir = ""
 
 [Mysql]
+  enable = false
   host = "127.0.0.1"
   port = "3306"
   username = "root"
@@ -13,10 +14,12 @@ log_dir = ""
   data_base = "springboot3"
 
 [Sqlite]
+  enable = false
   base_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\db"
   sqlite_encryption_key = "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"
 
 [Redis]
+  enable = false
   host = "0.0.0.0"
   port = 6379
   password = ""
@@ -24,16 +27,8 @@ log_dir = ""
   pool_size = 20
   pool_timeout = 5
 
-[Logger]
-  level = "debug"
-  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\logs\\app"
-  max_age = "720h0m0s"
-  rotation_time = "24h0m0s"
-
-[Upload]
-  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\uploads"
-
 [Ns]
+  enable = false
   host = "0.0.0.0"
   port = 8848
   grpc_port = 9848
@@ -55,3 +50,12 @@ log_dir = ""
   max_backups = 30
   compress = true
   local_time = true
+
+[Logger]
+  level = "debug"
+  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\logs\\app"
+  max_age = "720h0m0s"
+  rotation_time = "24h0m0s"
+
+[Upload]
+  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\uploads"

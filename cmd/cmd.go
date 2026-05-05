@@ -14,9 +14,9 @@ func InitFxModule() fx.Option {
 	// 使用 flags.Parse 解析并自动进行必填项验证
 	if _, err := flags.Parse(&args); err != nil {
 		if flagsErr, ok := err.(*flags.Error); ok && flagsErr.Type == flags.ErrRequired {
-			fmt.Println("\n❌ 错误：缺少必需的参数！")
+			fmt.Println("\n❌ 参数缺失：缺少必需的参数！")
 			// 提示用户使用帮助指令
-			fmt.Println("❌ 请使用 -h 或 --help 查看所有必需的选项。\n")
+			fmt.Println("❌ 使用 -h 或 --help 查看所有必需的选项。\n")
 			os.Exit(0)
 		} else {
 			fmt.Printf("❌ 解析错误: %v\n", err)
@@ -32,6 +32,7 @@ func appendModule(args *Args) []fx.Option {
 	var fxOptions []fx.Option
 	fxOptions = append(fxOptions)
 	if args.All {
+		fxOptions = append(fxOptions, fx_module.FXSwaggerModule)
 		fxOptions = append(fxOptions, fx_module.FXNacosModule)
 		fxOptions = append(fxOptions, fx_module.FXSQLiteModule)
 		fxOptions = append(fxOptions, fx_module.FXMySqlModule)
@@ -39,6 +40,9 @@ func appendModule(args *Args) []fx.Option {
 		fxOptions = append(fxOptions, fx_module.FXCronModule)
 		fxOptions = append(fxOptions, fx_module.FxWsModule)
 		return fxOptions
+	}
+	if args.Swagger {
+		fxOptions = append(fxOptions, fx_module.FXSwaggerModule)
 	}
 	if args.Ns {
 		fxOptions = append(fxOptions, fx_module.FXNacosModule)

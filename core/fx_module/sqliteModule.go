@@ -2,7 +2,7 @@ package fx_module
 
 import (
 	"example.com/t/api/service"
-	"example.com/t/core/sql_driver"
+	"example.com/t/core/component/sql_driver"
 	"go.uber.org/fx"
 )
 

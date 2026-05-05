@@ -11,8 +11,9 @@ import (
 
 	"example.com/t/cmd"
 	"example.com/t/core"
+	logger2 "example.com/t/core/component/logger"
 	"example.com/t/core/fx_module"
-	"example.com/t/core/logger"
+	_ "example.com/t/docs"
 	"example.com/t/types"
 	"github.com/sirupsen/logrus"
 	"go.uber.org/fx"
@@ -53,10 +54,10 @@ func main() {
 	options := cmd.InitFxModule()
 	app := fx.New(
 		// 日志初始化
-		fx.Provide(logger.NewLogger),
+		fx.Provide(logger2.NewLogger),
 		fx.WithLogger(func(l *logrus.Logger) fxevent.Logger {
 			// TODO: 此处可能还需优化
-			return &logger.FxLogger{
+			return &logger2.FxLogger{
 				Logger: l,
 			}
 			//return fxevent.NopLogger
@@ -80,19 +81,6 @@ func main() {
 		// 开启 http-server
 		fx_module.FxGinModule,
 		fx_module.FxGormConfigModule,
-		//// 1、mysql
-		//fx_module.FXMySqlModule,
-		//// 2、sqlite
-		//fx_module.FXSQLiteModule,
-		//// 3、redis
-		//fx_module.FxRedisModule,
-		//// 4、nacos
-		//fx_module.FXNacosModule,
-		//// 5、websocket
-		//fx_module.FxWsModule,
-		//// 6、cron
-		//fx_module.FXCronModule,
-
 		options,
 		// 生命周期
 		fx.Provide(NewAppLifeCycle),
@@ -127,6 +115,6 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := app.Stop(ctx); err != nil {
-		logger.L().Fatal(err)
+		logger2.L().Fatal(err)
 	}
 }

@@ -3,22 +3,24 @@ package types
 import "time"
 
 type AppConfig struct {
-	Debug     bool   `toml:"debug"`
 	AppName   string `toml:"app_name"`
+	Debug     bool   `toml:"-"`
+	Version   string `toml:"version"`
 	Path      string `toml:"-"`
 	StaticDir string `toml:"static_dir"`
-	StaticUrl string `toml:"static_url"`
-	Listen    string `toml:"listen"`
+	Host      string `toml:"host"`
+	Port      int    `toml:"port"`
 	LogDir    string `toml:"log_dir"`
 	/* 注意这里不可以用匿名嵌入子结构体，否则写入toml文件时, 无法形成树状结构 */
 	Mysql  MysqlConfig
 	Sqlite SqliteConfig
 	Redis  RedisConfig
+	Ns     NsConfig
 	Logger LoggerConfig
 	Upload UploadConfig
-	Ns     NsConfig
 }
 type MysqlConfig struct {
+	Enable   bool   `toml:"enable"`
 	Host     string `toml:"host"`
 	Port     string `toml:"port"`
 	Username string `toml:"username"`
@@ -27,22 +29,13 @@ type MysqlConfig struct {
 }
 
 type SqliteConfig struct {
+	Enable              bool   `toml:"enable"`
 	BasePath            string `toml:"base_path"`
 	SqliteEncryptionKey string `toml:"sqlite_encryption_key"`
 }
 
-type LoggerConfig struct {
-	Level        string        `toml:"level"`
-	Filepath     string        `toml:"file_path"`
-	MaxAge       time.Duration `toml:"max_age"`
-	RotationTime time.Duration `toml:"rotation_time"`
-}
-
-type UploadConfig struct {
-	Filepath string `toml:"file_path"`
-}
-
 type NsConfig struct {
+	Enable               bool   `toml:"enable"`
 	Host                 string `toml:"host"`                    // Nacos连接的IP
 	Port                 uint64 `toml:"port"`                    // Nacos连接的端口号
 	GrpcPort             uint64 `toml:"grpc_port"`               // Nacos grpc端口号
@@ -67,10 +60,22 @@ type NsConfig struct {
 }
 
 type RedisConfig struct {
+	Enable      bool   `toml:"enable"`
 	Host        string `toml:"host"`
 	Port        int    `toml:"port"`
 	Password    string `toml:"password"`
 	DB          int    `toml:"db"`
 	PoolSize    int    `toml:"pool_size"`
 	PoolTimeout int    `toml:"pool_timeout"`
+}
+
+type LoggerConfig struct {
+	Level        string        `toml:"level"`
+	Filepath     string        `toml:"file_path"`
+	MaxAge       time.Duration `toml:"max_age"`
+	RotationTime time.Duration `toml:"rotation_time"`
+}
+
+type UploadConfig struct {
+	Filepath string `toml:"file_path"`
 }

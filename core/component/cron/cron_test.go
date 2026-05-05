@@ -23,7 +23,7 @@ func mockFunc() {
 
 func TestNewTimerTask(t *testing.T) {
 	tm := NewTimerTask()
-	_tm := tm.(*CronManager)
+	_tm := tm
 	{
 		_, err := tm.AddTaskByFunc("func", "@every 1s", mockFunc, "测试")
 		assert.Nil(t, err, "定时任务测试失败")

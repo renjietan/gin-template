@@ -25,8 +25,9 @@ func NewAppServer(appConfig *types.AppConfig) *AppServer {
 		fmt.Printf("endpoint %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
 	engine := gin.Default()
+	addr := fmt.Sprintf("%s:%d", appConfig.Host, appConfig.Port)
 	server := &http.Server{
-		Addr:           appConfig.Listen,
+		Addr:           addr,
 		Handler:        engine,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,

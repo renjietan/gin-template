@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"example.com/t/core/logger"
+	"example.com/t/core/component/logger"
 	"example.com/t/types"
 	"github.com/gin-gonic/gin"
 )

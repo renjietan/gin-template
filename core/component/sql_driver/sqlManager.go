@@ -10,10 +10,3 @@ type SqlManager struct {
 	SqliteDriver *gorm.DB
 	AppConfig    *types.AppConfig
 }
-
-func NewSqlManager(app_config *types.AppConfig) *SqlManager {
-	//if app_config.Sqlite.Enable == true {
-	//
-	//}
-	return nil
-}

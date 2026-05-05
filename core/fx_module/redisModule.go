@@ -1,7 +1,7 @@
 package fx_module
 
 import (
-	redis_driver "example.com/t/core/redis_drivers"
+	"example.com/t/core/component/redis_drivers"
 	"github.com/go-redis/redis/v8"
 	"go.uber.org/fx"
 )

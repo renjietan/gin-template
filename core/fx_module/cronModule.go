@@ -1,7 +1,7 @@
 package fx_module
 
 import (
-	cronManager "example.com/t/core/cron"
+	"example.com/t/core/component/cron"
 	"go.uber.org/fx"
 )
 

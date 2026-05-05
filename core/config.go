@@ -16,13 +16,14 @@ func NewDefaultConfig() *types.AppConfig {
 		panic(err)
 	}
 	return &types.AppConfig{
-		Debug:     false,
 		AppName:   "gin-template",
+		Debug:     false,
+		Version:   "1.0.0",
 		StaticDir: "./static",
-		StaticUrl: "http://localhost:8080/static",
-		Listen:    "0.0.0.0:3344",
+		Host:      "localhost",
+		Port:      3344,
 		Mysql: types.MysqlConfig{
-			//Enable:   true,
+			Enable:   false,
 			Host:     "127.0.0.1",
 			Port:     "3306",
 			Username: "root",
@@ -30,11 +31,12 @@ func NewDefaultConfig() *types.AppConfig {
 			Database: "springboot3",
 		},
 		Sqlite: types.SqliteConfig{
-			//Enable:              true,
+			Enable:              false,
 			BasePath:            filepath.Join(pathWd, "static", "db"),
 			SqliteEncryptionKey: "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99",
 		},
 		Redis: types.RedisConfig{
+			Enable:      false,
 			Host:        "0.0.0.0",
 			Port:        6379,
 			Password:    "",
@@ -42,16 +44,8 @@ func NewDefaultConfig() *types.AppConfig {
 			PoolSize:    20,
 			PoolTimeout: 5,
 		},
-		Logger: types.LoggerConfig{
-			Level:        "debug",
-			MaxAge:       30 * 24 * time.Hour, // 保留30天
-			Filepath:     filepath.Join(pathWd, "static", "logs", "app"),
-			RotationTime: 24 * time.Hour, // 每天切割
-		},
-		Upload: types.UploadConfig{
-			Filepath: filepath.Join(pathWd, "static", "uploads"),
-		},
 		Ns: types.NsConfig{
+			Enable:               false,
 			Host:                 "0.0.0.0",
 			Port:                 8848,
 			GrpcPort:             9848,
@@ -73,6 +67,15 @@ func NewDefaultConfig() *types.AppConfig {
 			MaxBackups:           30,
 			Compress:             true,
 			LocalTime:            true,
+		},
+		Logger: types.LoggerConfig{
+			Level:        "debug",
+			MaxAge:       30 * 24 * time.Hour, // 保留30天
+			Filepath:     filepath.Join(pathWd, "static", "logs", "app"),
+			RotationTime: 24 * time.Hour, // 每天切割
+		},
+		Upload: types.UploadConfig{
+			Filepath: filepath.Join(pathWd, "static", "uploads"),
 		},
 	}
 }

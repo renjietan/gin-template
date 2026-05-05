@@ -7,9 +7,7 @@ import (
 
 	"example.com/t/types"
 	"example.com/t/utility"
-	//sqlcipher "github.com/gdanko/gorm-sqlcipher"
 	sqliteEncrypt "github.com/ShaoQ1ang/gorm-sqlite-cipher"
-	//"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
