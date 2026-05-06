@@ -9,7 +9,7 @@ import (
 	"go.uber.org/fx"
 )
 
-func InitFxModule() fx.Option {
+func InitFxModule() (fx.Option, Args) {
 	var args Args
 	// 使用 flags.Parse 解析并自动进行必填项验证
 	if _, err := flags.Parse(&args); err != nil {
@@ -25,7 +25,7 @@ func InitFxModule() fx.Option {
 	}
 	fmt.Println("✅ 参数验证通过...")
 	options := appendModule(&args)
-	return fx.Options(options...)
+	return fx.Options(options...), args
 }
 
 func appendModule(args *Args) []fx.Option {
@@ -41,9 +41,9 @@ func appendModule(args *Args) []fx.Option {
 		fxOptions = append(fxOptions, fx_module.FxWsModule)
 		return fxOptions
 	}
-	if args.Swagger {
-		fxOptions = append(fxOptions, fx_module.FXSwaggerModule)
-	}
+	//if args.Swagger {
+	//	fxOptions = append(fxOptions, fx_module.FXSwaggerModule)
+	//}
 	if args.Ns {
 		fxOptions = append(fxOptions, fx_module.FXNacosModule)
 	}

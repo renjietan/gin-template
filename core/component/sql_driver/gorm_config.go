@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-// NewGormConfig Mortal 2026-05-02 00:21:24 CST 将 GORM 配置 单独拧出来 方便其他类型数据库共用
+// NewGormConfig Mortal 2026-05-02 00:21:24 CST 将 GORM 配置 单独拎出来 方便其他类型数据库共用
 func NewGormConfig(log *logrus.Logger) *gorm.Config {
 	return &gorm.Config{
 		Logger: NewGormLogger(log),

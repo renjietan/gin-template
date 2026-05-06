@@ -11,6 +11,6 @@ var FXSQLiteModule = fx.Module("fx-sqlite-module",
 	// 自动同步 数据库 表
 	fx.Provide(service.NewMigrationService),
 	fx.Invoke(func(migrationService *service.MigrationService) {
-		migrationService.StartMigrate()
+		//migrationService.StartMigrate()
 	}),
 )

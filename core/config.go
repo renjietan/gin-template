@@ -68,6 +68,16 @@ func NewDefaultConfig() *types.AppConfig {
 			Compress:             true,
 			LocalTime:            true,
 		},
+		WebSocket: types.WebSocketConfig{
+			Enable:  false,
+			BaseUrl: "/ws/:id",
+		},
+		Swagger: types.SwaggerConfig{
+			Enable: false,
+		},
+		Cron: types.CronConfig{
+			Enable: false,
+		},
 		Logger: types.LoggerConfig{
 			Level:        "debug",
 			MaxAge:       30 * 24 * time.Hour, // 保留30天
@@ -85,7 +95,7 @@ func LoadConfig(configFile string) (*types.AppConfig, error) {
 	_, err := os.Stat(configFile)
 	if err != nil {
 		config = NewDefaultConfig()
-		config.Path = configFile
+		config.ConfigPath = configFile
 		err := SaveConfig(config)
 		if err != nil {
 			return nil, err
@@ -106,5 +116,5 @@ func SaveConfig(config *types.AppConfig) error {
 	if err := encoder.Encode(&config); err != nil {
 		return err
 	}
-	return os.WriteFile(config.Path, buf.Bytes(), 0644)
+	return os.WriteFile(config.ConfigPath, buf.Bytes(), 0644)
 }

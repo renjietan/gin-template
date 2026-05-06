@@ -19,8 +19,10 @@ type AppServer struct {
 
 func NewAppServer(appConfig *types.AppConfig) *AppServer {
 	//gin.DefaultWriter = logrus.StandardLogger().Out
-	gin.SetMode(gin.ReleaseMode)
-	gin.ForceConsoleColor()
+	if !appConfig.Debug {
+		gin.SetMode(gin.ReleaseMode)
+		gin.ForceConsoleColor()
+	}
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		fmt.Printf("endpoint %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
@@ -40,7 +42,6 @@ func NewAppServer(appConfig *types.AppConfig) *AppServer {
 		Server: server,
 	}
 	res.Middlewares()
-	//res.Server = server
 	return res
 }
 
@@ -60,7 +61,7 @@ func (s *AppServer) Middlewares() {
 	//// 异常捕获: 捕获请求处理过程中发生的 panic
 	s.Engine.Use(gin.CustomRecovery(func(c *gin.Context, err any) {
 		res := gin.H{"error": "服务器内部错误", "detail": fmt.Sprintf("%v", err)}
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": res})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, res)
 	}))
 	// 添加静态资源访问
 	s.Engine.Static("/static", s.Config.StaticDir)

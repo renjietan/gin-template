@@ -5,7 +5,7 @@ host = "localhost"
 port = 3344
 log_dir = ""
 
-[Mysql]
+[mysql]
   enable = false
   host = "127.0.0.1"
   port = "3306"
@@ -13,12 +13,12 @@ log_dir = ""
   password = "123456"
   data_base = "springboot3"
 
-[Sqlite]
+[sqlite]
   enable = false
-  base_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\db"
+  base_path = "D:\\work\\go\\template\\gin-template\\static\\db"
   sqlite_encryption_key = "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"
 
-[Redis]
+[redis]
   enable = false
   host = "0.0.0.0"
   port = 6379
@@ -27,7 +27,7 @@ log_dir = ""
   pool_size = 20
   pool_timeout = 5
 
-[Ns]
+[ns]
   enable = false
   host = "0.0.0.0"
   port = 8848
@@ -38,8 +38,8 @@ log_dir = ""
   group_name = "DEFAULT_GROUP"
   namespaceId = "nacos-namespace-id"
   dataId = "nacos-dataId"
-  log_dir = "D:\\work\\go\\template\\sever\\gin-template\\static\\nacos\\log"
-  cache_dir = "D:\\work\\go\\template\\sever\\gin-template\\static\\nacos\\cache"
+  log_dir = "D:\\work\\go\\template\\gin-template\\static\\nacos\\log"
+  cache_dir = "D:\\work\\go\\template\\gin-template\\static\\nacos\\cache"
   not_load_cache_as_start = true
   rotate_time = "24h"
   max_age = 30
@@ -51,11 +51,21 @@ log_dir = ""
   compress = true
   local_time = true
 
-[Logger]
+[logger]
   level = "debug"
-  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\logs\\app"
+  file_path = "D:\\work\\go\\template\\gin-template\\static\\logs\\app"
   max_age = "720h0m0s"
   rotation_time = "24h0m0s"
 
-[Upload]
-  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\uploads"
+[upload]
+  file_path = "D:\\work\\go\\template\\gin-template\\static\\uploads"
+
+[websocket]
+  enable = false
+  base_url = ""
+
+[cron]
+  enable = false
+
+[swagger]
+  enable = false

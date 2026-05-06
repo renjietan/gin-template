@@ -9,29 +9,55 @@ import (
 
 func SUCCESS(c *gin.Context, values ...interface{}) {
 	if values != nil {
-		c.JSON(http.StatusOK, types.Response{Code: types.Success, Data: values[0]})
+		c.JSON(http.StatusOK, types.Response{
+			Code:    types.Success,
+			Message: types.SuccessMsg,
+			Data:    values[0],
+			Detail:  "",
+		})
 	} else {
-		c.JSON(http.StatusOK, types.Response{Code: types.Success})
+		c.JSON(http.StatusOK, types.Response{
+			Code:    types.Success,
+			Message: types.SuccessMsg,
+			Data:    nil,
+			Detail:  "",
+		})
 	}
 
 }
 
 func ERROR(c *gin.Context, messages ...string) {
 	if messages != nil {
-		c.JSON(http.StatusBadRequest, types.Response{Code: types.Failed, Message: messages[0]})
+		c.JSON(http.StatusBadRequest, types.Response{
+			Code:    types.Failed,
+			Message: types.FailedMsg,
+			Data:    nil,
+			Detail:  messages[0],
+		})
 	} else {
-		c.JSON(http.StatusBadRequest, types.Response{Code: types.Failed})
+		c.JSON(http.StatusBadRequest, types.Response{
+			Code:    types.Failed,
+			Message: types.FailedMsg,
+			Data:    nil,
+			Detail:  "",
+		})
 	}
-}
-
-func HACKER(c *gin.Context) {
-	c.JSON(http.StatusBadRequest, types.Response{Code: types.Failed, Message: "Hacker attempt!!!"})
 }
 
 func NotAuth(c *gin.Context, messages ...string) {
 	if messages != nil {
-		c.JSON(http.StatusUnauthorized, types.Response{Code: types.NotAuthorized, Message: messages[0]})
+		c.JSON(http.StatusUnauthorized, types.Response{
+			Code:    types.NotAuthorized,
+			Message: types.FailedMsg,
+			Data:    nil,
+			Detail:  messages[0],
+		})
 	} else {
-		c.JSON(http.StatusUnauthorized, types.Response{Code: types.NotAuthorized, Message: "Not Authorized"})
+		c.JSON(http.StatusUnauthorized, types.Response{
+			Code:    types.NotAuthorized,
+			Message: types.NoAuth,
+			Data:    nil,
+			Detail:  "",
+		})
 	}
 }

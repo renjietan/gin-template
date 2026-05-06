@@ -83,7 +83,7 @@ func (c *ConfigService) Updates(dtos []entity.ConfigEntity) error {
 		valueCases += fmt.Sprintf("WHEN %d THEN '%s' ", u.ID, u.Value)
 	}
 	sql := fmt.Sprintf(`
-        UPDATE config SET 
+		UPDATE config SET 
             name = CASE id %s END,
             value = CASE id %s END,
             updated_at = NOW()

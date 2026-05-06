@@ -51,7 +51,7 @@ func main() {
 			}
 		}()
 	}
-	options := cmd.InitFxModule()
+	options, args := cmd.InitFxModule()
 	app := fx.New(
 		// 日志初始化
 		fx.Provide(logger2.NewLogger),
@@ -70,16 +70,48 @@ func main() {
 				// 因为 logger.NewLogger 中引入了 AppConfig， 此处 引入 logrus  会导致循环依赖引入
 				log.Fatal("❌ 配置文件：读取失败")
 			}
-			config.Path = configFile
+			config.ConfigPath = configFile
 			config.Debug = debug
 			if debug {
 				_ = core.SaveConfig(config)
+			}
+			if args.All {
+				config.Ns.Enable = true
+				config.WebSocket.Enable = true
+				config.Cron.Enable = true
+				config.Swagger.Enable = true
+				config.Sqlite.Enable = true
+				config.Mysql.Enable = true
+				config.Redis.Enable = true
+				return config
+			}
+			if args.Ns {
+				config.Ns.Enable = true
+			}
+			if args.Websocket {
+				config.WebSocket.Enable = true
+			}
+			if args.Cron {
+				config.Cron.Enable = true
+			}
+			if args.Swagger {
+				config.Swagger.Enable = true
+			}
+			if args.Driver["sqlite"] {
+				config.Sqlite.Enable = true
+			}
+			if args.Driver["mysql"] {
+				config.Mysql.Enable = true
+			}
+			if args.Driver["redis"] {
+				config.Redis.Enable = true
 			}
 			return config
 		}),
 
 		// 开启 http-server
 		fx_module.FxGinModule,
+		// 拆分 Gorm 配置 为独立模块
 		fx_module.FxGormConfigModule,
 		options,
 		// 生命周期

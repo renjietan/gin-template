@@ -28,7 +28,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/cmd/args.go" />
-              <option value="file://$PROJECT_DIR$/test/main.go" />
             </set>
           </value>
         </entry>
@@ -98,7 +97,7 @@
         <entry key="ConfigDetailsDTO">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go" />
+              <option value="file://$PROJECT_DIR$/api/DTO/configDetailsDTO.go" />
             </set>
           </value>
         </entry>
@@ -137,10 +136,26 @@
             </set>
           </value>
         </entry>
+        <entry key="CronConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="CronManager">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/cron/cron.go" />
               <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="DriverManager">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/component/sql_driver/driverManager.go" />
+              <option value="file://$PROJECT_DIR$/core/component/sql_driver/sqlManager.go" />
             </set>
           </value>
         </entry>
@@ -154,6 +169,7 @@
         <entry key="FxLogger">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/logger/fx_logger.go" />
               <option value="file://$PROJECT_DIR$/core/logger/fx_logger.go" />
             </set>
           </value>
@@ -161,6 +177,7 @@
         <entry key="GormLogger">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/logger/gorm_logger.go" />
               <option value="file://$PROJECT_DIR$/core/logger/gorm_logger.go" />
             </set>
           </value>
@@ -168,6 +185,7 @@
         <entry key="LinePerFieldFormatter">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/logger/text_fromat.go" />
               <option value="file://$PROJECT_DIR$/core/logger/text_fromat.go" />
             </set>
           </value>
@@ -196,6 +214,7 @@
         <entry key="NacosSerivce">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/nacos/nacos.go" />
               <option value="file://$PROJECT_DIR$/core/nacos/nacos.go" />
             </set>
           </value>
@@ -204,14 +223,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/types/config.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="Options">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/cmd/args.go" />
-              <option value="file://$PROJECT_DIR$/test/main.go" />
             </set>
           </value>
         </entry>
@@ -253,6 +264,7 @@
         <entry key="SqlManager">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/sql_driver/sqlManager.go" />
               <option value="file://$PROJECT_DIR$/core/sql_driver/sqlManager.go" />
             </set>
           </value>
@@ -275,13 +287,14 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/core/swagger.go" />
+              <option value="file://$PROJECT_DIR$/types/config.go" />
             </set>
           </value>
         </entry>
-        <entry key="Test1">
+        <entry key="SwaggerManager">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/DTO/testDTO.go" />
+              <option value="file://$PROJECT_DIR$/core/component/swagger/swagger.go" />
             </set>
           </value>
         </entry>
@@ -289,13 +302,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/api/controller/testController.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="TestDTO">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/api/DTO/testDTO.go" />
             </set>
           </value>
         </entry>
@@ -344,6 +350,7 @@
         <entry key="User">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/sql_driver/sqlite.go" />
               <option value="file://$PROJECT_DIR$/core/sql_driver/sqlite.go" />
             </set>
           </value>
@@ -352,6 +359,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/api/DTO/wsMetaFileDTO.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="WebSocketConfig">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/config.go" />
             </set>
           </value>
         </entry>
@@ -372,6 +386,7 @@
         <entry key="WsManager">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/wsManager/wsManager.go" />
               <option value="file://$PROJECT_DIR$/core/wsManager/wsManager.go" />
             </set>
           </value>
@@ -379,6 +394,7 @@
         <entry key="WsType">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/wsManager/ws_type.go" />
               <option value="file://$PROJECT_DIR$/core/wsManager/ws_type.go" />
             </set>
           </value>
@@ -386,6 +402,7 @@
         <entry key="mockJob">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/cron/cron_test.go" />
               <option value="file://$PROJECT_DIR$/core/cron/cron_test.go" />
             </set>
           </value>
@@ -400,6 +417,7 @@
         <entry key="task">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/cron/cron.go" />
               <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
             </set>
           </value>
@@ -407,6 +425,7 @@
         <entry key="taskManager">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/component/cron/cron.go" />
               <option value="file://$PROJECT_DIR$/core/cron/cron.go" />
             </set>
           </value>
@@ -429,18 +448,6 @@
     </option>
     <option name="scannedPathMapping">
       <map>
-        <entry key="file://$PROJECT_DIR$/api/DTO/ConfigDetailsDTO.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1776677097918" />
-              <option name="schema">
-                <list>
-                  <option value="ConfigDetailsDTO" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/api/DTO/configDTO.go">
           <value>
             <ScannedPath>
@@ -451,6 +458,18 @@
                   <option value="ConfigsDTO" />
                   <option value="UpdatesConfigDTO" />
                   <option value="ConfigListDTO" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/api/DTO/configDetailsDTO.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1776677097918" />
+              <option name="schema">
+                <list>
+                  <option value="ConfigDetailsDTO" />
                 </list>
               </option>
             </ScannedPath>
@@ -507,7 +526,7 @@
         <entry key="file://$PROJECT_DIR$/api/controller/configController.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776678635132" />
+              <option name="lastModified" value="1778046216063" />
               <option name="schema">
                 <list>
                   <option value="ConfigController" />
@@ -531,7 +550,7 @@
         <entry key="file://$PROJECT_DIR$/api/controller/testController.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777519510146" />
+              <option name="lastModified" value="1778029966911" />
               <option name="schema">
                 <list>
                   <option value="TestController" />
@@ -606,7 +625,7 @@
         <entry key="file://$PROJECT_DIR$/api/service/configService.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776678206948" />
+              <option name="lastModified" value="1778051673685" />
               <option name="schema">
                 <list>
                   <option value="ConfigService" />
@@ -618,7 +637,7 @@
         <entry key="file://$PROJECT_DIR$/api/service/migrationService.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776391987377" />
+              <option name="lastModified" value="1778029966918" />
               <option name="schema">
                 <list>
                   <option value="MigrationService" />
@@ -693,7 +712,7 @@
         <entry key="file://$PROJECT_DIR$/cmd/args.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777541807939" />
+              <option name="lastModified" value="1778060975982" />
               <option name="schema">
                 <list>
                   <option value="Args" />
@@ -705,7 +724,7 @@
         <entry key="file://$PROJECT_DIR$/cmd/cmd.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777542931260" />
+              <option name="lastModified" value="1778056765334" />
             </ScannedPath>
           </value>
         </entry>
@@ -719,7 +738,7 @@
         <entry key="file://$PROJECT_DIR$/core/app_server.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777282394585" />
+              <option name="lastModified" value="1778038815291" />
               <option name="schema">
                 <list>
                   <option value="AppServer" />
@@ -728,10 +747,184 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/cron/cron.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029966959" />
+              <option name="schema">
+                <list>
+                  <option value="task" />
+                  <option value="taskManager" />
+                  <option value="CronManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/cron/cron_test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029966965" />
+              <option name="schema">
+                <list>
+                  <option value="mockJob" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/logger/fx_logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029966971" />
+              <option name="schema">
+                <list>
+                  <option value="FxLogger" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/logger/gorm_logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778035800803" />
+              <option name="schema">
+                <list>
+                  <option value="GormLogger" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/logger/logger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778052554099" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/logger/text_fromat.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029966991" />
+              <option name="schema">
+                <list>
+                  <option value="LinePerFieldFormatter" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/nacos/nacos.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778053688746" />
+              <option name="schema">
+                <list>
+                  <option value="NacosSerivce" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/redis_drivers/redis.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029967006" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/sql_driver/driverManager.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778052298261" />
+              <option name="schema">
+                <list>
+                  <option value="DriverManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/sql_driver/gorm_config.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778054383504" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/sql_driver/mysql.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029967022" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/sql_driver/sqlManager.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778052175433" />
+              <option name="schema">
+                <list>
+                  <option value="DriverManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/sql_driver/sqlite.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778062091481" />
+              <option name="schema">
+                <list>
+                  <option value="User" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/swagger/swagger.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029967045" />
+              <option name="schema">
+                <list>
+                  <option value="SwaggerManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/wsManager/wsManager.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029967048" />
+              <option name="schema">
+                <list>
+                  <option value="WsManager" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/component/wsManager/ws_type.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029967052" />
+              <option name="schema">
+                <list>
+                  <option value="WsType" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777344700359" />
+              <option name="lastModified" value="1778061896340" />
             </ScannedPath>
           </value>
         </entry>
@@ -764,14 +957,14 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/apiModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777280076688" />
+              <option name="lastModified" value="1778029967068" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/cronModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777425904446" />
+              <option name="lastModified" value="1778029967076" />
             </ScannedPath>
           </value>
         </entry>
@@ -785,49 +978,56 @@
         <entry key="file://$PROJECT_DIR$/core/fx_module/gormConfigModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777543639148" />
+              <option name="lastModified" value="1778029967081" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/mySqlModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777543828086" />
+              <option name="lastModified" value="1778029967089" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/nacosModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777011604981" />
+              <option name="lastModified" value="1778029967096" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/redisModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777017946509" />
+              <option name="lastModified" value="1778029967104" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/sqliteModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777367168028" />
+              <option name="lastModified" value="1778062078338" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/fx_module/swaggerModule.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778029967116" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/fx_module/wsModule.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777514572803" />
+              <option name="lastModified" value="1778029967123" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/logger/fx_logger.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777022322531" />
+              <option name="lastModified" value="1777544922217" />
               <option name="schema">
                 <list>
                   <option value="FxLogger" />
@@ -858,7 +1058,7 @@
         <entry key="file://$PROJECT_DIR$/core/logger/text_fromat.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777256454808" />
+              <option name="lastModified" value="1777544333373" />
               <option name="schema">
                 <list>
                   <option value="LinePerFieldFormatter" />
@@ -877,14 +1077,14 @@
         <entry key="file://$PROJECT_DIR$/core/middlewave/errorHandler.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777339274560" />
+              <option name="lastModified" value="1778029967130" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/middlewave/ginLoggerMiddleWave.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776907012246" />
+              <option name="lastModified" value="1778029967139" />
             </ScannedPath>
           </value>
         </entry>
@@ -898,7 +1098,7 @@
         <entry key="file://$PROJECT_DIR$/core/middlewave/rateLimitMiddlewave.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777256454815" />
+              <option name="lastModified" value="1778052404878" />
             </ScannedPath>
           </value>
         </entry>
@@ -1005,7 +1205,7 @@
         <entry key="file://$PROJECT_DIR$/docs/docs.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776765731985" />
+              <option name="lastModified" value="1778029967148" />
             </ScannedPath>
           </value>
         </entry>
@@ -1033,7 +1233,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777543721146" />
+              <option name="lastModified" value="1778061217565" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
@@ -1042,29 +1242,10 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/test/index.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1777532443334" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/main.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1777542040331" />
-              <option name="schema">
-                <list>
-                  <option value="Args" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/types/Response.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776314313458" />
+              <option name="lastModified" value="1778040120672" />
               <option name="schema">
                 <list>
                   <option value="Response" />
@@ -1077,16 +1258,19 @@
         <entry key="file://$PROJECT_DIR$/types/config.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777344637041" />
+              <option name="lastModified" value="1778059077417" />
               <option name="schema">
                 <list>
                   <option value="AppConfig" />
                   <option value="MysqlConfig" />
                   <option value="SqliteConfig" />
-                  <option value="LoggerConfig" />
-                  <option value="UploadConfig" />
                   <option value="NsConfig" />
                   <option value="RedisConfig" />
+                  <option value="LoggerConfig" />
+                  <option value="UploadConfig" />
+                  <option value="WebSocketConfig" />
+                  <option value="CronConfig" />
+                  <option value="SwaggerConfig" />
                 </list>
               </option>
             </ScannedPath>
@@ -1116,7 +1300,7 @@
         <entry key="file://$PROJECT_DIR$/utility/response/response.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1776677098886" />
+              <option name="lastModified" value="1778040084015" />
             </ScannedPath>
           </value>
         </entry>
@@ -1184,7 +1368,9 @@
         <entry key="config_list_dto" value="ConfigListDTO" />
         <entry key="config_service" value="ConfigService" />
         <entry key="configs_dto" value="ConfigsDTO" />
+        <entry key="cron_config" value="CronConfig" />
         <entry key="cron_manager" value="CronManager" />
+        <entry key="driver_manager" value="DriverManager" />
         <entry key="error_response" value="ErrorResponse" />
         <entry key="fx_logger" value="FxLogger" />
         <entry key="gorm_logger" value="GormLogger" />
@@ -1195,7 +1381,6 @@
         <entry key="mysql_config" value="MysqlConfig" />
         <entry key="nacos_serivce" value="NacosSerivce" />
         <entry key="ns_config" value="NsConfig" />
-        <entry key="options" value="Options" />
         <entry key="pager_dto" value="PagerDTO" />
         <entry key="pagination_response" value="PaginationResponse" />
         <entry key="redis_config" value="RedisConfig" />
@@ -1206,11 +1391,10 @@
         <entry key="sqlite_config" value="SqliteConfig" />
         <entry key="status_response" value="StatusResponse" />
         <entry key="swagger_config" value="SwaggerConfig" />
+        <entry key="swagger_manager" value="SwaggerManager" />
         <entry key="task" value="task" />
         <entry key="task_manager" value="taskManager" />
-        <entry key="test1" value="Test1" />
         <entry key="test_controller" value="TestController" />
-        <entry key="test_dto" value="TestDTO" />
         <entry key="test_form_dto" value="TestFormDTO" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
@@ -1220,6 +1404,7 @@
         <entry key="upload_config" value="UploadConfig" />
         <entry key="upload_service" value="UploadService" />
         <entry key="user" value="User" />
+        <entry key="web_socket_config" value="WebSocketConfig" />
         <entry key="web_socket_manager" value="WebSocketManager" />
         <entry key="ws_client_count_response" value="WsClientCountResponse" />
         <entry key="ws_manager" value="WsManager" />
@@ -1227,6 +1412,6 @@
         <entry key="ws_type" value="WsType" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1777517006012" />
+    <option name="lastTimeChecked" value="1778029306740" />
   </component>
 </project>

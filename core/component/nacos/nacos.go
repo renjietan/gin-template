@@ -122,7 +122,7 @@ func (ns *NacosSerivce) RegisterService() Nacos_err {
 		Enable:      true,
 		Healthy:     true,
 		Ephemeral:   true,
-		Metadata:    map[string]string{"gin-version": "1.9.0"},
+		Metadata:    map[string]string{"gin-template-version": "1.9.0"},
 	})
 	if err != nil {
 		return parseInfo(ns.appConfig, "服务注册失败", err.Error())

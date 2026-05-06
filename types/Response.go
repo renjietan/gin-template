@@ -3,12 +3,10 @@ package types
 type BizCode int
 
 type Response struct {
-	Code     BizCode     `json:"code"`
-	Page     int         `json:"page,omitempty"`
-	PageSize int         `json:"page_size,omitempty"`
-	Total    int         `json:"total,omitempty"`
-	Message  string      `json:"message,omitempty"`
-	Data     interface{} `json:"data,omitempty"`
+	Code    BizCode     `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+	Detail  string      `json:"detail"`
 }
 
 type PaginationResponse struct {
@@ -20,15 +18,16 @@ type PaginationResponse struct {
 }
 
 const (
-	Success       = BizCode(0)
-	Failed        = BizCode(1)
-	NotAuthorized = BizCode(401) // 未授权
+	Success       = BizCode(20000)
+	Failed        = BizCode(50000)
+	NotAuthorized = BizCode(401)
 )
 
 const (
-	OkMsg       = "操作成功"
+	SuccessMsg  = "操作成功"
 	FailedMsg   = "操作失败"
 	ErrorMsg    = "系统开小差了"
 	InvalidArgs = "非法参数或参数解析失败"
 	UploadFaild = "文件上传失败"
+	NoAuth      = "无权限，清联系管理员"
 )

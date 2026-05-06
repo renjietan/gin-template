@@ -21,7 +21,7 @@ func RateLimitEvery(redisClient *redis.Client, interval time.Duration) gin.Handl
 	//
 	//	fullPath := c.FullPath()
 	//	if fullPath == "" {
-	//		fullPath = c.Request.URL.Path
+	//		fullPath = c.Request.URL.ConfigPath
 	//	}
 	//	key := fmt.Sprintf("rl:%s:%s", fullPath, keyID)
 	//

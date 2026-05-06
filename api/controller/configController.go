@@ -101,7 +101,7 @@ func (config *ConfigController) upload(c *gin.Context) {
 		response.ERROR(c, types.UploadFaild)
 		return
 	}
-	response.SUCCESS(c, types.OkMsg)
+	response.SUCCESS(c, types.SuccessMsg)
 }
 
 // @Summary      更新
@@ -171,7 +171,7 @@ func (config *ConfigController) delete(c *gin.Context) {
 		response.ERROR(c, err.Error())
 		return
 	}
-	response.SUCCESS(c, types.OkMsg)
+	response.SUCCESS(c, types.SuccessMsg)
 }
 
 // @Summary      获取配置列表（分页+排序）
