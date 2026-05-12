@@ -24,6 +24,7 @@ func NewSqliteDriver(config *gorm.Config, appConfig *types.AppConfig) (*gorm.DB,
 	if err != nil {
 		return nil, err
 	}
+	appConfig.Sqlite.Enable = true
 	return db, nil
 }
 

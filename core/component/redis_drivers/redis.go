@@ -22,5 +22,6 @@ func NewRedisDriver(app_config *types.AppConfig) (*redis.Client, error) {
 	if err != nil {
 		return nil, err
 	}
+	app_config.Redis.Enable = true
 	return client, nil
 }

@@ -19,8 +19,9 @@ type WsManager struct {
 }
 
 func NewWsManager(config *types.AppConfig, server *core.AppServer) *WsManager {
+	config.WebSocket.Enable = true
 	return &WsManager{
-		Server:  melody.New(),
+		Server:  melody.New(), // 创建 WS 示例
 		Clients: make(map[string]*melody.Session),
 		config:  config,
 		Http:    server,
@@ -28,7 +29,7 @@ func NewWsManager(config *types.AppConfig, server *core.AppServer) *WsManager {
 }
 
 func (ws *WsManager) InitRouter() {
-	ws.Http.Engine.Any("/ws/:id", func(context *gin.Context) {
+	ws.Http.Engine.Any(ws.config.WebSocket.BaseUrl, func(context *gin.Context) {
 		err := ws.Server.HandleRequest(context.Writer, context.Request)
 		if err != nil {
 			return
@@ -40,19 +41,32 @@ func (ws *WsManager) HandleFunds() {
 	ws.Server.HandleConnect(func(session *melody.Session) {
 		paths := strings.Split(session.Request.RequestURI, "/")
 		id := utility.Tern(len(paths) > 2, paths[2], "")
-		session.Set("ws-id", id)
+		key := ws.GenSessionKey()
+		value := ws.GenClientKey(id)
+		session.Set(key, value)
+		ws.Clients[value] = session
 		err := session.Write([]byte("connected"))
 		if err != nil {
 			return
 		}
 	})
 	ws.Server.HandleDisconnect(func(s *melody.Session) {
-		fmt.Println("disconnected", s)
+		key := ws.GenSessionKey()
+		delete(ws.Clients, key)
 	})
 	ws.Server.HandleMessage(func(session *melody.Session, bytes []byte) {
 		msg := string(bytes)
-		id, _ := session.Get("ws-id")
+		key := ws.GenSessionKey()
+		id, _ := session.Get(key)
 		fmt.Println("msg", msg)
 		fmt.Println("id", id)
 	})
+}
+
+func (ws *WsManager) GenSessionKey() string {
+	return "id"
+}
+
+func (ws *WsManager) GenClientKey(id interface{}) string {
+	return fmt.Sprintf("user-%s", id)
 }

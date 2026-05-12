@@ -123,10 +123,6 @@ func main() {
 					return lc.OnStart(ctx)
 				},
 				OnStop: func(ctx context.Context) error {
-					//err := server.Server.Shutdown(ctx)
-					//if err != nil {
-					//	return err
-					//}
 					return lc.OnStop(ctx)
 				},
 			})

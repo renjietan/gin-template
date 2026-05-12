@@ -15,7 +15,7 @@ log_dir = ""
 
 [sqlite]
   enable = false
-  base_path = "D:\\work\\go\\template\\gin-template\\static\\db"
+  base_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\db"
   sqlite_encryption_key = "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"
 
 [redis]
@@ -38,8 +38,8 @@ log_dir = ""
   group_name = "DEFAULT_GROUP"
   namespaceId = "nacos-namespace-id"
   dataId = "nacos-dataId"
-  log_dir = "D:\\work\\go\\template\\gin-template\\static\\nacos\\log"
-  cache_dir = "D:\\work\\go\\template\\gin-template\\static\\nacos\\cache"
+  log_dir = "D:\\work\\go\\template\\sever\\gin-template\\static\\nacos\\log"
+  cache_dir = "D:\\work\\go\\template\\sever\\gin-template\\static\\nacos\\cache"
   not_load_cache_as_start = true
   rotate_time = "24h"
   max_age = 30
@@ -53,16 +53,16 @@ log_dir = ""
 
 [logger]
   level = "debug"
-  file_path = "D:\\work\\go\\template\\gin-template\\static\\logs\\app"
+  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\logs\\app"
   max_age = "720h0m0s"
   rotation_time = "24h0m0s"
 
 [upload]
-  file_path = "D:\\work\\go\\template\\gin-template\\static\\uploads"
+  file_path = "D:\\work\\go\\template\\sever\\gin-template\\static\\uploads"
 
 [websocket]
   enable = false
-  base_url = ""
+  base_url = "/ws/:id"
 
 [cron]
   enable = false

@@ -34,6 +34,7 @@ func NewSwaggerManager(appserver *core.AppServer, appConfig *types.AppConfig) *S
 			ginSwagger.PersistAuthorization(true),   // 5. 持久化认证信息（如 API Key）
 		)
 	}
+	appConfig.Swagger.Enable = true
 	return &SwaggerManager{
 		Server:      appserver,
 		Config:      appConfig,

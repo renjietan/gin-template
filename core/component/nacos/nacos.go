@@ -66,6 +66,7 @@ func NewNacosSerivce(config *types.AppConfig) (*NacosSerivce, Nacos_err) {
 	if err != nil {
 		return nil, parseInfo(config, "创建服务注册客户端失败: ", err.Error())
 	}
+	config.Ns.Enable = true
 	return &NacosSerivce{
 		ConfigClient: configClient,
 		NamingClient: namingClient,

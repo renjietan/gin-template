@@ -3,6 +3,7 @@ package cronManager
 import (
 	"sync"
 
+	"example.com/t/types"
 	"github.com/robfig/cron/v3"
 )
 
@@ -52,7 +53,8 @@ type CronManager struct {
 	sync.Mutex
 }
 
-func NewTimerTask() *CronManager {
+func NewTimerTask(config *types.AppConfig) *CronManager {
+	config.Cron.Enable = true
 	return &CronManager{cronList: make(map[string]*taskManager)}
 }
 

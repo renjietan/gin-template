@@ -5,6 +5,7 @@ import (
 	"testing"
 	"time"
 
+	"example.com/t/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -22,12 +23,12 @@ func mockFunc() {
 }
 
 func TestNewTimerTask(t *testing.T) {
-	tm := NewTimerTask()
+	tm := NewTimerTask(&types.AppConfig{})
 	_tm := tm
 	{
-		_, err := tm.AddTaskByFunc("func", "@every 1s", mockFunc, "测试")
+		_, err := tm.AddTaskByFunc("1s", "@every 1s", mockFunc, "测试")
 		assert.Nil(t, err, "定时任务测试失败")
-		_, ok := _tm.cronList["func"]
+		_, ok := _tm.cronList["1s"]
 		assert.True(t, ok, "未找到定时任务")
 	}
 	{
@@ -38,13 +39,13 @@ func TestNewTimerTask(t *testing.T) {
 	}
 
 	{
-		_, ok := tm.FindCron("func")
+		_, ok := tm.FindCron("1s")
 		if !ok {
-			t.Error("no find func")
+			t.Error("未找到 1s 的任务")
 		}
 		_, ok = tm.FindCron("job")
 		if !ok {
-			t.Error("no find job")
+			t.Error("未找到 job 任务")
 		}
 		_, ok = tm.FindCron("none")
 		if ok {
@@ -52,10 +53,10 @@ func TestNewTimerTask(t *testing.T) {
 		}
 	}
 	{
-		tm.Clear("func")
-		_, ok := tm.FindCron("func")
+		tm.Clear("1s")
+		_, ok := tm.FindCron("1s")
 		if ok {
-			t.Error("find func")
+			t.Error("此处不应该找到 1s ")
 		}
 	}
 	{
