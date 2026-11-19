@@ -307,7 +307,7 @@
         <entry key="UDPClient">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/api/udp/index.go" />
+              <option value="file://$PROJECT_DIR$/api/udp/client.go" />
             </set>
           </value>
         </entry>
@@ -505,7 +505,7 @@
         <entry key="file://$PROJECT_DIR$/api/controller/configController.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778046216063" />
+              <option name="lastModified" value="1784797668431" />
               <option name="schema">
                 <list>
                   <option value="ConfigController" />
@@ -637,7 +637,7 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/api/udp/index.go">
+        <entry key="file://$PROJECT_DIR$/api/udp/client.go">
           <value>
             <ScannedPath>
               <option name="lastModified" value="1775786973080" />
@@ -678,7 +678,7 @@
         <entry key="file://$PROJECT_DIR$/api/ws/ws.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1777425028242" />
+              <option name="lastModified" value="1784798771623" />
               <option name="schema">
                 <list>
                   <option value="ClientInfo" />
@@ -1010,7 +1010,7 @@
         <entry key="file://$PROJECT_DIR$/docs/docs.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778029967148" />
+              <option name="lastModified" value="1784864454851" />
             </ScannedPath>
           </value>
         </entry>
@@ -1038,7 +1038,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778575645155" />
+              <option name="lastModified" value="1778577177776" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
@@ -1216,6 +1216,6 @@
         <entry key="ws_type" value="WsType" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1778574430718" />
+    <option name="lastTimeChecked" value="1795054300693" />
   </component>
 </project>

@@ -13,8 +13,8 @@ import (
 
 type ConfigController struct {
 	BaseController
-	service        *service.ConfigService
-	upload_service *service.UploadService
+	service       *service.ConfigService
+	uploadService *service.UploadService
 }
 
 func NewConfigController(
@@ -28,8 +28,8 @@ func NewConfigController(
 			App: app,
 			DB:  db,
 		},
-		service:        service,
-		upload_service: upload_service,
+		service:       service,
+		uploadService: upload_service,
 	}
 }
 
@@ -96,7 +96,7 @@ func (config *ConfigController) upload(c *gin.Context) {
 	if err != nil {
 		response.ERROR(c, types.InvalidArgs)
 	}
-	err2 := config.upload_service.Upload(c, file)
+	err2 := config.uploadService.Upload(c, file)
 	if err2 != nil {
 		response.ERROR(c, types.UploadFaild)
 		return

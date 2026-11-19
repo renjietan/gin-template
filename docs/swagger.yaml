@@ -130,16 +130,10 @@ definitions:
     type: object
   types.BizCode:
     enum:
-    - 0
-    - 1
+    - 20000
+    - 50000
     - 401
     type: integer
-    x-enum-comments:
-      NotAuthorized: 未授权
-    x-enum-descriptions:
-    - ""
-    - ""
-    - 未授权
     x-enum-varnames:
     - Success
     - Failed
@@ -149,14 +143,10 @@ definitions:
       code:
         $ref: '#/definitions/types.BizCode'
       data: {}
+      detail:
+        type: string
       message:
         type: string
-      page:
-        type: integer
-      page_size:
-        type: integer
-      total:
-        type: integer
     type: object
 info:
   contact: {}

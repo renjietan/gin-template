@@ -25,24 +25,24 @@ type WebSocketManager struct {
 	// 所有连接的客户端
 	Clients map[*websocket.Conn]ClientInfo
 	// 用于广播消息的通道
-	Broadcast_Msg_Chan chan []byte
+	BroadcastMsgChan chan []byte
 	// 用于注册新客户端
-	Register_Chan chan *websocket.Conn
+	RegisterChan chan *websocket.Conn
 	// 用于注销客户端
-	Unregister_Chan chan *websocket.Conn
-	mu              sync.RWMutex
-	upgrader        websocket.Upgrader
-	closed          atomic.Bool
-	l               *logrus.Logger
+	UnregisterChan chan *websocket.Conn
+	mu             sync.RWMutex
+	upgrader       websocket.Upgrader
+	closed         atomic.Bool
+	l              *logrus.Logger
 }
 
 // NewWebSocketManager 创建并初始化 WebSocket 管理器
 func NewWebSocketManager(l *logrus.Logger) *WebSocketManager {
 	return &WebSocketManager{
-		Clients:            make(map[*websocket.Conn]ClientInfo),
-		Broadcast_Msg_Chan: make(chan []byte, 256),
-		Register_Chan:      make(chan *websocket.Conn),
-		Unregister_Chan:    make(chan *websocket.Conn),
+		Clients:          make(map[*websocket.Conn]ClientInfo),
+		BroadcastMsgChan: make(chan []byte, 256),
+		RegisterChan:     make(chan *websocket.Conn),
+		UnregisterChan:   make(chan *websocket.Conn),
 		upgrader: websocket.Upgrader{
 			ReadBufferSize:  1024,
 			WriteBufferSize: 1024,
@@ -63,7 +63,7 @@ func (m *WebSocketManager) HandleWebSocket(c *gin.Context) {
 		return
 	}
 	// 注册新客户端
-	m.Register_Chan <- conn
+	m.RegisterChan <- conn
 
 	// 启动读取协程
 	go m.read(conn)
@@ -83,7 +83,7 @@ func (m *WebSocketManager) SendToClient(conn *websocket.Conn, message []byte) er
 
 // 广播
 func (m *WebSocketManager) Broadcast(message []byte) {
-	m.Broadcast_Msg_Chan <- message
+	m.BroadcastMsgChan <- message
 }
 
 // GET 客户端数量
@@ -109,16 +109,16 @@ func (m *WebSocketManager) Close() {
 		}
 		delete(m.Clients, conn)
 	}
-	close(m.Broadcast_Msg_Chan)
-	close(m.Register_Chan)
-	close(m.Unregister_Chan)
+	close(m.BroadcastMsgChan)
+	close(m.RegisterChan)
+	close(m.UnregisterChan)
 }
 
 // 主循环
 func (m *WebSocketManager) Run() {
 	for {
 		select {
-		case conn := <-m.Register_Chan:
+		case conn := <-m.RegisterChan:
 			// 注册新客户端
 			m.mu.Lock()
 			m.Clients[conn] = ClientInfo{
@@ -128,7 +128,7 @@ func (m *WebSocketManager) Run() {
 			}
 			m.mu.Unlock()
 			log.Printf("新客户端连接，当前连接数: %d", len(m.Clients))
-		case conn := <-m.Unregister_Chan:
+		case conn := <-m.UnregisterChan:
 			// 注销客户端
 			m.mu.Lock()
 			if _, ok := m.Clients[conn]; ok {
@@ -138,7 +138,7 @@ func (m *WebSocketManager) Run() {
 			}
 			m.mu.Unlock()
 
-		case message := <-m.Broadcast_Msg_Chan:
+		case message := <-m.BroadcastMsgChan:
 			// 广播消息给所有客户端
 			m.mu.RLock()
 			for conn := range m.Clients {
@@ -147,7 +147,7 @@ func (m *WebSocketManager) Run() {
 					log.Printf("发送消息失败: %v", err)
 					// 如果发送失败，将连接加入注销队列
 					select {
-					case m.Unregister_Chan <- conn:
+					case m.UnregisterChan <- conn:
 					default:
 					}
 				}
@@ -160,7 +160,7 @@ func (m *WebSocketManager) Run() {
 // 读取客户端消息的协程（没写完 - 数据处理）
 func (m *WebSocketManager) read(conn *websocket.Conn) {
 	defer func() {
-		m.Unregister_Chan <- conn
+		m.UnregisterChan <- conn
 		conn.Close()
 	}()
 

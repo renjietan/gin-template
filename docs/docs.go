@@ -780,17 +780,9 @@ const docTemplate = `{
         "types.BizCode": {
             "type": "integer",
             "enum": [
-                0,
-                1,
+                20000,
+                50000,
                 401
-            ],
-            "x-enum-comments": {
-                "NotAuthorized": "未授权"
-            },
-            "x-enum-descriptions": [
-                "",
-                "",
-                "未授权"
             ],
             "x-enum-varnames": [
                 "Success",
@@ -805,17 +797,11 @@ const docTemplate = `{
                     "$ref": "#/definitions/types.BizCode"
                 },
                 "data": {},
-                "message": {
+                "detail": {
                     "type": "string"
                 },
-                "page": {
-                    "type": "integer"
-                },
-                "page_size": {
-                    "type": "integer"
-                },
-                "total": {
-                    "type": "integer"
+                "message": {
+                    "type": "string"
                 }
             }
         }
