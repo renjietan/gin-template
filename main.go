@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"strconv"
 	"syscall"
 	"time"
@@ -43,11 +44,11 @@ func main() {
 	if configFile == "" {
 		configFile = "config.toml"
 	}
-	debug, _ := strconv.ParseBool(os.Getenv("APP_DEBUG"))
-	if !debug {
+	_debug, _ := strconv.ParseBool(os.Getenv("APP_DEBUG"))
+	if !_debug {
 		defer func() {
 			if err := recover(); err != nil {
-				log.Fatal("❌ 生产环境 抛出异常(main.go): ", err)
+				log.Printf("❌ panic(main.go): %v\n%s", err, debug.Stack())
 			}
 		}()
 	}
@@ -71,8 +72,8 @@ func main() {
 				log.Fatal("❌ 配置文件：读取失败")
 			}
 			config.ConfigPath = configFile
-			config.Debug = debug
-			if debug {
+			config.Debug = _debug
+			if _debug {
 				_ = core.SaveConfig(config)
 			}
 			if args.All {

@@ -703,7 +703,7 @@
         <entry key="file://$PROJECT_DIR$/cmd/cmd.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778056765334" />
+              <option name="lastModified" value="1795078183515" />
             </ScannedPath>
           </value>
         </entry>
@@ -843,7 +843,7 @@
         <entry key="file://$PROJECT_DIR$/core/component/sql_driver/sqlite.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778117484847" />
+              <option name="lastModified" value="1795082068413" />
               <option name="schema">
                 <list>
                   <option value="User" />
@@ -1010,7 +1010,7 @@
         <entry key="file://$PROJECT_DIR$/docs/docs.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1784864454851" />
+              <option name="lastModified" value="1795082089293" />
             </ScannedPath>
           </value>
         </entry>
@@ -1038,7 +1038,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778577177776" />
+              <option name="lastModified" value="1795077247575" />
               <option name="schema">
                 <list>
                   <option value="AppLifecycle" />
@@ -1216,6 +1216,6 @@
         <entry key="ws_type" value="WsType" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1795054300693" />
+    <option name="lastTimeChecked" value="1795485011041" />
   </component>
 </project>

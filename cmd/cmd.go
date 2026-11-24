@@ -41,9 +41,9 @@ func appendModule(args *Args) []fx.Option {
 		fxOptions = append(fxOptions, fx_module.FxWsModule)
 		return fxOptions
 	}
-	//if args.Swagger {
-	//	fxOptions = append(fxOptions, fx_module.FXSwaggerModule)
-	//}
+	if args.Swagger {
+		fxOptions = append(fxOptions, fx_module.FXSwaggerModule)
+	}
 	if args.Ns {
 		fxOptions = append(fxOptions, fx_module.FXNacosModule)
 	}
